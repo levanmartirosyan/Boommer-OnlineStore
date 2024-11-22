@@ -87,18 +87,12 @@
   </div>
   <div class="bottomM">
     <div class="leftM">
+      @for (item of categories; track $index) {
       <div class="categoryM activeM">
-        <i class="fi fi-tr-mobile-notch"></i>
-        <span>მობილურები</span>
+        <img [src]="item.image" alt="" />
+        <span>{{ item.name }}</span>
       </div>
-      <div class="categoryM">
-        <i class="fi fi-tr-laptop"></i>
-        <span>ლეპტოპები</span>
-      </div>
-      <div class="categoryM">
-        <i class="fi fi-tr-mobile-notch"></i>
-        <span>სხვა</span>
-      </div>
+      }
     </div>
   </div>
 </div>

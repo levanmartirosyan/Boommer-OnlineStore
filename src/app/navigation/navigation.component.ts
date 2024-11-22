@@ -3,11 +3,13 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnInit,
   Renderer2,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthorizationComponent } from './authorization/authorization.component';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,9 +18,15 @@ import { AuthorizationComponent } from './authorization/authorization.component'
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
-export class NavigationComponent {
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
-
+export class NavigationComponent implements OnInit {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    public myService: ApiService
+  ) {}
+  ngOnInit(): void {
+    this.showCategories();
+  }
   public burgerToggle: boolean = false;
   public authorizationToggle: boolean = false;
 
@@ -57,5 +65,12 @@ export class NavigationComponent {
 
       this.renderer.setStyle(bottomElement, 'background-color', '');
     }
+  }
+
+  public categories: any;
+  showCategories() {
+    this.myService.getCategories().subscribe((data: any) => {
+      this.categories = data;
+    });
   }
 }

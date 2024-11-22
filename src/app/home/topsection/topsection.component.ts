@@ -41,7 +41,6 @@ export class TopsectionComponent implements OnInit {
 
   showCategories() {
     this.myService.getCategories().subscribe((data: any) => {
-      console.log(data);
       this.categories = data;
     });
   }
