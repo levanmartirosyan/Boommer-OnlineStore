@@ -1,0 +1,236 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+.authorizationForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid $primary;
+  border-radius: 20px;
+  padding: 25px;
+  animation: authAppear 0.7s ease-out;
+  z-index: 1000;
+  background-color: $secondary;
+  .exitBtn {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    cursor: pointer;
+    background-color: $primary;
+    color: $secondary;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    i {
+      font-size: 20px;
+    }
+  }
+  .switchers {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    span {
+      cursor: pointer;
+      position: relative;
+      width: 190px;
+      text-align: center;
+    }
+  }
+  .auth {
+    width: 100%;
+    max-height: 450px;
+    overflow-y: scroll;
+    .signIn {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      padding: 0 10px;
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        input {
+          width: 100%;
+          height: 50px;
+          border-radius: 20px;
+          border: 1px solid $primary;
+          padding: 3px 15px;
+          outline: none;
+        }
+        input.ng-invalid.ng-dirty {
+          border: 2px solid rgb(255, 0, 0);
+        }
+      }
+      button {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        background-color: $primary;
+        color: $secondary;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover {
+          border: 1px solid $primary;
+          background-color: $secondary;
+          color: $primary;
+        }
+      }
+    }
+    .signUp {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+          input {
+            width: 100%;
+            height: 50px;
+            border-radius: 20px;
+            border: 1px solid $primary;
+            padding: 3px 15px;
+            outline: none;
+          }
+          .custom-select {
+            position: relative;
+            select {
+              width: 100%;
+              height: 50px;
+              border-radius: 20px;
+              border: 1px solid $primary;
+              padding: 3px 15px;
+              outline: none;
+              cursor: pointer;
+              appearance: none;
+              option {
+                width: 100%;
+                border-radius: 20px;
+                border: 2px solid $primary;
+              }
+            }
+            i {
+              position: absolute;
+              right: 15px;
+              top: 50%;
+              transform: translateY(-50%);
+              color: $primary;
+            }
+          }
+          select {
+            width: 100%;
+            height: 50px;
+            border-radius: 20px;
+            border: 1px solid $primary;
+            padding: 3px 15px;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            option {
+              width: 100%;
+              border-radius: 20px;
+              border: 2px solid $primary;
+            }
+          }
+          i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $primary;
+          }
+          input.ng-invalid.ng-dirty {
+            border: 2px solid rgb(255, 0, 0);
+          }
+        }
+      }
+      button {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        background-color: $primary;
+        color: $secondary;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover {
+          border: 1px solid $primary;
+          background-color: $secondary;
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+.authActive {
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $primary;
+    border-radius: 8px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: lineFill 1s ease;
+  }
+}
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+@keyframes authAppear {
+  from {
+    transform: translate(-50%, -20%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes lineFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

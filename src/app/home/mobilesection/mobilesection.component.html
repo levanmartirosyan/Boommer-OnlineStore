@@ -1,0 +1,32 @@
+<section class="mainContent">
+  <h3>მობილურები</h3>
+  <div class="product">
+    @for (item of products; track $index) { @if (item.category.id == 2) {
+    <div class="productCard">
+      <img [src]="item.thumbnail" alt="{{ item.title }}" />
+      <div class="pInfo">
+        @if ( item.price.discountPercentage) {
+        <span class="discountPercentage"
+          >-{{ item.price.discountPercentage }}%</span
+        >
+        }
+        <span>
+          @if (item.price.beforeDiscount == item.price.current ) {
+          <span>{{ item.price.beforeDiscount }} ₾</span>
+          } @else {
+          <span class="beforeSale">{{ item.price.beforeDiscount }} </span>
+          <span class="currentPrice">{{ item.price.current }} ₾</span>
+          }
+        </span>
+        <span>{{ item.title }}</span>
+      </div>
+      <div class="cardBtn">
+        <div>
+          <i class="fi fi-rr-exchange"></i>
+        </div>
+        <button><i class="fi fi-rr-shopping-cart"></i> დამატება</button>
+      </div>
+    </div>
+    } }
+  </div>
+</section>

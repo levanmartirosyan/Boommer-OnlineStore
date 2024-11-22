@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+$primary: #ec5e2a;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Georgian";
+  src: url("/fonts/bpg_nino_mtavruli_normal.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  width: 100%;
+  font-family: "Georgian", sans-serif !important;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+}

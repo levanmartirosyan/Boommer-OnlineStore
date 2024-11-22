@@ -1,0 +1,389 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary;
+    padding: 0 12%;
+    height: 40px;
+    .number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: 0.2s ease;
+      cursor: pointer;
+      i {
+        color: $secondary;
+        font-size: 24px;
+      }
+      span {
+        color: $sixth;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+    .addInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      span {
+        color: $sixth;
+        font-size: 14px;
+        font-weight: bold;
+        transition: 0.3s ease;
+        cursor: pointer;
+        &:hover {
+          color: $secondary;
+        }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    width: 100%;
+    padding: 0 12%;
+    gap: 20px;
+    background-color: $secondary;
+    .logo {
+      cursor: pointer;
+      height: 40px;
+    }
+    .navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      .navv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        span {
+          width: 130px;
+          height: 40px;
+          background-color: $primary;
+          color: $secondary;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          gap: 10px;
+          padding: 10px;
+          font-weight: bold;
+          font-size: 15px;
+          cursor: pointer;
+          &:hover {
+            color: $secondary;
+          }
+          i {
+            width: 20px;
+            height: 20px;
+            font-size: 20px;
+          }
+        }
+        .search {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          width: 100%;
+          input {
+            width: 250px;
+            height: 45px;
+            border: 1px solid rgba(236, 94, 42, 0.5);
+            border-radius: 12px;
+            padding: 8px;
+            padding-left: 45px;
+            outline: none;
+          }
+          i {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: $primary;
+          }
+        }
+      }
+      span {
+        color: $fifth;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        i {
+          font-size: 22px;
+        }
+        img {
+          width: 30px;
+        }
+        &:hover {
+          color: $seventh;
+        }
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        input {
+          max-width: 400px;
+          width: 100%;
+          height: 45px;
+          border: 1px solid rgba(236, 94, 42, 0.5);
+          border-radius: 12px;
+          padding: 8px;
+          padding-left: 45px;
+          outline: none;
+        }
+        i {
+          position: absolute;
+          left: 11px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 20px;
+          color: $primary;
+        }
+      }
+    }
+  }
+  .mobileMenu {
+    display: none;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      .logoM {
+        margin-left: 70px;
+        img {
+          width: 100%;
+          height: 35px;
+        }
+      }
+    }
+    .cart {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      span {
+        color: $fifth;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        i {
+          font-size: 22px;
+        }
+        img {
+          width: 30px;
+        }
+        &:hover {
+          color: $seventh;
+        }
+      }
+    }
+    .mobileNavigation {
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid rgba($color: $seventh, $alpha: 0.2);
+      .navItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #333333;
+        cursor: pointer;
+        span {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+.burger {
+  position: fixed;
+  left: 20px;
+  top: 5px;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 9999;
+  .line {
+    width: 100%;
+    height: 2px;
+    background-color: $seventh;
+    border-radius: 10px;
+    transition: 0.5s ease;
+  }
+}
+.mobileActiveMenu {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary;
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+  position: absolute;
+  .topM {
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 30px;
+    .search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-left: 70px;
+      input {
+        width: 100%;
+        height: 45px;
+        border: 1px solid rgba(236, 94, 42, 0.5);
+        border-radius: 12px;
+        padding: 8px;
+        padding-left: 45px;
+        outline: none;
+      }
+      i {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: $primary;
+      }
+    }
+  }
+  .bottomM {
+    width: 100%;
+    .leftM {
+      width: 150px;
+      padding: 7px 10px;
+      .categoryM {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        i {
+          font-size: 26px;
+        }
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.hidden {
+  transform: translateX(0);
+}
+.activeM {
+  position: relative;
+  transition: 0.3s ease;
+  &::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    background-color: $primary;
+    border-radius: 10px;
+    left: -10px;
+    top: 0;
+    bottom: 0;
+  }
+}
+.activeMitem {
+  color: $primary !important;
+}
+.activeBurger {
+  .line:nth-child(1) {
+    transform: translateY(6.9px) rotate(225deg);
+  }
+  .line:nth-child(2) {
+    transform: translateY(-1000px);
+  }
+  .line:nth-child(3) {
+    transform: translateY(-6.9px) rotate(-225deg);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  nav {
+    .top {
+      display: none;
+    }
+    .bottom {
+      display: none;
+    }
+    .mobileMenu {
+      display: flex;
+    }
+  }
+  .burger {
+    display: flex;
+  }
+}

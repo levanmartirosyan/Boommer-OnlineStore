@@ -1,0 +1,121 @@
+<div class="authorizationForm">
+  <span class="exitBtn" (click)="sendAnswerFromAuth()">
+    <i class="fa-solid fa-xmark"></i>
+  </span>
+  <div class="switchers">
+    <span (click)="singIn()" [class.authActive]="!singInUp">ავტორიზაცია</span>
+    <span (click)="singUp()" [class.authActive]="singInUp">რეგისტრაცია</span>
+  </div>
+  <div class="auth">
+    @if (!singInUp) {
+    <form class="signIn" [formGroup]="authorization" (ngSubmit)="authorize()">
+      <div>
+        <label for="">Email</label>
+        <input
+          type="email"
+          placeholder="შეიყვანეთ Email"
+          formControlName="email"
+        />
+      </div>
+      <div>
+        <label for="">პაროლი</label>
+        <input
+          type="password"
+          placeholder="შეიყვანეთ პაროლი"
+          formControlName="password"
+        />
+      </div>
+      <button type="submit">ავტორიზაცია</button>
+    </form>
+    } @else {
+    <form class="signUp" [formGroup]="registration" (ngSubmit)="register()">
+      <div class="inputs">
+        <div>
+          <label for="">სახელი *</label>
+          <input
+            type="text"
+            placeholder="შეიყვანეთ სახელი"
+            formControlName="firstName"
+          />
+        </div>
+        <div>
+          <label for="">გვარი *</label>
+          <input
+            type="text"
+            placeholder="შეიყვანეთ გვარი"
+            formControlName="lastName"
+          />
+        </div>
+        <div>
+          <label for="">ასაკი *</label>
+          <input
+            type="number"
+            placeholder="შეიყვანეთ ასაკი"
+            formControlName="age"
+          />
+        </div>
+        <div>
+          <label for="">Email *</label>
+          <input
+            type="email"
+            placeholder="შეიყვანეთ Email"
+            formControlName="email"
+          />
+        </div>
+        <div>
+          <label for="">პაროლი *</label>
+          <input
+            type="password"
+            placeholder="შეიყვანეთ პაროლი"
+            formControlName="password"
+          />
+        </div>
+        <div>
+          <label for="">მისამართი *</label>
+          <input
+            type="text"
+            placeholder="შეიყვანეთ მისამართი"
+            formControlName="address"
+          />
+        </div>
+        <div>
+          <label for="">ტელეფონის ნომერი *</label>
+          <input
+            type="number"
+            placeholder="შეიყვანეთ ტელეფონის ნომერი"
+            formControlName="phone"
+          />
+        </div>
+        <div>
+          <label for="">Zip-Code *</label>
+          <input
+            type="text"
+            placeholder="შეიყვანეთ Zip-Code"
+            formControlName="zipcode"
+          />
+        </div>
+        <div>
+          <label for="">პროფილის სურათი *</label>
+          <input
+            type="text"
+            placeholder="შეიყვანეთ სურათის ლინკი"
+            formControlName="avatar"
+          />
+        </div>
+        <div>
+          <label for="">აირჩიეთ გენდერი *</label>
+          <div class="custom-select">
+            <select id="" formControlName="gender">
+              <option value="MALE">მამრობითი</option>
+              <option value="FEMALE">მდედრობითი</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+      <button type="submit">რეგისტრაცია</button>
+    </form>
+    }
+  </div>
+</div>
+<div class="overlay"></div>
