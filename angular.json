@@ -29,10 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss",
-              "node_modules/ngx-spinner/animations/ball-scale-ripple.css"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
