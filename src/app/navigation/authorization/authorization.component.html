@@ -1,3 +1,4 @@
+@if (!toggleRecovery) {
 <div class="authorizationForm">
   <span class="exitBtn" (click)="sendAnswerFromAuth()">
     <i class="fa-solid fa-xmark"></i>
@@ -25,6 +26,7 @@
           formControlName="password"
         />
       </div>
+      <span (click)="recoveryToggle()">დაგავიწყდა პაროლი?</span>
       <button type="submit">ავტორიზაცია</button>
     </form>
     } @else {
@@ -81,7 +83,7 @@
         <div>
           <label for="">ტელეფონის ნომერი *</label>
           <input
-            type="number"
+            type="text"
             placeholder="შეიყვანეთ ტელეფონის ნომერი"
             formControlName="phone"
           />
@@ -118,4 +120,29 @@
     }
   </div>
 </div>
+} @else {
+<div class="authorizationForm">
+  <span class="exitBtn" (click)="sendAnswerFromAuth()">
+    <i class="fa-solid fa-xmark"></i>
+  </span>
+  <div class="switchers">
+    <span [class.authActive]="!singInUp">პაროლისაღდგენა</span>
+  </div>
+  <div class="auth">
+    <form class="recovery" [formGroup]="recovery" (ngSubmit)="passRecovery()">
+      <div>
+        <label for="">Email</label>
+        <input
+          type="email"
+          placeholder="შეიყვანეთ Email"
+          formControlName="email"
+        />
+      </div>
+      <span (click)="recoveryToggle()">უკან</span>
+      <button type="submit">აღდგენა</button>
+    </form>
+  </div>
+</div>
+}
+
 <div class="overlay"></div>

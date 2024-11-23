@@ -68,7 +68,7 @@ nav {
     width: 100%;
     padding: 0 12%;
     gap: 20px;
-    background-color: $secondary;
+    background-color: #f2f0f0;
     .logo {
       cursor: pointer;
       height: 40px;
@@ -140,14 +140,30 @@ nav {
         gap: 10px;
         font-size: 15px;
         cursor: pointer;
+        background-color: $secondary;
+        padding: 0 15px;
+        border-radius: 15px;
+        height: 45px;
         i {
           font-size: 22px;
         }
         img {
           width: 30px;
         }
+        img.profileAvatar {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
         &:hover {
           color: $seventh;
+        }
+      }
+      .authorized {
+        transition: 0.3s ease;
+        &:hover {
+          transform: scale(1.05);
         }
       }
       .search {
@@ -250,6 +266,12 @@ nav {
         }
         i {
           font-size: 20px;
+        }
+        img.profileAvatar {
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          object-fit: cover;
         }
       }
     }

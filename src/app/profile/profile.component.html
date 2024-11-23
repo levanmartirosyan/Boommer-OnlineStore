@@ -1,0 +1,53 @@
+<section>
+  <div class="profile">
+    <div class="coverImg"></div>
+    <div class="mainInfo">
+      <div class="left">
+        <img [src]="userProfile.avatar" alt="" />
+        <div class="info">
+          <h1>{{ userProfile.firstName }} {{ userProfile.lastName }}</h1>
+          <span
+            ><p>Email:</p>
+            {{ userProfile.email }}
+            <i
+              [className]="
+                userProfile.verified
+                  ? 'fi fi-ss-badge-check'
+                  : 'fi fi-ss-cross-circle'
+              "
+            ></i
+          ></span>
+          <span
+            ><p>ტელეფონი:</p>
+            {{ userProfile.phone }}</span
+          >
+          <span
+            ><p>ასაკი:</p>
+            {{ userProfile.age }} წლის</span
+          >
+          <span
+            ><p>მისამართი:</p>
+            {{ userProfile.address }}</span
+          >
+          <span
+            ><p>როლი:</p>
+            {{
+              userProfile.role == "default" ? "მომხმარებელი" : userProfile.role
+            }}</span
+          >
+        </div>
+      </div>
+      <div class="right">
+        <div class="btns">
+          <div routerLink="/profile/edit-profile">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <div (click)="signOut()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+        </div>
+        <span> {{ userProfile._id }}</span>
+      </div>
+    </div>
+  </div>
+</section>

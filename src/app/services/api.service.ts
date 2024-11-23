@@ -17,21 +17,28 @@ export class ApiService {
     return this.http.get('https://api.everrest.educata.dev/shop/products/all');
   }
 
-  registerForm(body: any) {
+  registration(body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/auth/sign_up',
       body
     );
   }
 
-  signinForm(body: any) {
+  authorization(body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/auth/sign_in',
       body
     );
   }
 
-  getUserInfo(userData: any) {
+  recovery(body: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/auth/recovery',
+      body
+    );
+  }
+
+  getUser(userData: any) {
     return this.http.get('https://api.everrest.educata.dev/auth', {
       headers: userData,
     });

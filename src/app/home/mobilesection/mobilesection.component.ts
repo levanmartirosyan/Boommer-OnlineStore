@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './mobilesection.component.scss',
 })
 export class MobilesectionComponent implements OnInit {
-  constructor(public myService: ApiService) {}
+  constructor(public apiService: ApiService) {}
 
   ngOnInit(): void {
     this.showProductCards();
@@ -18,7 +18,7 @@ export class MobilesectionComponent implements OnInit {
   public products: any;
 
   showProductCards() {
-    this.myService.getAllProducts().subscribe((data: any) => {
+    this.apiService.getAllProducts().subscribe((data: any) => {
       console.log(data);
       this.products = data.products;
     });

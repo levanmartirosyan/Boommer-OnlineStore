@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './topsection.component.scss',
 })
 export class TopsectionComponent implements OnInit {
-  constructor(public myService: ApiService) {}
+  constructor(public apiService: ApiService) {}
 
   ngOnInit(): void {
     this.showCategories();
@@ -40,7 +40,7 @@ export class TopsectionComponent implements OnInit {
   public categories: any;
 
   showCategories() {
-    this.myService.getCategories().subscribe((data: any) => {
+    this.apiService.getCategories().subscribe((data: any) => {
       this.categories = data;
     });
   }

@@ -28,9 +28,21 @@
       <span routerLink="/cart"
         ><i class="fi fi-rr-shopping-cart"></i> კალათა</span
       >
-      <span (click)="toggleAuthorization()"
+      @if (userProfile) {
+      <span
+        [style.display]="userProfile ? 'flex' : 'none'"
+        routerLink="/profile"
+        class="authorized"
+        ><img [src]="userProfile.avatar" alt="" class="profileAvatar" />
+        {{ userProfile.firstName }}
+      </span>
+      }@else {
+      <span
+        (click)="toggleAuthorization()"
+        [style.display]="userProfile ? 'none' : 'flex'"
         ><i class="fi fi-rr-circle-user"></i> შესვლა</span
       >
+      }
       <span><img src="/georgia.png" alt="" /></span>
     </div>
   </div>
@@ -62,10 +74,21 @@
         <i class="fi fi-rr-exchange"></i>
         <span>შედარება</span>
       </div>
-      <div class="navItem" (click)="toggleAuthorization()">
+      @if (userProfile) {
+      <div class="navItem" [style.display]="userProfile ? 'flex' : 'none'">
+        <i class="fi fi-rr-circle-user"></i>
+        <span>პროფილი</span>
+      </div>
+      }@else {
+      <div
+        class="navItem"
+        (click)="toggleAuthorization()"
+        [style.display]="userProfile ? 'none' : 'flex'"
+      >
         <i class="fi fi-rr-circle-user"></i>
         <span>შესვლა</span>
       </div>
+      }
     </div>
   </div>
 </nav>

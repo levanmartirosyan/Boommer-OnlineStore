@@ -1,0 +1,105 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+section {
+  width: 100%;
+  padding: 0 12%;
+  margin-top: 150px;
+  display: flex;
+  height: 95vh;
+  .profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .coverImg {
+      width: 100%;
+      height: 250px;
+      background-color: $primary;
+      border-radius: 5px;
+    }
+    .mainInfo {
+      display: flex;
+      justify-content: space-between;
+      .left {
+        position: relative;
+        margin-top: 20px;
+        img {
+          width: 250px;
+          height: 250px;
+          border-radius: 25%;
+          object-fit: cover;
+          position: absolute;
+          top: -80px;
+          left: 15px;
+          background-color: rgba($color: $secondary, $alpha: 1);
+          padding: 7px;
+          object-position: center;
+        }
+        .info {
+          margin-left: 285px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px;
+          span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: $seventh;
+            .fi-ss-badge-check {
+              color: rgb(0, 150, 0);
+              font-size: 16px;
+            }
+            .fi-ss-cross-circle {
+              color: rgb(255, 0, 0);
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .right {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+        padding-right: 15px;
+        .btns {
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          gap: 10px;
+          div {
+            border: 1px solid $primary;
+            background-color: $primary;
+            color: $secondary;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            transition: 0.3s ease;
+            cursor: pointer;
+            i {
+              font-size: 18px;
+            }
+            &:hover {
+              border: 1px solid $primary;
+              background-color: $secondary;
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
