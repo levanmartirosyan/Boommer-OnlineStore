@@ -11,6 +11,5 @@ export const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'search', component: SearchComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'profile/edit-profile', component: EditprofileComponent },
   { path: '**', component: NotfoundComponent },
 ];

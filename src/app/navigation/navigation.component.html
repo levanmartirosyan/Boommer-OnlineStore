@@ -43,7 +43,6 @@
         ><i class="fi fi-rr-circle-user"></i> შესვლა</span
       >
       }
-      <span><img src="/georgia.png" alt="" /></span>
     </div>
   </div>
   <div class="mobileMenu">
@@ -75,7 +74,11 @@
         <span>შედარება</span>
       </div>
       @if (userProfile) {
-      <div class="navItem" [style.display]="userProfile ? 'flex' : 'none'">
+      <div
+        class="navItem"
+        [style.display]="userProfile ? 'flex' : 'none'"
+        routerLink="/profile"
+      >
         <i class="fi fi-rr-circle-user"></i>
         <span>პროფილი</span>
       </div>

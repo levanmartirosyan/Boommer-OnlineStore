@@ -43,4 +43,40 @@ export class ApiService {
       headers: userData,
     });
   }
+
+  changePersonalInfo(userData: any, body: any) {
+    return this.http.patch(
+      'https://api.everrest.educata.dev/auth/update',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  changePassword(userData: any, body: any) {
+    return this.http.patch(
+      'https://api.everrest.educata.dev/auth/change_password',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  emailVerification(userData: any, body: any) {
+    return this.http.patch(
+      'https://api.everrest.educata.dev/auth/verify_email',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  deleteAccount(userData: any) {
+    return this.http.delete('https://api.everrest.educata.dev/auth/delete', {
+      headers: userData,
+    });
+  }
 }

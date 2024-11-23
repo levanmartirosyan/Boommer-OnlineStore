@@ -1,1 +1,156 @@
-<p>editprofile works!</p>
+<div class="categories">
+  <span
+    (click)="activeCategory = 'personal'"
+    [class.active]="activeCategory === 'personal'"
+    >პირადი ინფორმაცია</span
+  >
+  <span
+    (click)="activeCategory = 'password'"
+    [class.active]="activeCategory === 'password'"
+    >პაროლის შეცვლა</span
+  >
+  <span
+    (click)="activeCategory = 'emailVerification'"
+    [class.active]="activeCategory === 'emailVerification'"
+    >Email-ის ვერიფიკაცია</span
+  >
+  <span
+    (click)="activeCategory = 'delete'"
+    [class.active]="activeCategory === 'delete'"
+    >ანგარიშის წაშლა</span
+  >
+</div>
+<div class="settings">
+  @switch (activeCategory) { @case ('personal') {
+  <form
+    class="personalInfo"
+    [formGroup]="personalInfo"
+    (ngSubmit)="changePersonalInfo()"
+  >
+    <div>
+      <label for="">სახელი</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ სახელი"
+        formControlName="firstName"
+      />
+    </div>
+    <div>
+      <label for="">გვარი</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ გვარი"
+        formControlName="lastName"
+      />
+    </div>
+    <div>
+      <label for="">ასაკი</label>
+      <input type="text" placeholder="შეიყვანეთ ასაკი" formControlName="age" />
+    </div>
+    <div>
+      <label for="">მისამართი</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ მისამართი"
+        formControlName="address"
+      />
+    </div>
+    <div>
+      <label for="">ტელეფონის ნომერი</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ ტელეფონის ნომერი"
+        formControlName="phone"
+      />
+    </div>
+    <div>
+      <label for="">Zip-Code</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ Zip-Code"
+        formControlName="zipcode"
+      />
+    </div>
+    <div>
+      <label for="">პროფილის სურათი</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ სურათის ლინკი"
+        formControlName="avatar"
+      />
+    </div>
+    <div>
+      <label for="">აირჩიეთ გენდერი</label>
+      <div class="custom-select">
+        <select id="" formControlName="gender">
+          <option value="MALE">მამრობითი</option>
+          <option value="FEMALE">მდედრობითი</option>
+        </select>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+    <button type="submit">შენახვა</button>
+  </form>
+  } @case ('password') {
+  <form
+    class="personalInfo"
+    [formGroup]="newPassword"
+    (ngSubmit)="changePassword()"
+  >
+    <div>
+      <label for="">ძველი პაროლი</label>
+      <input
+        type="password"
+        placeholder="შეიყვანეთ ძველი პაროლი"
+        formControlName="oldPassword"
+      />
+    </div>
+    <div>
+      <label for="">ახალი პაროლი</label>
+      <input
+        type="password"
+        placeholder="შეიყვანეთ ახალი პაროლი"
+        formControlName="newPassword"
+      />
+    </div>
+    <button type="submit">შენახვა</button>
+  </form>
+  }@case ('emailVerification') { @if (!userProfile.verified) {
+  <form
+    class="personalInfo"
+    [formGroup]="emailVerification"
+    (ngSubmit)="verifyEmail()"
+  >
+    <div>
+      <label for="">Email *</label>
+      <input
+        type="email"
+        placeholder="შეიყვანეთ Email"
+        formControlName="email"
+      />
+    </div>
+    <button type="submit">შენახვა</button>
+  </form>
+  } @else {
+  <h3>თქვენი Email უკვე ვერიფიცირებულია!</h3>
+  } } @case ('delete') {
+  <div class="deleteAcc">
+    <span>ანგარიშის წაშლა</span>
+    <button (click)="deleteUserAcc()">წაშლა</button>
+  </div>
+  }}
+</div>
+@if (confirmationWindow) {
+<div class="confirmationWindow">
+  <h2>ანგარიშის წაშლა</h2>
+  <span
+    >დარწმუნებული ხართ რომ გსურთ ანგარიშის წაშლა?
+    <span class="attention">მის აღდგენას ვეღარ შეძლებთ!</span></span
+  >
+  <div class="btns">
+    <button (click)="approveDelete()" class="deleteBtn">წაშლა</button>
+    <button (click)="cancelDelete()">გაუქმება</button>
+  </div>
+</div>
+<div class="overlay"></div>
+}

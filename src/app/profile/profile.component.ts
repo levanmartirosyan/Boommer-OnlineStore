@@ -2,11 +2,12 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, EditprofileComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })

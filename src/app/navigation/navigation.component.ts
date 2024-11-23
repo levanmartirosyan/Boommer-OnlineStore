@@ -47,24 +47,28 @@ export class NavigationComponent implements OnInit {
   //   sessionStorage.setItem('userProfileData', JSON.stringify(value));
   // }
   getUserInfo() {
-    const getToken = sessionStorage.getItem('userToken');
-    const userData = new HttpHeaders({
-      accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
-    });
-    this.apiService.getUser(userData).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        sessionStorage.setItem('userProfileData', JSON.stringify(data));
-        const storedData = sessionStorage.getItem('userProfileData');
-        if (storedData) {
-          this.userProfile = JSON.parse(storedData);
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    const checkAccessToken = sessionStorage.getItem('userToken');
+    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
+    if (checkAccessToken && checkRefreshToken) {
+      const getToken = sessionStorage.getItem('userToken');
+      const userData = new HttpHeaders({
+        accept: 'application/json',
+        Authorization: `Bearer ${getToken}`,
+      });
+      this.apiService.getUser(userData).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          sessionStorage.setItem('userProfileData', JSON.stringify(data));
+          const storedData = sessionStorage.getItem('userProfileData');
+          if (storedData) {
+            this.userProfile = JSON.parse(storedData);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
   }
   // getUserDataFromStorage() {
   //   const storedObject = sessionStorage.getItem('userProfileData');

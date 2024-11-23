@@ -1,0 +1,271 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+.categories {
+  display: flex;
+  padding: 10px 0;
+  position: relative;
+  text-align: center;
+  span {
+    text-decoration: none;
+    color: $seventh;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $primary;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+      z-index: 100;
+    }
+    &:hover {
+      color: $primary;
+      z-index: 100;
+    }
+    &:hover::after {
+      transform: scaleX(1);
+    }
+    &.active {
+      color: $primary;
+      z-index: 100;
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #d3d3d3;
+    z-index: 1;
+  }
+}
+.settings {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  .personalInfo {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      input {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        padding: 3px 15px;
+        outline: none;
+      }
+      label {
+        font-size: 14px;
+      }
+      .custom-select {
+        position: relative;
+        select {
+          width: 100%;
+          height: 50px;
+          border-radius: 20px;
+          border: 1px solid $primary;
+          padding: 3px 15px;
+          outline: none;
+          cursor: pointer;
+          appearance: none;
+          option {
+            width: 100%;
+            border-radius: 20px;
+            border: 2px solid $primary;
+          }
+        }
+        i {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $primary;
+        }
+      }
+      select {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        padding: 3px 15px;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        option {
+          width: 100%;
+          border-radius: 20px;
+          border: 2px solid $primary;
+        }
+      }
+      i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $primary;
+      }
+      input.ng-invalid.ng-dirty {
+        border: 2px solid rgb(255, 0, 0);
+      }
+    }
+    button {
+      width: 100%;
+      height: 50px;
+      border-radius: 20px;
+      border: 1px solid $primary;
+      background-color: $primary;
+      color: $secondary;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
+        border: 1px solid $primary;
+        background-color: $secondary;
+        color: $primary;
+      }
+    }
+  }
+  .deleteAcc {
+    width: 60%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $primary;
+    border-radius: 20px;
+    padding: 0 20px;
+    button {
+      width: 100px;
+      height: 50px;
+      border-radius: 20px;
+      border: 1px solid $primary;
+      background-color: $primary;
+      color: $secondary;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
+        border: 1px solid $primary;
+        background-color: $secondary;
+        color: $primary;
+      }
+    }
+  }
+}
+
+.confirmationWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid $primary;
+  border-radius: 20px;
+  padding: 25px;
+  animation: windowAppear 0.7s ease-out;
+  z-index: 1000;
+  background-color: $secondary;
+  span {
+    text-align: center;
+    line-height: 30px;
+    .attention {
+      color: rgb(204, 4, 4);
+      font-weight: bold;
+    }
+  }
+  .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    button {
+      width: 100px;
+      height: 38px;
+      border-radius: 20px;
+      border: 1px solid $primary;
+      background-color: $secondary;
+      color: $secondary;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      color: $primary;
+      &:hover {
+        border: 1px solid $secondary;
+        background-color: $primary;
+        color: $secondary;
+      }
+    }
+    .deleteBtn {
+      background-color: red;
+      color: $secondary;
+      border: 1px solid red;
+      &:hover {
+        border: 1px solid red;
+        background-color: $secondary;
+        color: red;
+      }
+    }
+  }
+}
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+@keyframes windowAppear {
+  from {
+    transform: translate(-50%, -20%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
