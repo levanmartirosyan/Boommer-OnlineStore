@@ -45,6 +45,7 @@ section.header {
     position: relative;
     width: 100%;
     flex: 3;
+    height: 100%;
     button.prevImg {
       position: absolute;
       left: 10px;
@@ -79,11 +80,15 @@ section.header {
       justify-content: center;
       cursor: pointer;
     }
-    img {
+    div {
       width: 100%;
-      height: 350px;
-      border-radius: 12px;
-      transition: 0.5s ease;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        transition: 0.5s ease;
+      }
     }
   }
 }
@@ -124,11 +129,10 @@ section.header {
 
 @media screen and (max-width: 550px) {
   section.header {
+    padding: 0 6%;
     .slider {
-      img {
-        width: 100%;
-        height: 200px;
-      }
+      width: 100%;
+      height: 100%;
     }
   }
 }
