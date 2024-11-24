@@ -3,7 +3,7 @@
     <div class="coverImg"></div>
     <div class="mainInfo">
       <div class="left">
-        <img [src]="userProfile.avatar" alt="" />
+        <img [src]="userProfile ? userProfile.avatar : '/user.png'" alt="" />
         <div class="info">
           <h1>{{ userProfile.firstName }} {{ userProfile.lastName }}</h1>
           <span
@@ -46,6 +46,15 @@
           <div (click)="signOut()">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </div>
+        </div>
+        <span> {{ userProfile._id }}</span>
+      </div>
+      <div class="rightM">
+        <div class="btns">
+          <span (click)="signOut()">
+            გასვლა
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </span>
         </div>
         <span> {{ userProfile._id }}</span>
       </div>

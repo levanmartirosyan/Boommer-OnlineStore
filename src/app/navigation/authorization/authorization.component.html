@@ -4,11 +4,19 @@
     <i class="fa-solid fa-xmark"></i>
   </span>
   <div class="switchers">
-    <span (click)="singIn()" [class.authActive]="!singInUp">ავტორიზაცია</span>
-    <span (click)="singUp()" [class.authActive]="singInUp">რეგისტრაცია</span>
+    <span
+      (click)="switchAuth = 'auth'"
+      [class.authActive]="switchAuth === 'auth'"
+      >ავტორიზაცია</span
+    >
+    <span
+      (click)="switchAuth = 'register'"
+      [class.authActive]="switchAuth === 'register'"
+      >რეგისტრაცია</span
+    >
   </div>
   <div class="auth">
-    @if (!singInUp) {
+    @switch (switchAuth) { @case ('auth') {
     <form class="signIn" [formGroup]="authorization" (ngSubmit)="authorize()">
       <div>
         <label for="">Email</label>
@@ -29,7 +37,7 @@
       <span (click)="recoveryToggle()">დაგავიწყდა პაროლი?</span>
       <button type="submit">ავტორიზაცია</button>
     </form>
-    } @else {
+    } @case ('register') {
     <form class="signUp" [formGroup]="registration" (ngSubmit)="register()">
       <div class="inputs">
         <div>
@@ -117,7 +125,7 @@
       </div>
       <button type="submit">რეგისტრაცია</button>
     </form>
-    }
+    } }
   </div>
 </div>
 } @else {

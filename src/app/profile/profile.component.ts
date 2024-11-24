@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,18 +13,24 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  constructor(public apiService: ApiService, public router: Router) {}
+  constructor(
+    public apiService: ApiService,
+    public router: Router,
+    public tools: ToolsService
+  ) {
+    document.title = 'dasd';
+  }
   ngOnInit(): void {
     this.getUserProfileData();
   }
-
   public userProfile: any;
 
   getUserProfileData() {
     const getToken = sessionStorage.getItem('userToken');
-    const storedData = sessionStorage.getItem('userProfileData');
-    if (getToken && storedData) {
-      this.userProfile = JSON.parse(storedData);
+    if (getToken) {
+      this.tools.transferData.subscribe((data: any) => {
+        this.userProfile = data;
+      });
     }
   }
   signOut() {

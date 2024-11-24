@@ -16,6 +16,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrl: './authorization.component.scss',
 })
 export class AuthorizationComponent implements OnInit {
+  switchAuth: any = 'auth';
   constructor(public apiService: ApiService) {}
   ngOnInit(): void {}
 
@@ -23,18 +24,9 @@ export class AuthorizationComponent implements OnInit {
   @Output() sendCloseCommand: EventEmitter<boolean> = new EventEmitter();
   @Output() sendUserData: EventEmitter<any> = new EventEmitter();
 
-  singIn() {
-    this.singInUp = false;
-  }
-  singUp() {
-    this.singInUp = true;
-  }
   sendAnswerFromAuth(): void {
     this.sendCloseCommand.emit(false);
   }
-  // sendUserInfo(): void {
-  //   this.sendUserData.emit(this.userProfile);
-  // }
   public authorization: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [

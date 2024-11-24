@@ -102,6 +102,40 @@ section.mainSection {
           }
         }
       }
+      .rightM {
+        display: none;
+        width: 100%;
+        .btns {
+          width: 100%;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          gap: 10px;
+          span {
+            border: 1px solid $primary;
+            background-color: $primary;
+            color: $secondary;
+            font-weight: bold;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 40px;
+            transition: 0.3s ease;
+            cursor: pointer;
+            gap: 10px;
+            i {
+              font-size: 18px;
+            }
+            &:hover {
+              border: 1px solid $primary;
+              background-color: $secondary;
+              color: $primary;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -112,4 +146,55 @@ section.profileSettings {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 913px) {
+  section.mainSection {
+    padding: 0 6%;
+    margin-top: 80px;
+    .profile {
+      width: 100%;
+      .mainInfo {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding: 0 15px;
+        .left {
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          .info {
+            width: 100%;
+            margin: 0;
+            margin-top: 130px;
+            align-items: center;
+          }
+        }
+        .right {
+          display: none;
+        }
+        .rightM {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+          margin-top: 50px;
+        }
+      }
+    }
+  }
+  section.profileSettings {
+    padding: 0 6%;
+  }
 }

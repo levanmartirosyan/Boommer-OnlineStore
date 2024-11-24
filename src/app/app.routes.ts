@@ -7,9 +7,13 @@ import { EditprofileComponent } from './profile/editprofile/editprofile.componen
 import { NotfoundComponent } from './notfound/notfound.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '**', component: NotfoundComponent },
+  { path: '', component: HomeComponent, title: 'Boommer - Home' },
+  { path: 'cart', component: CartComponent, title: 'Boommer - Cart' },
+  { path: 'search', component: SearchComponent, title: 'Boommer - Search' },
+  { path: 'profile', component: ProfileComponent, title: 'Boommer - Profile' },
+  {
+    path: '**',
+    component: NotfoundComponent,
+    title: 'Boommer - Page Not Found',
+  },
 ];

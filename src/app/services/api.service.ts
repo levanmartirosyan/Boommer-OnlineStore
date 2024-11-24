@@ -79,4 +79,32 @@ export class ApiService {
       headers: userData,
     });
   }
+
+  getCartProducts(userData: any) {
+    return this.http.get('https://api.everrest.educata.dev/shop/cart', {
+      headers: userData,
+    });
+  }
+
+  addProductsToCart(userData: any, body: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/shop/cart/product',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  getProductsById(id: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/id/${id}`
+    );
+  }
+
+  getProductBrand() {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/brands`
+    );
+  }
 }

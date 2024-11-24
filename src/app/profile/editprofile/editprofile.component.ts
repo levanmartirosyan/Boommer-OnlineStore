@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { ToolsService } from '../../services/tools.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -18,13 +19,17 @@ import { Router } from '@angular/router';
   styleUrl: './editprofile.component.scss',
 })
 export class EditprofileComponent implements OnInit {
-  constructor(public apiService: ApiService, public router: Router) {}
+  constructor(
+    public apiService: ApiService,
+    public router: Router,
+    public tools: ToolsService
+  ) {}
 
   ngOnInit(): void {
-    this.getUserInfo();
+    this.getBrands();
   }
 
-  public activeCategory: string = 'personal';
+  public activeCategory: string = 'productAdd';
 
   public personalInfo: FormGroup = new FormGroup({
     firstName: new FormControl(''),
@@ -53,7 +58,7 @@ export class EditprofileComponent implements OnInit {
           console.log(data);
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 100);
         },
         error: (error) => {
           console.log(error);
@@ -138,30 +143,43 @@ export class EditprofileComponent implements OnInit {
 
   verifyEmail() {}
 
-  public userProfile: any;
+  public brands: any;
 
-  getUserInfo() {
-    const checkAccessToken = sessionStorage.getItem('userToken');
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-      });
-      this.apiService.getUser(userData).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          sessionStorage.setItem('userProfileData', JSON.stringify(data));
-          const storedData = sessionStorage.getItem('userProfileData');
-          if (storedData) {
-            this.userProfile = JSON.parse(storedData);
-          }
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-    }
+  getBrands() {
+    this.apiService.getProductBrand().subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.brands = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
+
+  public categories: any;
+
+  getCategories() {
+    this.apiService.getCategories().subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.categories = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  public productAdd: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    brand: new FormControl('', Validators.required),
+    price: new FormControl('', Validators.required),
+    stock: new FormControl('', Validators.required),
+    images: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
+    warranty: new FormControl('', Validators.required),
+    thumbnail: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+  });
 }

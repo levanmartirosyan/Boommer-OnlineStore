@@ -51,6 +51,7 @@ $seventh: #000000;
       position: relative;
       width: 190px;
       text-align: center;
+      font-weight: bold;
     }
   }
   .auth {
@@ -302,5 +303,11 @@ $seventh: #000000;
   }
   to {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .authorizationForm {
+    width: 90%;
   }
 }

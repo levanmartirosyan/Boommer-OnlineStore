@@ -1,1 +1,60 @@
-<p>cart works!</p>
+<section>
+  <div class="top">
+    <h1>შენს კალათაში 1 ნივთია</h1>
+    <span><i class="fa-solid fa-trash-can"></i> გასუფთავება</span>
+  </div>
+  <div class="content">
+    <div class="left">
+      <div class="products">
+        @for (item of productsOfCart; track $index) {
+        <div class="product">
+          <div class="mainInfo">
+            <div class="productImg">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSELHPTLjLUf8sBWPzXg7bTDdG1nClBF5Kc4A&s"
+                alt=""
+              />
+            </div>
+            <div class="info">
+              <span>Samsung</span>
+              <div>
+                <span class="beforePrice">{{ item.beforeDiscountPrice }}</span>
+                <span class="newPrice">{{ item.pricePerQuantity }} ₾</span>
+              </div>
+            </div>
+          </div>
+          <div class="btns">
+            <div>
+              <span class="changeQuantity">-</span>
+              <span>2</span>
+              <span class="changeQuantity">+</span>
+            </div>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="right">
+      <div class="total">
+        <div class="prices">
+          <div>
+            <span>ღირებულება</span>
+            <span class="price">1231Gel</span>
+          </div>
+          <div>
+            <span>მიწოდების ღირებულება</span>
+            <span class="price">0</span>
+          </div>
+        </div>
+        <div class="totalPrices">
+          <div>
+            <span>გადასახდელი თანხა</span>
+            <span class="price2">32131GEla</span>
+          </div>
+        </div>
+      </div>
+      <button>შემდეგი</button>
+    </div>
+  </div>
+</section>

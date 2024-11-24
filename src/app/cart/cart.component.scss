@@ -1,0 +1,251 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+section {
+  width: 100%;
+  height: 100vh;
+  margin-top: 150px;
+  padding: 0 12%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: rgba($color: #000000, $alpha: 0.15);
+      bottom: -25px;
+      left: 0;
+    }
+    span {
+      color: $primary;
+      font-weight: bold;
+      transition: 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      &:hover {
+        color: $sixth;
+      }
+    }
+  }
+  .content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px;
+    .left {
+      display: flex;
+      flex: 2;
+      width: 100%;
+      .products {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .product {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          justify-content: space-between;
+          background-color: #f2f0f0;
+          border-radius: 15px;
+          height: 85px;
+          padding: 10px 20px;
+          .mainInfo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 10px;
+            .productImg {
+              background-color: $secondary;
+              border-radius: 15px;
+              padding: 5px 10px;
+              img {
+                width: 40px;
+                height: 50px;
+                object-fit: cover;
+              }
+            }
+            .info {
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              span {
+                font-weight: bold;
+                font-size: 15px;
+              }
+              div {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .beforePrice {
+                  color: $seventh;
+                  position: relative;
+                  font-size: 14px;
+                  font-weight: bold;
+                  &::after {
+                    content: "";
+                    position: absolute;
+                    width: 120%;
+                    height: 2px;
+                    background-color: $primary;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                  }
+                }
+                .newPrice {
+                  font-size: 17px;
+                  font-weight: bold;
+                  color: $primary;
+                }
+              }
+            }
+          }
+          .btns {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              background-color: $primary;
+              border-radius: 20px;
+              width: 130px;
+              height: 30px;
+              span {
+                color: $secondary;
+                font-weight: bold;
+                font-size: 14px;
+              }
+              .changeQuantity {
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 20px;
+                transition: 0.3s ease;
+                cursor: pointer;
+                width: 33.33%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                  background-color: rgba($color: #000000, $alpha: 0.2);
+                }
+              }
+            }
+            i {
+              font-size: 18px;
+              color: $primary;
+              border-radius: 50%;
+              width: 38px;
+              height: 38px;
+              transition: 0.3s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.15);
+              }
+            }
+          }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+      flex: 1;
+      .total {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        background-color: $secondary;
+        .prices {
+          background-color: #f2f0f0;
+          padding: 20px;
+          border-radius: 15px 15px 0 0;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          gap: 20px;
+          div {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            span {
+              font-weight: bold;
+              color: #525252;
+              font-size: 15px;
+            }
+            .price {
+              color: $seventh;
+              font-size: 18px;
+            }
+            .price2 {
+              color: $primary;
+              font-size: 18px;
+            }
+          }
+        }
+        .totalPrices {
+          background-color: #f2f0f0;
+          padding: 20px;
+          border-radius: 0 0 15px 15px;
+          div {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            span {
+              font-weight: bold;
+              color: #525252;
+              font-size: 15px;
+            }
+            .price2 {
+              color: $primary;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+      button {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        background-color: $primary;
+        color: $secondary;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover {
+          border: 1px solid $primary;
+          background-color: $secondary;
+          color: $primary;
+        }
+      }
+    }
+  }
+}

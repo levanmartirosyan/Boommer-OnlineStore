@@ -1,5 +1,10 @@
 <div class="categories">
   <span
+    (click)="activeCategory = 'productAdd'"
+    [class.active]="activeCategory === 'productAdd'"
+    >პროდუქტის დამატება</span
+  >
+  <span
     (click)="activeCategory = 'personal'"
     [class.active]="activeCategory === 'personal'"
     >პირადი ინფორმაცია</span
@@ -8,11 +13,6 @@
     (click)="activeCategory = 'password'"
     [class.active]="activeCategory === 'password'"
     >პაროლის შეცვლა</span
-  >
-  <span
-    (click)="activeCategory = 'emailVerification'"
-    [class.active]="activeCategory === 'emailVerification'"
-    >Email-ის ვერიფიკაცია</span
   >
   <span
     (click)="activeCategory = 'delete'"
@@ -115,25 +115,93 @@
     </div>
     <button type="submit">შენახვა</button>
   </form>
-  }@case ('emailVerification') { @if (!userProfile.verified) {
+  }@case ('productAdd') {
   <form
     class="personalInfo"
-    [formGroup]="emailVerification"
+    [formGroup]="productAdd"
     (ngSubmit)="verifyEmail()"
   >
     <div>
-      <label for="">Email *</label>
+      <label for="">პროდუქტის სახელი *</label>
       <input
-        type="email"
-        placeholder="შეიყვანეთ Email"
-        formControlName="email"
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის სახელი"
+        formControlName="title"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის ბრენდი *</label>
+      <div class="custom-select">
+        <select name="" formControlName="brand">
+          @for (item of brands; track $index) {
+          <option value="{{ item }}">{{ item }}</option>
+          }
+        </select>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+    <div>
+      <label for="">პროდუქტის ფასი *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის ფასი"
+        formControlName="price"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის რაოდენობა *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის რაოდენობა"
+        formControlName="stock"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის სურათები *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის სურათების ლინკები"
+        formControlName="images"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის კატეგორია *</label>
+      <div class="custom-select">
+        <select name="" formControlName="category">
+          @for (item of categories; track $index) {
+          <option value="{{ item }}">{{ item }}</option>
+          }
+        </select>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+    <div>
+      <label for="">პროდუქტის გარანტიის ხანგრძლივობა *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის გარანტიის ხანგრძლივობა"
+        formControlName="warranty"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის მთავარი ფოტო *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის მთავარი ფოტო"
+        formControlName="thumbnail"
+      />
+    </div>
+    <div>
+      <label for="">პროდუქტის აღწერა *</label>
+      <input
+        type="text"
+        placeholder="შეიყვანეთ პროდუქტის აღწერა"
+        formControlName="description"
       />
     </div>
     <button type="submit">შენახვა</button>
   </form>
-  } @else {
-  <h3>თქვენი Email უკვე ვერიფიცირებულია!</h3>
-  } } @case ('delete') {
+  } @case ('delete') {
   <div class="deleteAcc">
     <span>ანგარიშის წაშლა</span>
     <button (click)="deleteUserAcc()">წაშლა</button>
@@ -143,10 +211,10 @@
 @if (confirmationWindow) {
 <div class="confirmationWindow">
   <h2>ანგარიშის წაშლა</h2>
-  <span
-    >დარწმუნებული ხართ რომ გსურთ ანგარიშის წაშლა?
-    <span class="attention">მის აღდგენას ვეღარ შეძლებთ!</span></span
-  >
+  <div class="infoText">
+    <span>დარწმუნებული ხართ რომ გსურთ ანგარიშის წაშლა? </span>
+    <span class="attention">მის აღდგენას ვეღარ შეძლებთ!</span>
+  </div>
   <div class="btns">
     <button (click)="approveDelete()" class="deleteBtn">წაშლა</button>
     <button (click)="cancelDelete()">გაუქმება</button>

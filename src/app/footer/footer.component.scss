@@ -26,6 +26,9 @@ footer {
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
+      img {
+        width: 170px;
+      }
       span {
         font-weight: 600;
         color: $primary;
@@ -88,6 +91,7 @@ footer {
 @media screen and (max-width: 1024px) {
   footer {
     margin-bottom: 60px;
+    padding: 50px 6%;
   }
 }
 

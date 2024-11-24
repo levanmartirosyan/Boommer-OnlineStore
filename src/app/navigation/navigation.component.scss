@@ -72,6 +72,9 @@ nav {
     .logo {
       cursor: pointer;
       height: 40px;
+      img {
+        width: 170px;
+      }
     }
     .navigation {
       display: flex;

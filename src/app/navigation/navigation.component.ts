@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-navigation',
@@ -23,7 +24,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
-    public apiService: ApiService
+    public apiService: ApiService,
+    public tools: ToolsService
   ) {}
   ngOnInit(): void {
     this.showCategories();
@@ -37,15 +39,15 @@ export class NavigationComponent implements OnInit {
   toggleBurger() {
     this.burgerToggle = !this.burgerToggle;
   }
+
   toggleAuthorization() {
     this.authorizationToggle = true;
   }
+
   getAnswerFromAuth(value: boolean): void {
     this.authorizationToggle = value;
   }
-  // getUserData(value: any): void {
-  //   sessionStorage.setItem('userProfileData', JSON.stringify(value));
-  // }
+
   getUserInfo() {
     const checkAccessToken = sessionStorage.getItem('userToken');
     const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
@@ -62,6 +64,7 @@ export class NavigationComponent implements OnInit {
           const storedData = sessionStorage.getItem('userProfileData');
           if (storedData) {
             this.userProfile = JSON.parse(storedData);
+            this.tools.transferData.next(JSON.parse(storedData));
           }
         },
         error: (error) => {
@@ -70,17 +73,13 @@ export class NavigationComponent implements OnInit {
       });
     }
   }
-  // getUserDataFromStorage() {
-  //   const storedObject = sessionStorage.getItem('userProfileData');
-  //   if (storedObject) {
-  //     this.userProfile = JSON.parse(storedObject);
-  //   }
 
-  //   console.log(this.userProfile);
-  // }
+  sendUserData() {}
+
   reloadPage() {
     window.location.reload();
   }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
@@ -109,6 +108,7 @@ export class NavigationComponent implements OnInit {
   }
 
   public categories: any;
+
   showCategories() {
     this.apiService.getCategories().subscribe((data: any) => {
       this.categories = data;
