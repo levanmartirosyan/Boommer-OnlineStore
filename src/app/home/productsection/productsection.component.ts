@@ -56,7 +56,7 @@ export class ProductsectionComponent implements OnInit {
   addToCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      alert('User not logged in.');
+      console.log('User not logged in.');
       return;
     }
     const userData = new HttpHeaders({
@@ -81,7 +81,8 @@ export class ProductsectionComponent implements OnInit {
   getCartForCheck() {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      alert('User not logged in.');
+      console.log('User not logged in.');
+
       return;
     }
     const userData = new HttpHeaders({
@@ -98,5 +99,17 @@ export class ProductsectionComponent implements OnInit {
         console.log(error);
       },
     });
+  }
+
+  goCheckOut() {
+    const checkAccessToken = sessionStorage.getItem('userToken');
+    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
+    if (checkAccessToken && checkRefreshToken) {
+      const getToken = sessionStorage.getItem('userToken');
+      const userData = new HttpHeaders({
+        accept: 'application/json',
+        Authorization: `Bearer ${getToken}`,
+      });
+    }
   }
 }

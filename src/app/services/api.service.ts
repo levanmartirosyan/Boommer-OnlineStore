@@ -122,6 +122,15 @@ export class ApiService {
     });
   }
 
+  checkOut(userData: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/shop/cart/checkout',
+      {
+        headers: userData,
+      }
+    );
+  }
+
   getProductsById(id: any) {
     return this.http.get(
       `https://api.everrest.educata.dev/shop/products/id/${id}`
