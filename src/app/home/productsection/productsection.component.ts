@@ -31,7 +31,7 @@ export class ProductsectionComponent implements OnInit {
   createCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      alert('User not logged in.');
+      console.log('User not logged in.');
       return;
     }
     const userData = new HttpHeaders({
