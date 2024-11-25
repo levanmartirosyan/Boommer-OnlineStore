@@ -27,6 +27,7 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBrands();
+    this.getCategories();
   }
 
   public activeCategory: string = 'productAdd';

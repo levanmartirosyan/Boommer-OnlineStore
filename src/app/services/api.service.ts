@@ -86,7 +86,7 @@ export class ApiService {
     });
   }
 
-  addProductsToCart(userData: any, body: any) {
+  addCreateProductsCart(userData: any, body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/shop/cart/product',
       body,
@@ -94,6 +94,32 @@ export class ApiService {
         headers: userData,
       }
     );
+  }
+
+  addProductsToCart(userData: any, body: any) {
+    return this.http.patch(
+      'https://api.everrest.educata.dev/shop/cart/product',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  deleteProductFromCart(userData: any, body: any) {
+    return this.http.delete(
+      'https://api.everrest.educata.dev/shop/cart/product',
+      {
+        headers: userData,
+        body: body,
+      }
+    );
+  }
+
+  deleteUserCart(userData: any) {
+    return this.http.delete('https://api.everrest.educata.dev/shop/cart', {
+      headers: userData,
+    });
   }
 
   getProductsById(id: any) {

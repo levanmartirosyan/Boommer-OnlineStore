@@ -169,7 +169,7 @@
       <div class="custom-select">
         <select name="" formControlName="category">
           @for (item of categories; track $index) {
-          <option value="{{ item }}">{{ item }}</option>
+          <option value="{{ item.name }}">{{ item.name }}</option>
           }
         </select>
         <i class="fa-solid fa-chevron-down"></i>

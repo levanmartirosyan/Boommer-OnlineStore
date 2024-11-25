@@ -1,35 +1,43 @@
 <section>
   <div class="top">
-    <h1>შენს კალათაში 1 ნივთია</h1>
-    <span><i class="fa-solid fa-trash-can"></i> გასუფთავება</span>
+    <h1>შენს კალათაში {{ totalProducts ? totalProducts : "0" }} ნივთია</h1>
+    <span (click)="deleteCart()"
+      ><i class="fa-solid fa-trash-can"></i> გასუფთავება</span
+    >
   </div>
   <div class="content">
     <div class="left">
       <div class="products">
-        @for (item of productsOfCart; track $index) {
+        @for (item of combinedCartProducts; track $index) {
         <div class="product">
           <div class="mainInfo">
             <div class="productImg">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSELHPTLjLUf8sBWPzXg7bTDdG1nClBF5Kc4A&s"
-                alt=""
-              />
+              <img [src]="item.productDetails.thumbnail" alt="" />
             </div>
             <div class="info">
-              <span>Samsung</span>
+              <span>{{ item.productDetails.title }}</span>
               <div>
+                @if (item.beforeDiscountPrice == item.pricePerQuantity) {
+                <span class="beforePriceNoLine"
+                  >{{ item.beforeDiscountPrice }} ₾</span
+                >
+                } @else {
                 <span class="beforePrice">{{ item.beforeDiscountPrice }}</span>
                 <span class="newPrice">{{ item.pricePerQuantity }} ₾</span>
+                }
               </div>
             </div>
           </div>
           <div class="btns">
             <div>
               <span class="changeQuantity">-</span>
-              <span>2</span>
+              <span>{{ item.quantity }}</span>
               <span class="changeQuantity">+</span>
             </div>
-            <i class="fa-solid fa-trash-can"></i>
+            <i
+              class="fa-solid fa-trash-can"
+              (click)="deleteProduct(item.productId)"
+            ></i>
           </div>
         </div>
         }
@@ -40,17 +48,27 @@
         <div class="prices">
           <div>
             <span>ღირებულება</span>
-            <span class="price">1231Gel</span>
+            <span class="price"
+              >{{ totalPrices ? totalPrices + "₾" : "..." }}
+            </span>
           </div>
           <div>
             <span>მიწოდების ღირებულება</span>
-            <span class="price">0</span>
+            <span class="price"
+              >{{ totalPrices ? deliveryPrice + "₾" : "..." }}
+            </span>
           </div>
         </div>
         <div class="totalPrices">
           <div>
             <span>გადასახდელი თანხა</span>
-            <span class="price2">32131GEla</span>
+            <span class="price2"
+              >{{
+                totalPrices + deliveryPrice
+                  ? totalPrices + deliveryPrice + "₾"
+                  : "..."
+              }}
+            </span>
           </div>
         </div>
       </div>

@@ -56,6 +56,9 @@ section {
         width: 100%;
         display: flex;
         flex-direction: column;
+        gap: 15px;
+        max-height: 500px;
+        overflow-y: scroll;
         .product {
           display: flex;
           align-items: center;
@@ -75,9 +78,8 @@ section {
               border-radius: 15px;
               padding: 5px 10px;
               img {
-                width: 40px;
-                height: 50px;
-                object-fit: cover;
+                width: 48px;
+                height: 55px;
               }
             }
             .info {
@@ -109,6 +111,12 @@ section {
                     transform: translate(-50%, -50%);
                   }
                 }
+                .beforePriceNoLine {
+                  color: $seventh;
+                  position: relative;
+                  font-size: 14px;
+                  font-weight: bold;
+                }
                 .newPrice {
                   font-size: 17px;
                   font-weight: bold;
@@ -127,7 +135,7 @@ section {
               justify-content: space-between;
               background-color: $primary;
               border-radius: 20px;
-              width: 130px;
+              width: 110px;
               height: 30px;
               span {
                 color: $secondary;
@@ -193,6 +201,7 @@ section {
             align-items: center;
             width: 100%;
             justify-content: space-between;
+            gap: 15px;
             span {
               font-weight: bold;
               color: #525252;
@@ -217,6 +226,7 @@ section {
             align-items: center;
             width: 100%;
             justify-content: space-between;
+            gap: 15px;
             span {
               font-weight: bold;
               color: #525252;
@@ -244,6 +254,43 @@ section {
           border: 1px solid $primary;
           background-color: $secondary;
           color: $primary;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  section {
+    .content {
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  section {
+    padding: 0 6%;
+    .content {
+      .left {
+        .products {
+          .product {
+            padding: 10px;
+            gap: 5px;
+            .btns {
+              gap: 7px;
+              flex-direction: column-reverse;
+              align-items: flex-end;
+              div {
+                width: 70px;
+                height: 30px;
+                .changeQuantity {
+                  width: 100%;
+                  height: 33.33%;
+                }
+              }
+            }
+          }
         }
       }
     }
