@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productsection',
@@ -10,7 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrl: './productsection.component.scss',
 })
 export class ProductsectionComponent implements OnInit {
-  constructor(public apiService: ApiService) {}
+  constructor(public apiService: ApiService, public router: Router) {}
 
   ngOnInit(): void {
     this.showProductCards();
@@ -82,7 +83,6 @@ export class ProductsectionComponent implements OnInit {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
       console.log('User not logged in.');
-
       return;
     }
     const userData = new HttpHeaders({
@@ -101,15 +101,11 @@ export class ProductsectionComponent implements OnInit {
     });
   }
 
-  goCheckOut() {
-    const checkAccessToken = sessionStorage.getItem('userToken');
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-      });
-    }
+  goToDetails(card: any) {
+    this.router.navigate([`products/details/${card.title}`], {
+      queryParams: {
+        data: JSON.stringify(card),
+      },
+    });
   }
 }

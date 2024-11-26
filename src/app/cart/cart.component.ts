@@ -87,6 +87,7 @@ export class CartComponent implements OnInit {
       const userData = new HttpHeaders({
         accept: 'application/json',
         Authorization: `Bearer ${getToken}`,
+        'Content-Type': 'application/json',
       });
       const body = JSON.stringify({
         id: id,
@@ -94,6 +95,7 @@ export class CartComponent implements OnInit {
       this.apiService.deleteProductFromCart(userData, body).subscribe({
         next: (data: any) => {
           console.log(data);
+          window.location.reload();
         },
         error: (error: any) => {
           console.log(error);
@@ -117,6 +119,30 @@ export class CartComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (error: any) => {
+          console.log(error);
+        },
+      });
+    }
+  }
+
+  increaseQuantity() {}
+
+  decreaseQuantity() {}
+
+  goCheckOut() {
+    const checkAccessToken = sessionStorage.getItem('userToken');
+    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
+    if (checkAccessToken && checkRefreshToken) {
+      const getToken = sessionStorage.getItem('userToken');
+      const userData = new HttpHeaders({
+        accept: '*/*',
+        Authorization: `Bearer ${getToken}`,
+      });
+      this.apiService.checkOut(userData).subscribe({
+        next: (data: any) => {
+          console.log(data);
+        },
+        error: (error) => {
           console.log(error);
         },
       });

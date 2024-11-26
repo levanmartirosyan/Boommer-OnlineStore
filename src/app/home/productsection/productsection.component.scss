@@ -32,12 +32,36 @@ section.mainContent {
       border-radius: 10px;
       cursor: pointer;
       transition: 0.3s ease;
-      img {
-        width: 195px;
-        height: 195px;
-        object-fit: contain;
-        border-radius: 10px 10px 0 0;
+      .head {
+        position: relative;
         margin: 0 auto;
+        img {
+          width: 195px;
+          height: 195px;
+          object-fit: contain;
+          border-radius: 10px 10px 0 0;
+          margin: 0 auto;
+        }
+        div {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          padding: 4px 8px;
+          background-color: $primary;
+          border-radius: 5px;
+          gap: 3px;
+          span.rating {
+            color: $secondary;
+            font-weight: bold;
+            font-size: 14px;
+          }
+          i {
+            font-size: 12px;
+            color: $secondary;
+          }
+        }
       }
       .pInfo {
         display: flex;
@@ -127,6 +151,7 @@ section.mainContent {
 
 @media screen and (max-width: 565px) {
   section.mainContent {
+    margin-top: 100px;
     .product {
       justify-content: center;
       .productCard {

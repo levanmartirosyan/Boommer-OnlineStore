@@ -1,0 +1,379 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+section.main {
+  width: 100%;
+  padding: 0 12%;
+  margin-top: 150px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  .left {
+    width: 100%;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .name {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      gap: 10px;
+      div {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        i {
+          cursor: pointer;
+          font-size: 18px;
+          transition: 0.3s ease;
+          &:hover {
+            color: $primary;
+          }
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+        bottom: -20px;
+        left: 0;
+        border-radius: 5px;
+      }
+    }
+    .slider {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      flex: 3;
+      height: 500px;
+      button.prevImg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background-color: rgba($color: $secondary, $alpha: 0.6);
+        color: $seventh;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px 5px rgba($color: #000000, $alpha: 0.2);
+      }
+      button.nextImg {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background-color: rgba($color: $secondary, $alpha: 0.6);
+        color: $seventh;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px 5px rgba($color: #000000, $alpha: 0.2);
+      }
+      div {
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 450px;
+          border-radius: 12px;
+          transition: 0.5s ease;
+          cursor: pointer;
+          object-fit: contain;
+        }
+      }
+      .thumbnails {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+        img {
+          width: 70px;
+          height: 70px;
+          object-fit: contain;
+          cursor: pointer;
+          transition: 0.3s ease;
+          &.active {
+            border: 1px solid $primary;
+            border-radius: 12px;
+            padding: 7px;
+          }
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+        bottom: -50px;
+        left: 0;
+        border-radius: 5px;
+      }
+    }
+  }
+  .right {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    .prices {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 15px 15px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      span {
+        color: #525252;
+        font-size: 19px;
+      }
+      .beforePriceNoLine {
+        font-size: 23px;
+        font-weight: bold;
+      }
+      .beforeSale {
+        font-weight: bold;
+        font-size: 19px;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 120%;
+          height: 2px;
+          background-color: $primary;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .currentPrice {
+        font-weight: bold;
+        color: $primary;
+        font-size: 23px;
+      }
+      .ganvadebaParent {
+        font-size: 14px;
+        font-weight: bold;
+        .ganvadeba {
+          font-size: 14px;
+          color: $primary;
+        }
+      }
+    }
+    .stock {
+      width: 100%;
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        span {
+          i {
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+    .btns {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 0 0 15px 15px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      button.buy {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        border: 1px solid $primary;
+        background-color: $primary;
+        color: $secondary;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover {
+          border: 1px solid $primary;
+          background-color: $secondary;
+          color: $primary;
+        }
+      }
+      div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        button.addCart {
+          color: $seventh;
+          font-weight: bold;
+          width: 100%;
+          border: 2px solid $third;
+          background-color: $third;
+          border-radius: 20px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 7px;
+          font-size: 14px;
+          transition: 0.3s ease;
+          cursor: pointer;
+          &:hover {
+            border: 2px solid $sixth;
+            background-color: $sixth;
+          }
+        }
+      }
+    }
+  }
+}
+
+.rateWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid $primary;
+  border-radius: 20px;
+  padding: 25px;
+  animation: windowAppear 0.7s ease-out;
+  z-index: 1000;
+  background-color: $secondary;
+  .rateName {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .exitBtn {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    cursor: pointer;
+    background-color: $primary;
+    color: $secondary;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    i {
+      font-size: 20px;
+    }
+  }
+  .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    gap: 10px;
+    label {
+      font-size: 30px;
+      color: rgb(173, 173, 173);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .form-radio {
+      display: none;
+    }
+  }
+  .form-radio:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: $primary;
+  }
+  button {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+    border: 1px solid $primary;
+    background-color: $primary;
+    color: $secondary;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      border: 1px solid $primary;
+      background-color: $secondary;
+      color: $primary;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+@keyframes windowAppear {
+  from {
+    transform: translate(-50%, -20%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}

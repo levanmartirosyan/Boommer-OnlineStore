@@ -1,0 +1,148 @@
+<section class="main">
+  <div class="left">
+    <div class="name">
+      <h3>{{ productDetails.title }}</h3>
+      <div>
+        <i class="fi fi-rr-share" (click)="copyLink()"></i>
+        <span>{{ productDetails._id }}</span>
+      </div>
+    </div>
+    <div class="slider">
+      <button (click)="prev()" class="prevImg">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div>
+        <img
+          [src]="productDetailsImages[currentIndex]"
+          alt="Image slider"
+          class="slider-image"
+        />
+      </div>
+      <button (click)="next()" class="nextImg">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <div class="thumbnails">
+        @for (item of productDetailsImages; track $index) {
+        <img
+          [src]="item"
+          alt=""
+          (click)="giveIndex($index)"
+          [class.active]="currentIndex == $index"
+        />
+        }
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="prices">
+      @if (productDetails.price.beforeDiscount == productDetails.price.current)
+      {
+      <span class="beforePriceNoLine">{{
+        productDetails.price.beforeDiscount + " ₾"
+      }}</span>
+      } @else {
+      <div>
+        <span class="beforeSale">{{
+          productDetails.price.beforeDiscount
+        }}</span>
+        <span class="currentPrice">{{
+          productDetails.price.current + " ₾"
+        }}</span>
+      </div>
+      } @if (productDetails.price.beforeDiscount ==
+      productDetails.price.current) {
+      <span class="ganvadebaParent"
+        >თვეში:
+        <span class="ganvadeba">{{ saledGanvadebaBefore + " ₾" }}</span>
+        -დან</span
+      >
+      } @else {
+      <span class="ganvadebaParent"
+        >თვეში
+        <span class="ganvadeba">{{ saledGanvadebaCurrent + " ₾" }}</span>
+        -დან</span
+      >
+      }
+    </div>
+    <div class="stock">
+      <div [style.color]="productDetails.stock > 0 ? 'green' : 'red'">
+        <span>
+          <i class="fi fi-ss-supplier-alt"></i>
+          {{ productDetails.stock > 0 ? "მარაგშია" : "მარაგი ამოიწურა" }}
+        </span>
+        <span></span>
+        ({{ productDetails.stock }})
+      </div>
+    </div>
+    <div class="btns">
+      <button class="buy">ყიდვა</button>
+      <div>
+        <button class="addCart" (click)="openRateWindow()">
+          <i class="fi fi-ss-star"></i>შეფასება
+        </button>
+        @if (checkCart) {
+        <button (click)="addToCart(productDetails._id)" class="addCart">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        } @else {
+        <button (click)="createCart(productDetails._id)" class="addCart">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+@if (rateWindow) {
+<form
+  class="rateWindow"
+  [formGroup]="productRate"
+  (ngSubmit)="sendProductRate(productDetails._id)"
+>
+  <span class="exitBtn" (click)="openRateWindow()">
+    <i class="fa-solid fa-xmark"></i>
+  </span>
+  <span class="rateName">პროდუქტის შეფასება</span>
+  <div class="stars">
+    <input
+      type="radio"
+      id="star5"
+      value="5"
+      class="form-radio"
+      formControlName="rate"
+    /><label for="star5" class="fa fa-star"></label>
+    <input
+      type="radio"
+      id="star4"
+      value="4"
+      class="form-radio"
+      formControlName="rate"
+    /><label for="star4" class="fa fa-star"></label>
+    <input
+      type="radio"
+      id="star3"
+      value="3"
+      class="form-radio"
+      formControlName="rate"
+    /><label for="star3" class="fa fa-star"></label>
+    <input
+      type="radio"
+      id="star2"
+      value="2"
+      class="form-radio"
+      formControlName="rate"
+    /><label for="star2" class="fa fa-star"></label>
+    <input
+      type="radio"
+      id="star1"
+      value="1"
+      class="form-radio"
+      formControlName="rate"
+    /><label for="star1" class="fa fa-star"></label>
+  </div>
+  <button type="submit">გაგზავნა</button>
+</form>
+<div class="overlay"></div>
+
+}
+<section class="description"></section>

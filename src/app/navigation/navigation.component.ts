@@ -30,6 +30,7 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.showCategories();
     this.getUserInfo();
+    this.getCartForQuantity();
   }
   public burgerToggle: boolean = false;
   public authorizationToggle: boolean = false;
@@ -74,7 +75,29 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  sendUserData() {}
+  public cartLength: any;
+
+  getCartForQuantity() {
+    const getToken = sessionStorage.getItem('userToken');
+    if (!getToken) {
+      console.log('User not logged in.');
+      return;
+    }
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+      Authorization: `Bearer ${getToken}`,
+      'Content-Type': 'application/json',
+    });
+    this.apiService.getCartProducts(userData).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.cartLength = data.total.quantity;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   reloadPage() {
     window.location.reload();

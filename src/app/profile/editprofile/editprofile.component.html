@@ -169,7 +169,15 @@
       <div class="custom-select">
         <select name="" formControlName="category">
           @for (item of categories; track $index) {
-          <option value="{{ item.name }}">{{ item.name }}</option>
+          <option value="{{ item.name }}">
+            {{
+              item.name == "laptops"
+                ? "Laptops"
+                : item.name == "phones"
+                ? "Phones"
+                : ""
+            }}
+          </option>
           }
         </select>
         <i class="fa-solid fa-chevron-down"></i>
@@ -199,7 +207,7 @@
         formControlName="description"
       />
     </div>
-    <button type="submit">შენახვა</button>
+    <button type="submit" (click)="addProductToStore()">შენახვა</button>
   </form>
   } @case ('delete') {
   <div class="deleteAcc">

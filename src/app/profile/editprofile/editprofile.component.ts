@@ -183,4 +183,23 @@ export class EditprofileComponent implements OnInit {
     thumbnail: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
   });
+
+  addProductToStore() {
+    const getToken = sessionStorage.getItem('userToken');
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+      Authorization: `Bearer ${getToken}`,
+      'Content-Type': 'application/json',
+    });
+    this.apiService
+      .addProductsToshop(userData, this.productAdd.value)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
 }

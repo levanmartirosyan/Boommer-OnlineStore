@@ -147,6 +147,7 @@ nav {
         padding: 0 15px;
         border-radius: 15px;
         height: 45px;
+        transition: 0.3s ease;
         i {
           font-size: 22px;
         }
@@ -161,6 +162,7 @@ nav {
         }
         &:hover {
           color: $seventh;
+          transform: scale(1.05);
         }
       }
       .authorized {

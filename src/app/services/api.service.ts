@@ -142,4 +142,24 @@ export class ApiService {
       `https://api.everrest.educata.dev/shop/products/brands`
     );
   }
+
+  addProductsToshop(userData: any, body: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/shop/products',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
+
+  productRate(userData: any, body: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/shop/products/rate',
+      body,
+      {
+        headers: userData,
+      }
+    );
+  }
 }

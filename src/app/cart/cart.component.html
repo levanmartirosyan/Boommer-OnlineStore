@@ -30,9 +30,9 @@
           </div>
           <div class="btns">
             <div>
-              <span class="changeQuantity">-</span>
+              <span class="changeQuantity" (click)="deliveryPrice()">-</span>
               <span>{{ item.quantity }}</span>
-              <span class="changeQuantity">+</span>
+              <span class="changeQuantity" (click)="increaseQuantity()">+</span>
             </div>
             <i
               class="fa-solid fa-trash-can"
@@ -63,16 +63,12 @@
           <div>
             <span>გადასახდელი თანხა</span>
             <span class="price2"
-              >{{
-                totalPrices + deliveryPrice
-                  ? totalPrices + deliveryPrice + "₾"
-                  : "..."
-              }}
+              >{{ totalPrices ? totalPrices + deliveryPrice + "₾" : "..." }}
             </span>
           </div>
         </div>
       </div>
-      <button>შემდეგი</button>
+      <button (click)="goCheckOut()">შემდეგი</button>
     </div>
   </div>
 </section>
