@@ -148,7 +148,11 @@ export class DetailsComponent implements OnInit {
   }
 
   public productRate: FormGroup = new FormGroup({
-    rate: new FormControl('', Validators.required),
+    rate: new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(5),
+    ]),
   });
 
   sendProductRate(id: any) {
@@ -161,16 +165,17 @@ export class DetailsComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${getToken}`,
     });
     const body = {
       productId: id,
-      rate: this.productRate.value,
+      rate: this.productRate.value.rate,
     };
     this.apiService.productRate(userData, body).subscribe({
       next: (data: any) => {
         console.log(data);
+        this.openRateWindow();
       },
       error: (error: any) => {
         console.log(error);
