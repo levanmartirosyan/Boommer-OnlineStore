@@ -82,6 +82,15 @@ $seventh: #000000;
         input.ng-invalid.ng-dirty {
           border: 2px solid rgb(255, 0, 0);
         }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type="number"] {
+          -moz-appearance: textfield;
+          appearance: textfield;
+        }
       }
       span {
         cursor: pointer;
@@ -133,6 +142,16 @@ $seventh: #000000;
             border: 1px solid $primary;
             padding: 3px 15px;
             outline: none;
+          }
+          input[type="number"]::-webkit-inner-spin-button,
+          input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
           }
           label {
             font-size: 14px;

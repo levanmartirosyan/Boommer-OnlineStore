@@ -1,10 +1,5 @@
 <div class="categories">
   <span
-    (click)="activeCategory = 'productAdd'"
-    [class.active]="activeCategory === 'productAdd'"
-    >პროდუქტის დამატება</span
-  >
-  <span
     (click)="activeCategory = 'personal'"
     [class.active]="activeCategory === 'personal'"
     >პირადი ინფორმაცია</span
@@ -13,6 +8,11 @@
     (click)="activeCategory = 'password'"
     [class.active]="activeCategory === 'password'"
     >პაროლის შეცვლა</span
+  >
+  <span
+    (click)="activeCategory = 'productAdd'"
+    [class.active]="activeCategory === 'productAdd'"
+    >პროდუქტის დამატება</span
   >
   <span
     (click)="activeCategory = 'delete'"
@@ -83,6 +83,7 @@
       <label for="">აირჩიეთ გენდერი</label>
       <div class="custom-select">
         <select id="" formControlName="gender">
+          <option value="" selected>აირჩიეთ გენდერი</option>
           <option value="MALE">მამრობითი</option>
           <option value="FEMALE">მდედრობითი</option>
         </select>
@@ -133,6 +134,7 @@
       <label for="">პროდუქტის ბრენდი *</label>
       <div class="custom-select">
         <select name="" formControlName="brand">
+          <option value="" selected>აირჩიეთ ბრენდი</option>
           @for (item of brands; track $index) {
           <option value="{{ item }}">{{ item }}</option>
           }
@@ -168,6 +170,7 @@
       <label for="">პროდუქტის კატეგორია *</label>
       <div class="custom-select">
         <select name="" formControlName="category">
+          <option value="" selected>აირჩიეთ კატეგორია</option>
           @for (item of categories; track $index) {
           <option value="{{ item.name }}">
             {{

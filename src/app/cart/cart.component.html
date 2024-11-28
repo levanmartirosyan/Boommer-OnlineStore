@@ -30,9 +30,17 @@
           </div>
           <div class="btns">
             <div>
-              <span class="changeQuantity" (click)="deliveryPrice()">-</span>
+              <span
+                class="changeQuantity"
+                (click)="decreaseQuantity(item.productId, item.quantity)"
+                >-</span
+              >
               <span>{{ item.quantity }}</span>
-              <span class="changeQuantity" (click)="increaseQuantity()">+</span>
+              <span
+                class="changeQuantity"
+                (click)="increaseQuantity(item.productId, item.quantity)"
+                >+</span
+              >
             </div>
             <i
               class="fa-solid fa-trash-can"

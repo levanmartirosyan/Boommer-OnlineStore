@@ -4,19 +4,29 @@
     @for (item of products; track $index) { @if (item.price.discountPercentage)
     {
     <div class="productCard">
-      <img [src]="item.thumbnail" alt="{{ item.title }}" />
-      <div class="pInfo">
+      <div class="head" (click)="goToDetails(item)">
+        <img [src]="item.thumbnail" alt="{{ item.title }}" />
+        <div
+          [style.background-color]="
+            item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
+          "
+        >
+          <span class="rating"> {{ item.rating }} </span>
+          <i class="fi fi-ss-star"></i>
+        </div>
+      </div>
+      <div class="pInfo" (click)="goToDetails(item)">
         @if ( item.price.discountPercentage) {
         <span class="discountPercentage"
-          >-{{ item.price.discountPercentage }}%</span
+          >-{{ item.price.discountPercentage + "%" }}</span
         >
         }
         <span>
           @if (item.price.beforeDiscount == item.price.current ) {
-          <span>{{ item.price.beforeDiscount }} ₾</span>
+          <span>{{ item.price.beforeDiscount + "₾" }}</span>
           } @else {
           <span class="beforeSale">{{ item.price.beforeDiscount }} </span>
-          <span class="currentPrice">{{ item.price.current }} ₾</span>
+          <span class="currentPrice">{{ item.price.current + "₾" }}</span>
           }
         </span>
         <span>{{ item.title }}</span>
@@ -25,7 +35,15 @@
         <div>
           <i class="fi fi-rr-exchange"></i>
         </div>
-        <button><i class="fi fi-rr-shopping-cart"></i> დამატება</button>
+        @if (checkCart !== "") {
+        <button (click)="addToCart(item._id)">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        } @else {
+        <button (click)="createCart(item._id)">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        }
       </div>
     </div>
     } }

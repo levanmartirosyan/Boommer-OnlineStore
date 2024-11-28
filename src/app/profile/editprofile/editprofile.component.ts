@@ -30,7 +30,7 @@ export class EditprofileComponent implements OnInit {
     this.getCategories();
   }
 
-  public activeCategory: string = 'productAdd';
+  public activeCategory: string = '';
 
   public personalInfo: FormGroup = new FormGroup({
     firstName: new FormControl(''),

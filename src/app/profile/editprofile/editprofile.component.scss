@@ -71,6 +71,9 @@ $seventh: #000000;
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  background-color: #f2f2f2;
+  padding: 30px;
+  border-radius: 15px;
   .personalInfo {
     width: 60%;
     display: flex;
@@ -167,6 +170,7 @@ $seventh: #000000;
     justify-content: space-between;
     align-items: center;
     border: 1px solid $primary;
+    background-color: $secondary;
     border-radius: 20px;
     padding: 0 20px;
     button {

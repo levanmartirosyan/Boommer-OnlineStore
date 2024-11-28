@@ -14,7 +14,14 @@ export class ApiService {
   }
 
   getAllProducts() {
-    return this.http.get('https://api.everrest.educata.dev/shop/products/all');
+    return this.http.get(
+      'https://api.everrest.educata.dev/shop/products/all?page_index=6&page_size=6'
+    );
+  }
+  getProducts(page: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/all?page_index=${page}&page_size=15`
+    );
   }
 
   registration(body: any) {
@@ -160,6 +167,30 @@ export class ApiService {
       {
         headers: userData,
       }
+    );
+  }
+
+  filterProduct(sortBy: any, sortDir: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/search?sort_by=${sortBy}&sort_direction=${sortDir}&page_size=50`
+    );
+  }
+
+  filterBrand(category: any, brand: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/search?category_id=${category}&brand=${brand}&page_size=50`
+    );
+  }
+
+  filterPrice(priceMin: any, priceMax: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/search?price_min=${priceMin}&price_max=${priceMax}&page_size=50`
+    );
+  }
+
+  search(keyword: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/search?keywords=${keyword}&page_size=50`
     );
   }
 }

@@ -149,9 +149,22 @@ section.mainContent {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  section.mainContent {
+    padding: 0 6%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section.mainContent {
+    .product {
+      justify-content: center;
+    }
+  }
+}
+
 @media screen and (max-width: 565px) {
   section.mainContent {
-    margin-top: 100px;
     .product {
       justify-content: center;
       .productCard {

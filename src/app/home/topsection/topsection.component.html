@@ -1,18 +1,4 @@
 <section class="header">
-  <div class="categories">
-    @for (item of categories; track $index) {
-    <span
-      ><img [src]="item.image" alt="" />
-      {{
-        item.name == "laptops"
-          ? "ლეპტოპები"
-          : item.name == "phones"
-          ? "მობილურები"
-          : ""
-      }}</span
-    >
-    }
-  </div>
   <div class="slider">
     <button (click)="prev()" class="prevImg">
       <i class="fa-solid fa-chevron-left"></i>

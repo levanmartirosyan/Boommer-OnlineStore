@@ -19,10 +19,11 @@
     </div>
     <div class="navigation">
       <div class="navv">
-        <span><i class="fi fi-br-grid"></i> ნავიგაცია</span>
-        <div class="search">
+        <span routerLink="/products"
+          ><i class="fi fi-br-grid"></i> პროდუქტები</span
+        >
+        <div class="search" routerLink="/products">
           <i class="fa-solid fa-magnifying-glass" routerLink="/search"></i>
-          <input type="search" placeholder="ძიება" />
         </div>
       </div>
       <span routerLink="/cart"
@@ -53,31 +54,48 @@
       </div>
     </div>
     <div class="cart">
-      <span><i class="fi fi-rr-search" routerLink="/search"></i></span>
+      <span routerLink="/products"
+        ><i class="fi fi-rr-search" routerLink="/search"></i
+      ></span>
       <span routerLink="/cart"><i class="fi fi-rr-shopping-cart"></i></span>
     </div>
     <div class="mobileNavigation">
-      <div class="navItem activeMitem">
+      <div
+        class="navItem"
+        routerLink="/"
+        routerLinkActive="activeMitem"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         <i class="fi fi-rr-home"></i>
         <span>მთავარი</span>
       </div>
-      <div class="navItem" (click)="toggleBurger()">
+      <div
+        class="navItem"
+        (click)="toggleBurger()"
+        [class.activeMitem]="burgerToggle == true"
+      >
         <i class="fi fi-rr-category"></i>
         <span>კატეგორიები</span>
       </div>
-      <div class="navItem">
-        <i class="fi fi-rr-percentage"></i>
-        <span>აქციები</span>
+      <div class="navItem" routerLink="/cart" routerLinkActive="activeMitem">
+        <i class="fi fi-rr-shopping-cart"></i>
+        <span>კალათა</span>
+        <span class="cartLengthM">{{ cartLength ? cartLength : "0" }}</span>
       </div>
-      <div class="navItem">
-        <i class="fi fi-rr-exchange"></i>
-        <span>შედარება</span>
+      <div
+        class="navItem"
+        routerLink="/products"
+        routerLinkActive="activeMitem"
+      >
+        <i class="fi fi-rr-box-open"></i>
+        <span>პროდუქტები</span>
       </div>
       @if (userProfile) {
       <div
         class="navItem"
         [style.display]="userProfile ? 'flex' : 'none'"
         routerLink="/profile"
+        routerLinkActive="activeMitem"
       >
         <i class="fi fi-rr-circle-user"></i>
         <span>პროფილი</span>

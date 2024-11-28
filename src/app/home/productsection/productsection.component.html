@@ -34,7 +34,7 @@
         <div>
           <i class="fi fi-rr-exchange"></i>
         </div>
-        @if (checkCart) {
+        @if (checkCart !== "") {
         <button (click)="addToCart(item._id)">
           <i class="fi fi-rr-shopping-cart"></i> დამატება
         </button>

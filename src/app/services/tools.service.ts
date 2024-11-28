@@ -8,4 +8,5 @@ export class ToolsService {
   constructor() {}
 
   public transferData: BehaviorSubject<any> = new BehaviorSubject('');
+  public cartLength: Subject<any> = new Subject();
 }

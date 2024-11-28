@@ -9,36 +9,10 @@ $seventh: #000000;
 section.header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 30px;
   position: relative;
   padding: 0 12%;
-  .categories {
-    max-width: 250;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex: 1;
-    gap: 10px;
-    span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      gap: 10px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      font-weight: bold;
-      img {
-        width: 25px;
-      }
-      &:hover {
-        color: $primary;
-      }
-    }
-  }
   .slider {
     display: flex;
     align-items: center;
@@ -95,6 +69,7 @@ section.header {
 
 @media screen and (max-width: 1024px) {
   section.header {
+    padding: 0 6%;
     .categories {
       display: none;
     }

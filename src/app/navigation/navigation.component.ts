@@ -36,6 +36,7 @@ export class NavigationComponent implements OnInit {
   public authorizationToggle: boolean = false;
   public userProfile: any = null;
   public userDataFromStorage: any;
+  public mobileNavigation: any;
 
   toggleBurger() {
     this.burgerToggle = !this.burgerToggle;
@@ -113,11 +114,7 @@ export class NavigationComponent implements OnInit {
     if (scrollPosition > 100) {
       this.renderer.setStyle(topElement, 'display', 'none');
 
-      this.renderer.setStyle(
-        bottomElement,
-        'background-color',
-        'rgba(255, 255, 255, 0.8)'
-      );
+      this.renderer.setStyle(bottomElement, 'background-color', '#ffffff');
       this.renderer.setStyle(
         bottomElement,
         'transition',

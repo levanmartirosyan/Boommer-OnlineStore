@@ -1,0 +1,130 @@
+<section class="allProducts">
+  <div class="content">
+    <div class="filter">
+      <div>
+        <div class="search">
+          <input type="search" [(ngModel)]="search" placeholder="ძიება..." />
+          <button (click)="searchByKeyword()">
+            <i class="fa-solid fa-magnifying-glass" routerLink="/search"></i>
+          </button>
+        </div>
+        <div class="priceRange">
+          <input type="number" [(ngModel)]="priceMin" placeholder="0" />
+          <input type="number" [(ngModel)]="priceMax" placeholder="9999" />
+        </div>
+        <div class="custom-select">
+          <select [(ngModel)]="brand">
+            <option value="" selected>აირჩიეთ ბრენდი</option>
+            @for (item of brands; track $index) {
+            <option value="{{ item }}">{{ item }}</option>
+            }
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="custom-select">
+          <select [(ngModel)]="categoryId">
+            <option value="" selected>აირჩიეთ კატეგორია</option>
+            <option value="1">ლეპტოპები</option>
+            <option value="2">მობილურები</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="custom-select">
+          <select [(ngModel)]="sortBy">
+            <option value="" selected>აირჩიეთ ფილტრი</option>
+            <option value="rating">რეიტინგი</option>
+            <option value="price">ფასი</option>
+            <option value="issue_date">გამოშვების თარიღი</option>
+            <option value="title">სახელი</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="custom-select">
+          <select [(ngModel)]="sortDirection">
+            <option value="" selected>დალაგება</option>
+            <option value="asc">ზრდადობით</option>
+            <option value="desc">კლებადობით</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <button (click)="filterProducts()">გაფილტვრა</button>
+      </div>
+    </div>
+    <div class="product">
+      <h1>{{ noFound }}</h1>
+      @for (item of products; track $index) {
+      <div class="productCard">
+        <div class="head" (click)="goToDetails(item)">
+          <img [src]="item.thumbnail" alt="{{ item.title }}" />
+          <div
+            [style.background-color]="
+              item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
+            "
+          >
+            <span class="rating"> {{ item.rating }} </span>
+            <i class="fi fi-ss-star"></i>
+          </div>
+        </div>
+        <div class="pInfo" (click)="goToDetails(item)">
+          @if ( item.price.discountPercentage) {
+          <span class="discountPercentage"
+            >-{{ item.price.discountPercentage + "%" }}</span
+          >
+          }
+          <span>
+            @if (item.price.beforeDiscount == item.price.current ) {
+            <span>{{ item.price.beforeDiscount + "₾" }}</span>
+            } @else {
+            <span class="beforeSale">{{ item.price.beforeDiscount }} </span>
+            <span class="currentPrice">{{ item.price.current + "₾" }}</span>
+            }
+          </span>
+          <span>{{ item.title }}</span>
+        </div>
+        <div class="cardBtn">
+          <div>
+            <i class="fi fi-rr-exchange"></i>
+          </div>
+          @if (checkCart !== "") {
+          <button (click)="addToCart(item._id)">
+            <i class="fi fi-rr-shopping-cart"></i> დამატება
+          </button>
+          } @else {
+          <button (click)="createCart(item._id)">
+            <i class="fi fi-rr-shopping-cart"></i> დამატება
+          </button>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="pages" [style.display]="removePages ? 'none' : 'flex'">
+    <button
+      (click)="prevPage()"
+      [class.active]="pageNumber == 1"
+      [disabled]="pageNumber == 1"
+    >
+      წინა
+    </button>
+    <div>
+      @for (item of pageList; track $index) {
+      <button
+        (click)="showAllproducts($index + 1)"
+        [class.active]="$index + 1 == pageNumber"
+        [disabled]="$index + 1 == pageNumber"
+      >
+        {{ $index + 1 }}
+      </button>
+      }
+    </div>
+    <button
+      (click)="nextPage()"
+      [class.active]="pageNumber == lastPageNumber"
+      [disabled]="pageNumber == lastPageNumber"
+    >
+      შემდეგი
+    </button>
+  </div>
+</section>

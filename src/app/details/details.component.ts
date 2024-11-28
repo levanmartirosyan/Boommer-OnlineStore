@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit {
   public productDetailsImages: any[] = [];
   public saledGanvadebaCurrent: any;
   public saledGanvadebaBefore: any;
+  public dateOfProducts: any;
 
   getCardDetails() {
     this.actR.queryParams.subscribe((data: any) => {
@@ -37,10 +38,10 @@ export class DetailsComponent implements OnInit {
         Math.round((this.productDetails.price.current / 12) * 10) / 10;
       this.saledGanvadebaBefore =
         Math.round((this.productDetails.price.beforeDiscount / 12) * 10) / 10;
-      this.productDetailsImages.push(this.productDetails.thumbnail);
       this.productDetails.images.forEach((images: any) => {
         this.productDetailsImages.push(images);
       });
+      this.dateOfProducts = this.productDetails.issueDate.slice(0, 10);
     });
   }
   copyLink() {

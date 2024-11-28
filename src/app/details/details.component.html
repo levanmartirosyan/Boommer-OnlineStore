@@ -8,19 +8,19 @@
       </div>
     </div>
     <div class="slider">
-      <button (click)="prev()" class="prevImg">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
       <div>
+        <button (click)="prev()" class="prevImg">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
         <img
           [src]="productDetailsImages[currentIndex]"
           alt="Image slider"
           class="slider-image"
         />
+        <button (click)="next()" class="nextImg">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
       </div>
-      <button (click)="next()" class="nextImg">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
       <div class="thumbnails">
         @for (item of productDetailsImages; track $index) {
         <img
@@ -185,4 +185,37 @@
 <div class="overlay"></div>
 
 }
-<section class="description"></section>
+<section class="description">
+  <h3>დამატებითი მახასიათებლები</h3>
+  <div class="tech">
+    <div class="info">
+      <div>
+        <span>ბრენდი:</span>
+        <span style="font-family: sans-serif">{{ productDetails.brand }}</span>
+      </div>
+      <div>
+        <span>კატეგორია:</span>
+        <span>{{
+          productDetails.category.id == 1 ? "ლეპტოპები" : "მობილურები"
+        }}</span>
+      </div>
+      <div>
+        <span>გამოშვების თარიღი:</span>
+        <span>{{ dateOfProducts }}</span>
+      </div>
+      <div>
+        <span>გარანტია:</span>
+        <span>{{ productDetails.warranty }} თვე</span>
+      </div>
+      <div>
+        <span>მარაგი:</span>
+        <span>{{ productDetails.stock }} ერთეული</span>
+      </div>
+      <div class="addInfo">
+        <span>აღწერა:</span>
+        <span>{{ productDetails.description }}</span>
+      </div>
+    </div>
+    <div class="fakeBox"></div>
+  </div>
+</section>

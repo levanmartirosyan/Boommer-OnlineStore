@@ -80,7 +80,7 @@ nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 30px;
+      gap: 20px;
       .navv {
         display: flex;
         align-items: center;
@@ -96,7 +96,7 @@ nav {
           justify-content: center;
           border-radius: 12px;
           gap: 10px;
-          padding: 10px;
+          padding: 10px 15px;
           font-weight: bold;
           font-size: 15px;
           cursor: pointer;
@@ -113,24 +113,19 @@ nav {
           display: flex;
           align-items: center;
           justify-content: center;
-          position: relative;
-          width: 100%;
-          input {
-            width: 250px;
-            height: 45px;
-            border: 1px solid rgba(236, 94, 42, 0.5);
-            border-radius: 12px;
-            padding: 8px;
-            padding-left: 45px;
-            outline: none;
-          }
+          width: 45px;
+          height: 45px;
+          background-color: $secondary;
+          border-radius: 15px;
+          transition: 0.3s ease;
+          cursor: pointer;
           i {
-            position: absolute;
-            left: 11px;
-            top: 50%;
-            transform: translateY(-50%);
             font-size: 20px;
-            color: $primary;
+            color: $seventh;
+          }
+          &:hover {
+            color: $seventh;
+            transform: scale(1.05);
           }
         }
       }
@@ -144,10 +139,25 @@ nav {
         font-size: 15px;
         cursor: pointer;
         background-color: $secondary;
-        padding: 0 15px;
+        width: 120px;
         border-radius: 15px;
         height: 45px;
         transition: 0.3s ease;
+        position: relative;
+        .cartQuantity {
+          position: absolute;
+          top: 0;
+          left: 29px;
+          background-color: #ec5e2a;
+          color: $secondary;
+          width: 17px;
+          height: 17px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          font-size: 12px;
+        }
         i {
           font-size: 22px;
         }
@@ -208,7 +218,7 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba($color: $secondary, $alpha: 0.8);
+    background-color: $secondary;
     .menu {
       display: flex;
       align-items: center;
@@ -258,6 +268,7 @@ nav {
       border-top: 1px solid rgba($color: $seventh, $alpha: 0.2);
       background-color: $secondary;
       .navItem {
+        width: 52px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -265,9 +276,24 @@ nav {
         gap: 10px;
         color: #333333;
         cursor: pointer;
+        position: relative;
         span {
           font-size: 14px;
           font-weight: bold;
+        }
+        .cartLengthM {
+          position: absolute;
+          top: -11px;
+          right: 7px;
+          background-color: #ec5e2a;
+          color: $secondary;
+          width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          font-size: 12px;
         }
         i {
           font-size: 20px;
