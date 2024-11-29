@@ -14,7 +14,7 @@
         </div>
         <div class="custom-select">
           <select [(ngModel)]="brand">
-            <option value="" selected>აირჩიეთ ბრენდი</option>
+            <option value="" selected>ბრენდი</option>
             @for (item of brands; track $index) {
             <option value="{{ item }}">{{ item }}</option>
             }
@@ -23,7 +23,7 @@
         </div>
         <div class="custom-select">
           <select [(ngModel)]="categoryId">
-            <option value="" selected>აირჩიეთ კატეგორია</option>
+            <option value="" selected>კატეგორია</option>
             <option value="1">ლეპტოპები</option>
             <option value="2">მობილურები</option>
           </select>
@@ -31,7 +31,7 @@
         </div>
         <div class="custom-select">
           <select [(ngModel)]="sortBy">
-            <option value="" selected>აირჩიეთ ფილტრი</option>
+            <option value="" selected>ფილტრი</option>
             <option value="rating">რეიტინგი</option>
             <option value="price">ფასი</option>
             <option value="issue_date">გამოშვების თარიღი</option>
@@ -49,6 +49,7 @@
         </div>
 
         <button (click)="filterProducts()">გაფილტვრა</button>
+        <span (click)="resetFilters()">გასუფთავება</span>
       </div>
     </div>
     <div class="product">

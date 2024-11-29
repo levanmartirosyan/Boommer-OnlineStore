@@ -200,6 +200,9 @@ export class CartComponent implements OnInit {
     this.apiService.checkOut(userData).subscribe({
       next: (data: any) => {
         console.log(data);
+        setTimeout(() => {
+          window.location.reload();
+        }, 10);
       },
       error: (error) => {
         console.log(error);

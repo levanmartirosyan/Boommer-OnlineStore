@@ -1,7 +1,7 @@
 <section class="mainContent">
   <h3>მობილურები</h3>
   <div class="product">
-    @for (item of products; track $index) { @if (item.category.id == 2) {
+    @for (item of products; track $index) {
     <div class="productCard">
       <div class="head" (click)="goToDetails(item)">
         <img [src]="item.thumbnail" alt="{{ item.title }}" />
@@ -45,6 +45,6 @@
         }
       </div>
     </div>
-    } }
+    }
   </div>
 </section>

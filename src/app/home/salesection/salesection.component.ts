@@ -22,7 +22,7 @@ export class SalesectionComponent implements OnInit {
   public checkCart: any;
 
   showProductCards() {
-    this.apiService.getAllProducts().subscribe((data: any) => {
+    this.apiService.getSaled().subscribe((data: any) => {
       this.products = data.products;
     });
   }

@@ -250,6 +250,15 @@ section {
         font-size: 16px;
         cursor: pointer;
         transition: 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        i {
+          width: 16px;
+          height: 16px;
+          font-size: 16px;
+        }
         &:hover {
           border: 1px solid $primary;
           background-color: $secondary;

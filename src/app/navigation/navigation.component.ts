@@ -31,6 +31,7 @@ export class NavigationComponent implements OnInit {
     this.showCategories();
     this.getUserInfo();
     this.getCartForQuantity();
+    this.syncCartLength();
   }
   public burgerToggle: boolean = false;
   public authorizationToggle: boolean = false;
@@ -100,6 +101,9 @@ export class NavigationComponent implements OnInit {
     });
   }
 
+  syncCartLength() {
+    return this.cartLength;
+  }
   reloadPage() {
     window.location.reload();
   }

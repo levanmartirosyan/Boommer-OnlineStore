@@ -153,44 +153,31 @@ export class ProductsComponent implements OnInit {
   filterProducts() {
     this.noFound = '';
     this.products = [];
-    if (this.sortBy && this.sortDirection !== '') {
-      this.apiService.filterProduct(this.sortBy, this.sortDirection).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.removePages = data;
-          this.products = data.products;
-          if (data.total == 0) {
-            this.noFound = 'პროდუქტი ვერ მოიძებნა';
-          }
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
-    } else if (this.categoryId || this.brand !== '') {
-      this.apiService.filterBrand(this.categoryId, this.brand).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.removePages = data;
-          this.products = data.products;
-          if (data.total == 0) {
-            this.noFound = 'პროდუქტი ვერ მოიძებნა';
-          }
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
-    } else if (this.priceMin || this.priceMax !== '') {
-      if (this.priceMin > this.priceMax) {
-        alert('მინიმალური ფასი მეტია მაქსიმალურზე!');
-      } else {
-        this.apiService.filterPrice(this.priceMin, this.priceMax).subscribe({
+
+    const isSortingValid = this.sortBy !== '' && this.sortDirection !== '';
+    const isPriceValid = this.priceMin !== '' && this.priceMax !== '';
+
+    if (isPriceValid && this.priceMin > this.priceMax) {
+      alert('მინიმალური ფასი მეტია მაქსიმალურზე!');
+      return;
+    }
+
+    if (isSortingValid && isPriceValid) {
+      this.apiService
+        .filterAll(
+          this.categoryId,
+          this.brand,
+          this.priceMin,
+          this.priceMax,
+          this.sortBy,
+          this.sortDirection
+        )
+        .subscribe({
           next: (data: any) => {
             console.log(data);
             this.removePages = data;
             this.products = data.products;
-            if (data.total == 0) {
+            if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
             }
           },
@@ -198,8 +185,72 @@ export class ProductsComponent implements OnInit {
             console.log(error);
           },
         });
-      }
+    } else if (isSortingValid) {
+      this.apiService
+        .filterProduct(
+          this.sortBy,
+          this.sortDirection,
+          this.categoryId,
+          this.brand
+        )
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.removePages = data;
+            this.products = data.products;
+            if (data.total === 0) {
+              this.noFound = 'პროდუქტი ვერ მოიძებნა';
+            }
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+    } else if (isPriceValid) {
+      this.apiService
+        .filterPrice(this.priceMin, this.priceMax, this.categoryId, this.brand)
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.removePages = data;
+            this.products = data.products;
+            if (data.total === 0) {
+              this.noFound = 'პროდუქტი ვერ მოიძებნა';
+            }
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+    } else {
+      this.apiService.filterBrand(this.categoryId, this.brand).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.removePages = data;
+          this.products = data.products;
+          if (data.total === 0) {
+            this.noFound = 'პროდუქტი ვერ მოიძებნა';
+          }
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
     }
+  }
+
+  resetFilters() {
+    this.priceMin = '';
+    this.priceMax = '';
+    this.brand = '';
+    this.categoryId = '';
+    this.sortBy = '';
+    this.sortDirection = '';
+    this.search = '';
+    this.noFound = '';
+    this.products = [];
+    this.removePages = null;
+    this.showAllproducts(1);
   }
 
   searchByKeyword() {

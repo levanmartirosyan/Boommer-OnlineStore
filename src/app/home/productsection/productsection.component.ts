@@ -3,7 +3,6 @@ import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
-
 @Component({
   selector: 'app-productsection',
   standalone: true,
@@ -123,5 +122,15 @@ export class ProductsectionComponent implements OnInit {
         data: JSON.stringify(card),
       },
     });
+  }
+
+  currentIndex = 0;
+
+  next() {
+    this.currentIndex + 1;
+  }
+
+  prev() {
+    this.currentIndex - 1;
   }
 }

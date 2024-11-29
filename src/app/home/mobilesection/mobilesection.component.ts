@@ -22,7 +22,7 @@ export class MobilesectionComponent implements OnInit {
   public checkCart: any;
 
   showProductCards() {
-    this.apiService.getAllProducts().subscribe((data: any) => {
+    this.apiService.getPhones().subscribe((data: any) => {
       console.log(data);
       this.products = data.products;
     });

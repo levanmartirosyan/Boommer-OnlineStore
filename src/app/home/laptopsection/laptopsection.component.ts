@@ -22,7 +22,7 @@ export class LaptopsectionComponent implements OnInit {
   public checkCart: any;
 
   showProductCards() {
-    this.apiService.getAllProducts().subscribe((data: any) => {
+    this.apiService.getLaptops().subscribe((data: any) => {
       console.log(data);
       this.products = data.products;
     });

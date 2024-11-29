@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -18,9 +18,28 @@ export class ApiService {
       'https://api.everrest.educata.dev/shop/products/all?page_index=6&page_size=6'
     );
   }
+
   getProducts(page: any) {
     return this.http.get(
       `https://api.everrest.educata.dev/shop/products/all?page_index=${page}&page_size=15`
+    );
+  }
+
+  getSaled() {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=11`
+    );
+  }
+
+  getLaptops() {
+    return this.http.get(
+      'https://api.everrest.educata.dev/shop/products/category/1?page_index=2&page_size=6'
+    );
+  }
+
+  getPhones() {
+    return this.http.get(
+      'https://api.everrest.educata.dev/shop/products/category/2?page_index=1&page_size=6'
     );
   }
 
@@ -51,7 +70,7 @@ export class ApiService {
     });
   }
 
-  changePersonalInfo(userData: any, body: any) {
+  changePersonalInfo(userData: HttpHeaders, body: any) {
     return this.http.patch(
       'https://api.everrest.educata.dev/auth/update',
       body,
@@ -61,7 +80,7 @@ export class ApiService {
     );
   }
 
-  changePassword(userData: any, body: any) {
+  changePassword(userData: HttpHeaders, body: any) {
     return this.http.patch(
       'https://api.everrest.educata.dev/auth/change_password',
       body,
@@ -71,7 +90,7 @@ export class ApiService {
     );
   }
 
-  emailVerification(userData: any, body: any) {
+  emailVerification(userData: HttpHeaders, body: any) {
     return this.http.patch(
       'https://api.everrest.educata.dev/auth/verify_email',
       body,
@@ -81,19 +100,19 @@ export class ApiService {
     );
   }
 
-  deleteAccount(userData: any) {
+  deleteAccount(userData: HttpHeaders) {
     return this.http.delete('https://api.everrest.educata.dev/auth/delete', {
       headers: userData,
     });
   }
 
-  getCartProducts(userData: any) {
+  getCartProducts(userData: HttpHeaders) {
     return this.http.get('https://api.everrest.educata.dev/shop/cart', {
       headers: userData,
     });
   }
 
-  addCreateProductsCart(userData: any, body: any) {
+  addCreateProductsCart(userData: HttpHeaders, body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/shop/cart/product',
       body,
@@ -103,7 +122,7 @@ export class ApiService {
     );
   }
 
-  addProductsToCart(userData: any, body: any) {
+  addProductsToCart(userData: HttpHeaders, body: any) {
     return this.http.patch(
       'https://api.everrest.educata.dev/shop/cart/product',
       body,
@@ -113,7 +132,7 @@ export class ApiService {
     );
   }
 
-  deleteProductFromCart(userData: any, body: any) {
+  deleteProductFromCart(userData: HttpHeaders, body: any) {
     return this.http.delete(
       'https://api.everrest.educata.dev/shop/cart/product',
       {
@@ -123,18 +142,17 @@ export class ApiService {
     );
   }
 
-  deleteUserCart(userData: any) {
+  deleteUserCart(userData: HttpHeaders) {
     return this.http.delete('https://api.everrest.educata.dev/shop/cart', {
       headers: userData,
     });
   }
 
-  checkOut(userData: any) {
+  checkOut(userData: HttpHeaders) {
     return this.http.post(
       'https://api.everrest.educata.dev/shop/cart/checkout',
-      {
-        headers: userData,
-      }
+      {},
+      { headers: userData }
     );
   }
 
@@ -150,7 +168,7 @@ export class ApiService {
     );
   }
 
-  addProductsToshop(userData: any, body: any) {
+  addProductsToshop(userData: HttpHeaders, body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/shop/products',
       body,
@@ -160,7 +178,7 @@ export class ApiService {
     );
   }
 
-  productRate(userData: any, body: any) {
+  productRate(userData: HttpHeaders, body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/shop/products/rate',
       body,
@@ -170,9 +188,22 @@ export class ApiService {
     );
   }
 
-  filterProduct(sortBy: any, sortDir: any) {
+  filterProduct(sortBy: any, sortDir: any, category: any, brand: any) {
     return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?sort_by=${sortBy}&sort_direction=${sortDir}&page_size=50`
+      `https://api.everrest.educata.dev/shop/products/search?sort_by=${sortBy}&sort_direction=${sortDir}&category_id=${category}&brand=${brand}&page_size=50`
+    );
+  }
+
+  filterAll(
+    category: any,
+    brand: any,
+    priceMin: any,
+    priceMax: any,
+    sortBy: any,
+    sortDir: any
+  ) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/search?category_id=${category}&brand=${brand}&price_min=${priceMin}&price_max=${priceMax}&sort_by=${sortBy}&sort_direction=${sortDir}&page_size=50`
     );
   }
 
@@ -182,9 +213,9 @@ export class ApiService {
     );
   }
 
-  filterPrice(priceMin: any, priceMax: any) {
+  filterPrice(priceMin: any, priceMax: any, category: any, brand: any) {
     return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?price_min=${priceMin}&price_max=${priceMax}&page_size=50`
+      `https://api.everrest.educata.dev/shop/products/search?price_min=${priceMin}&price_max=${priceMax}&category_id=${category}&brand=${brand}&page_size=50`
     );
   }
 
