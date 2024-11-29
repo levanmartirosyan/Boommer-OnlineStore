@@ -184,6 +184,7 @@ section.allProducts {
             outline: none;
             cursor: pointer;
             appearance: none;
+            background-color: $secondary;
             option {
               width: 100%;
               border-radius: 20px;
@@ -296,8 +297,8 @@ section.allProducts {
           padding: 0 10px;
           span.discountPercentage {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background-color: $primary;
             border-radius: 50%;
             top: -15px;

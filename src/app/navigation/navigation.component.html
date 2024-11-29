@@ -78,7 +78,9 @@
       <div class="navItem" routerLink="/cart" routerLinkActive="activeMitem">
         <i class="fi fi-rr-shopping-cart"></i>
         <span>კალათა</span>
-        <span class="cartLengthM">{{ cartLength ? cartLength : "0" }}</span>
+        <div class="cartLengthM">
+          <span>{{ cartLength ? cartLength : "0" }}</span>
+        </div>
       </div>
       <div
         class="navItem"
