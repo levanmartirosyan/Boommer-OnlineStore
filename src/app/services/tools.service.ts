@@ -7,6 +7,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class ToolsService {
   constructor() {}
 
-  public transferData: BehaviorSubject<any> = new BehaviorSubject('');
+  public transferData: Subject<any> = new Subject();
+  public transferCategories: BehaviorSubject<any> = new BehaviorSubject(null);
   public cartLength: Subject<any> = new Subject();
+
+  clearSubject() {
+    this.transferCategories.next(null);
+  }
 }

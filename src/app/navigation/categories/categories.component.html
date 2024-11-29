@@ -1,1 +1,263 @@
-<p>categories works!</p>
+<div class="bottomM">
+  <div class="leftM">
+    <div
+      class="categoryM"
+      (click)="cataloge = 'laptops'"
+      [class.activeM]="cataloge === 'laptops'"
+    >
+      <i class="fi fi-rr-laptop"></i>
+      <span>ლეპტოპები</span>
+    </div>
+    <div
+      class="categoryM"
+      (click)="cataloge = 'phones'"
+      [class.activeM]="cataloge === 'phones'"
+    >
+      <i class="fi fi-rr-mobile-notch"></i>
+      <span>მობილურები</span>
+    </div>
+  </div>
+  <div class="cataloge">
+    @switch (cataloge) { @case ('laptops') {
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'apple',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2Ff9c42fe8-84b8-436e-b61c-6393fa79f560430fee22-88cb-4f4b-aa04-ed80d1b96db8.png&w=828&q=80"
+        alt=""
+      />
+      <span>Apple</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'hp',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F3e0e2a4c-c372-4620-a1ea-b00607536812a6d568fd-b7ab-4977-9b98-bc32d3ab440f.png&w=1080&q=80"
+        alt=""
+      />
+      <span>HP</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'asus',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2Faac038b3-e5d9-499a-9adb-5506bdcc179ba2ea2adf-ab60-4229-ac71-64ec0359c3dc.png&w=1200&q=80"
+        alt=""
+      />
+      <span>Asus</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'acer',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2Fef1a6098-0cb7-4cd5-a532-20103a02e78275289df7-3f74-4619-9040-1f7833f97a61.png&w=750&q=80"
+        alt=""
+      />
+      <span>Acer</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'lenovo',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F5c8b2366-56fb-402c-be17-232c3e8943cf1941b5f7-8ac2-4aa7-aa2d-6ce378261217.png&w=750&q=80"
+        alt=""
+      />
+      <span>Lenovo</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'dell',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F26e1525d-dd5c-4798-9157-531d761337020fc5c442-b860-47ad-88b8-515173b19a0b.png&w=1920&q=80"
+        alt=""
+      />
+      <span>Dell</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'msi',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F18310339-5f1a-4771-b929-1a0acb0c33703e27ad85-dd1f-4d5f-bb0e-68e68237604f.png&w=1200&q=80"
+        alt=""
+      />
+      <span>MSI</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'Samsung',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F1f3852c6-189a-4fdf-922a-4714bb950d265b566f4e-10f8-497d-bb28-de2f74381e0f.png&w=750&q=80"
+        alt=""
+      />
+      <span>Samsung</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'lg',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F93fa9081-149d-4512-91ea-b5ef6be0a7920bc96dfb-5a15-4c97-962e-2b18219c8398.png&w=828&q=80"
+        alt=""
+      />
+      <span>LG</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: '',
+          categoryId: 1
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F78863e1e-4658-4659-9bcd-54a88e6e1d01552a3f73-5ac0-4d79-9e3b-0915697e8c4a.png&w=828&q=80"
+        alt=""
+      />
+    </div>
+    } @case ('phones') {
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'apple',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F3ea268ca-9b31-4450-b506-dd8917e219dbbb1eb393-6c7c-448e-a8bd-a25ecc8e2d2c.png&w=3840&q=80"
+        alt=""
+      />
+      <span>Apple</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'samsung',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F9607c082-64ff-4752-ae66-b2750ace58b03d1e584f-efdf-4271-a9be-8b9d25cb5694.png&w=750&q=80"
+        alt=""
+      />
+      <span>Samsung</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'xiaomi',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F1bb9429b-be03-4861-9454-a50c875b1e9b3a59f9cf-bc71-48b4-a552-9cf0787a039c.png&w=2048&q=80"
+        alt=""
+      />
+      <span>Xiaomi</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'honor',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F702558d8-f220-4654-9e45-0f9d2545b7cfaf961227-b37d-4b08-a71a-34790d946c8c.png&w=3840&q=80"
+        alt=""
+      />
+      <span>Honor</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: 'oneplus',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F35c36785-3c55-499b-829c-69d3658ab5bad0e33879-e6e2-4b6c-abae-88c37d4bd29d.png&w=750&q=80"
+        alt=""
+      />
+      <span>OnePlus</span>
+    </div>
+    <div
+      class="catalogeMenu"
+      (click)="
+        sendBrand({
+          brand: '',
+          categoryId: 2
+        })
+      "
+    >
+      <img
+        src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2F78863e1e-4658-4659-9bcd-54a88e6e1d01552a3f73-5ac0-4d79-9e3b-0915697e8c4a.png&w=828&q=80"
+        alt=""
+      />
+    </div>
+    } }
+  </div>
+</div>

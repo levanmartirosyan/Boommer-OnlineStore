@@ -5,12 +5,8 @@
       <span>*7777 / +995 (32) 2 12 34 56</span>
     </div>
     <div class="addInfo">
-      <span>სავაჭრო პოლიტიკა</span>
-      <span>განვადება</span>
-      <span>კარიერა</span>
-      <span>Trade In</span>
-      <span>ფილიალები</span>
-      <span>ყველა აქცია</span>
+      <span>შეფასებები</span>
+      <span>QR Code</span>
     </div>
   </div>
   <div class="bottom">
@@ -126,21 +122,13 @@
 </div>
 <div class="mobileActiveMenu" [class.hidden]="burgerToggle">
   <div class="topM">
-    <div class="search">
+    <div class="search" routerLink="/products">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="search" placeholder="ძიება" />
     </div>
   </div>
-  <div class="bottomM">
-    <div class="leftM">
-      @for (item of categories; track $index) {
-      <div class="categoryM activeM">
-        <img [src]="item.image" alt="" />
-        <span>{{ item.name }}</span>
-      </div>
-      }
-    </div>
-  </div>
+  <app-categories
+    (closeMenu)="getAnswerFromCategories($event)"
+  ></app-categories>
 </div>
 
 @if(authorizationToggle) {

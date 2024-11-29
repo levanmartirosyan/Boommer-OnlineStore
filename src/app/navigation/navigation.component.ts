@@ -6,17 +6,23 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToolsService } from '../services/tools.service';
+import { CategoriesComponent } from './categories/categories.component';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [RouterModule, FormsModule, AuthorizationComponent],
+  imports: [
+    RouterModule,
+    FormsModule,
+    AuthorizationComponent,
+    CategoriesComponent,
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
@@ -25,7 +31,8 @@ export class NavigationComponent implements OnInit {
     private el: ElementRef,
     private renderer: Renderer2,
     public apiService: ApiService,
-    public tools: ToolsService
+    public tools: ToolsService,
+    public router: Router
   ) {}
   ngOnInit(): void {
     this.showCategories();
@@ -49,6 +56,10 @@ export class NavigationComponent implements OnInit {
 
   getAnswerFromAuth(value: boolean): void {
     this.authorizationToggle = value;
+  }
+
+  getAnswerFromCategories(value: boolean): void {
+    this.burgerToggle = value;
   }
 
   getUserInfo() {
@@ -137,5 +148,11 @@ export class NavigationComponent implements OnInit {
     this.apiService.getCategories().subscribe((data: any) => {
       this.categories = data;
     });
+  }
+
+  sendBrand(data: any) {
+    this.tools.transferData.next(data);
+    this.toggleBurger();
+    this.router.navigate([`/products`]);
   }
 }

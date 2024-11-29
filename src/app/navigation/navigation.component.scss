@@ -73,7 +73,9 @@ nav {
       cursor: pointer;
       height: 40px;
       img {
-        width: 170px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
     .navigation {
@@ -87,8 +89,8 @@ nav {
         justify-content: center;
         gap: 20px;
         span {
-          width: 130px;
-          height: 40px;
+          width: 150px;
+          height: 45px;
           background-color: $primary;
           color: $secondary;
           display: flex;
@@ -96,7 +98,6 @@ nav {
           justify-content: center;
           border-radius: 12px;
           gap: 10px;
-          padding: 10px 15px;
           font-weight: bold;
           font-size: 15px;
           cursor: pointer;
@@ -347,54 +348,27 @@ nav {
   .topM {
     width: 100%;
     padding: 7px 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     .search {
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      margin-left: 70px;
-      input {
-        width: 100%;
-        height: 45px;
-        border: 1px solid rgba(236, 94, 42, 0.5);
-        border-radius: 12px;
-        padding: 8px;
-        padding-left: 45px;
-        outline: none;
-      }
+      justify-content: flex-end;
+      width: 100%;
+      height: 36px;
+      padding-right: 20px;
       i {
-        position: absolute;
-        left: 11px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
         color: $primary;
-      }
-    }
-  }
-  .bottomM {
-    width: 100%;
-    background-color: $secondary;
-    z-index: 9999;
-    .leftM {
-      width: 150px;
-      padding: 7px 10px;
-      .categoryM {
+        background-color: #f2f2f2;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 7px;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-        img {
-          width: 28px;
-          height: 28px;
-        }
-        span {
-          font-size: 24px;
+        border-radius: 10px;
+        transition: 0.3s ease;
+        &:hover {
+          transform: scale(1.05);
         }
       }
     }
@@ -403,21 +377,6 @@ nav {
 
 .hidden {
   transform: translateX(0);
-}
-.activeM {
-  position: relative;
-  transition: 0.3s ease;
-  &::after {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 3px;
-    background-color: $primary;
-    border-radius: 10px;
-    left: -10px;
-    top: 0;
-    bottom: 0;
-  }
 }
 .activeMitem {
   color: $primary !important;

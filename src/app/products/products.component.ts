@@ -8,6 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-products',
@@ -17,11 +18,17 @@ import {
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  constructor(public apiService: ApiService, public router: Router) {}
+  constructor(
+    public apiService: ApiService,
+    public router: Router,
+    public tools: ToolsService
+  ) {}
   ngOnInit(): void {
     this.showAllproducts(1);
     this.getCartForCheck();
     this.getBrands();
+    this.getTransferedData();
+    this.tools.clearSubject();
   }
 
   public products: any;
@@ -282,6 +289,15 @@ export class ProductsComponent implements OnInit {
       error: (error: any) => {
         console.log(error);
       },
+    });
+  }
+  getTransferedData() {
+    this.tools.transferCategories.subscribe((data: any) => {
+      if (data) {
+        this.brand = data.brand;
+        this.categoryId = data.categoryId;
+      }
+      this.filterProducts();
     });
   }
 }
