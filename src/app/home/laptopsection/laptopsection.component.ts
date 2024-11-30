@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToolsService } from '../../services/tools.service';
 
 @Component({
   selector: 'app-laptopsection',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './laptopsection.component.scss',
 })
 export class LaptopsectionComponent implements OnInit {
-  constructor(public apiService: ApiService, public router: Router) {}
+  constructor(
+    public apiService: ApiService,
+    public router: Router,
+    public tools: ToolsService
+  ) {}
 
   ngOnInit(): void {
     this.showProductCards();
@@ -23,7 +28,6 @@ export class LaptopsectionComponent implements OnInit {
 
   showProductCards() {
     this.apiService.getLaptops().subscribe((data: any) => {
-      console.log(data);
       this.products = data.products;
     });
   }
@@ -31,7 +35,7 @@ export class LaptopsectionComponent implements OnInit {
   createCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -45,13 +49,13 @@ export class LaptopsectionComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
+          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
         }, 100);
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -59,7 +63,7 @@ export class LaptopsectionComponent implements OnInit {
   addToCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -73,10 +77,10 @@ export class LaptopsectionComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -90,16 +94,13 @@ export class LaptopsectionComponent implements OnInit {
     });
     this.apiService.getUser(userData).subscribe({
       next: (data: any) => {
-        console.log(data);
         sessionStorage.setItem('userProfileData', JSON.stringify(data));
         const storedData = sessionStorage.getItem('userProfileData');
         if (storedData) {
           this.checkCart = JSON.parse(storedData).cartID;
         }
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 

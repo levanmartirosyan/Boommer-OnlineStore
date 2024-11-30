@@ -63,17 +63,15 @@ export class NavigationComponent implements OnInit {
   }
 
   getUserInfo() {
-    const checkAccessToken = sessionStorage.getItem('userToken');
     const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-      });
+    const getToken = sessionStorage.getItem('userToken');
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+      Authorization: `Bearer ${getToken}`,
+    });
+    if (getToken) {
       this.apiService.getUser(userData).subscribe({
         next: (data: any) => {
-          console.log(data);
           sessionStorage.setItem('userProfileData', JSON.stringify(data));
           const storedData = sessionStorage.getItem('userProfileData');
           if (storedData) {
@@ -82,7 +80,7 @@ export class NavigationComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error);
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
     }
@@ -92,24 +90,20 @@ export class NavigationComponent implements OnInit {
 
   getCartForQuantity() {
     const getToken = sessionStorage.getItem('userToken');
-    if (!getToken) {
-      console.log('User not logged in.');
-      return;
-    }
     const userData = new HttpHeaders({
       accept: 'application/json',
       Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
-    this.apiService.getCartProducts(userData).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.cartLength = data.total.quantity;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+
+    if (getToken) {
+      this.apiService.getCartProducts(userData).subscribe({
+        next: (data: any) => {
+          this.cartLength = data.total.quantity;
+        },
+        error: (error) => {},
+      });
+    }
   }
 
   syncCartLength() {
@@ -154,5 +148,11 @@ export class NavigationComponent implements OnInit {
     this.tools.transferData.next(data);
     this.toggleBurger();
     this.router.navigate([`/products`]);
+  }
+
+  public qrCode: boolean = false;
+
+  openQrCode() {
+    this.qrCode = !this.qrCode;
   }
 }

@@ -27,11 +27,10 @@ export class ProductsectionComponent implements OnInit {
   showProductCards() {
     this.apiService.getAllProducts().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.products = data.products;
       },
       error: (error: any) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -41,7 +40,7 @@ export class ProductsectionComponent implements OnInit {
   createCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -55,13 +54,13 @@ export class ProductsectionComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
+          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
         }, 10);
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -69,7 +68,7 @@ export class ProductsectionComponent implements OnInit {
   addToCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -83,13 +82,13 @@ export class ProductsectionComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
+          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
         }, 10);
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -103,16 +102,13 @@ export class ProductsectionComponent implements OnInit {
     });
     this.apiService.getUser(userData).subscribe({
       next: (data: any) => {
-        console.log(data);
         sessionStorage.setItem('userProfileData', JSON.stringify(data));
         const storedData = sessionStorage.getItem('userProfileData');
         if (storedData) {
           this.checkCart = JSON.parse(storedData).cartID;
         }
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 

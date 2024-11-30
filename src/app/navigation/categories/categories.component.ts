@@ -16,9 +16,11 @@ export class CategoriesComponent {
   public cataloge: any = 'laptops';
 
   sendBrand(data: any): void {
-    this.tools.transferCategories.next(data);
-    this.sendCommand();
-    this.router.navigate([`/products`]);
+    if (data) {
+      this.tools.transferCategories.next(data);
+      this.sendCommand();
+      this.router.navigate([`/products`]);
+    }
   }
 
   sendCommand(): void {

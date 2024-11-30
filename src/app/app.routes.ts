@@ -6,6 +6,7 @@ import { EditprofileComponent } from './profile/editprofile/editprofile.componen
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './details/details.component';
 import { ProductsComponent } from './products/products.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Boommer - Home' },
@@ -19,7 +20,12 @@ export const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
-    title: 'Boommer - products',
+    title: 'Boommer - Products',
+  },
+  {
+    path: 'reviews',
+    component: ReviewsComponent,
+    title: 'Boommer - Reviews',
   },
   {
     path: '**',

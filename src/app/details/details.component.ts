@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import {
   FormControl,
@@ -8,16 +8,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
 export class DetailsComponent implements OnInit {
-  constructor(public actR: ActivatedRoute, public apiService: ApiService) {}
+  constructor(
+    public actR: ActivatedRoute,
+    public apiService: ApiService,
+    public tools: ToolsService
+  ) {}
 
   ngOnInit(): void {
     this.getCardDetails();
@@ -48,8 +53,12 @@ export class DetailsComponent implements OnInit {
     const currentUrl = window.location.href; // Get current URL
     navigator.clipboard
       .writeText(currentUrl)
-      .then(() => {})
-      .catch((err) => console.error('Failed to copy link: ', err));
+      .then(() => {
+        this.tools.showSuccess('ლინკი დაკოპირდა', 'წარმატება!');
+      })
+      .catch(() => {
+        this.tools.showError('ლინკი ვერ დაკოპირდა', 'შეცდომა!');
+      });
   }
 
   public currentIndex = 0;
@@ -73,7 +82,7 @@ export class DetailsComponent implements OnInit {
   createCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -87,10 +96,10 @@ export class DetailsComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -98,7 +107,7 @@ export class DetailsComponent implements OnInit {
   addToCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -112,10 +121,10 @@ export class DetailsComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -133,12 +142,9 @@ export class DetailsComponent implements OnInit {
     });
     this.apiService.getCartProducts(userData).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.checkCart = data;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -161,7 +167,7 @@ export class DetailsComponent implements OnInit {
 
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
@@ -175,11 +181,11 @@ export class DetailsComponent implements OnInit {
     };
     this.apiService.productRate(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
+        this.tools.showSuccess('შეფასება გაიგზავნა', 'წარმატება!');
         this.openRateWindow();
       },
       error: (error: any) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }

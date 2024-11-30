@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ToolsService } from '../../services/tools.service';
 
 @Component({
   selector: 'app-authorization',
@@ -17,7 +18,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class AuthorizationComponent implements OnInit {
   switchAuth: any = 'auth';
-  constructor(public apiService: ApiService) {}
+  constructor(public apiService: ApiService, public tools: ToolsService) {}
   ngOnInit(): void {}
 
   public singInUp: boolean = false;
@@ -42,19 +43,16 @@ export class AuthorizationComponent implements OnInit {
     console.log(this.authorization);
     this.apiService.authorization(this.authorization.value).subscribe({
       next: (data: any) => {
-        console.log(data);
         sessionStorage.setItem('userToken', data.access_token);
         sessionStorage.setItem('userRefreshToken', data.refresh_token);
-        // this.accessToken = data.access_token;
-        // this.refreshToken = data.refresh_token;
-        // this.sendUserInfo();
         this.sendAnswerFromAuth();
         setTimeout(() => {
           window.location.reload();
         }, 300);
+        this.tools.showSuccess('', 'წარმატებული ავტორიზაცია!');
       },
       error: (error) => {
-        console.log(error.error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -84,12 +82,12 @@ export class AuthorizationComponent implements OnInit {
   register() {
     this.apiService.registration(this.registration.value).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.userId = data._id;
         this.sendAnswerFromAuth();
+        this.tools.showSuccess('', 'წარმატებული რეგისტრაცია!');
       },
       error: (error) => {
-        console.log(error.error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -109,9 +107,10 @@ export class AuthorizationComponent implements OnInit {
       next: (data: any) => {
         console.log(data);
         this.sendAnswerFromAuth();
+        this.tools.showSuccess('შეტყობინება გაიგზავნა მაილზე!', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error.error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }

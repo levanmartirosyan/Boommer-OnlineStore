@@ -224,4 +224,10 @@ export class ApiService {
       `https://api.everrest.educata.dev/shop/products/search?keywords=${keyword}&page_size=50`
     );
   }
+
+  getReviews(page: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/quote?page_index=${page}&page_size=50`
+    );
+  }
 }

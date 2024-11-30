@@ -24,7 +24,6 @@ section.allProducts {
       height: 35px;
       border: 1px solid $primary;
       background-color: $primary;
-      border: 0;
       border-radius: 10px;
       color: $secondary;
       font-weight: bold;
@@ -34,6 +33,7 @@ section.allProducts {
       &:hover {
         background-color: $secondary;
         color: $primary;
+        border: 1px solid $primary;
       }
       &.active {
         background-color: #f28f6a;

@@ -28,7 +28,6 @@ export class ProductsComponent implements OnInit {
     this.getCartForCheck();
     this.getBrands();
     this.getTransferedData();
-    this.tools.clearSubject();
   }
 
   public products: any;
@@ -100,13 +99,13 @@ export class ProductsComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
         }, 10);
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -128,13 +127,13 @@ export class ProductsComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
         }, 10);
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -165,7 +164,10 @@ export class ProductsComponent implements OnInit {
     const isPriceValid = this.priceMin !== '' && this.priceMax !== '';
 
     if (isPriceValid && this.priceMin > this.priceMax) {
-      alert('მინიმალური ფასი მეტია მაქსიმალურზე!');
+      this.tools.showWarning(
+        'მინიმალური ფასი მეტია მაქსიმალურზე!',
+        'ყურადღება!'
+      );
       return;
     }
 
@@ -186,6 +188,7 @@ export class ProductsComponent implements OnInit {
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
+              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
             }
           },
           error: (error: any) => {
@@ -207,6 +210,7 @@ export class ProductsComponent implements OnInit {
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
+              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
             }
           },
           error: (error: any) => {
@@ -223,6 +227,7 @@ export class ProductsComponent implements OnInit {
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
+              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
             }
           },
           error: (error: any) => {
@@ -237,6 +242,7 @@ export class ProductsComponent implements OnInit {
           this.products = data.products;
           if (data.total === 0) {
             this.noFound = 'პროდუქტი ვერ მოიძებნა';
+            this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
           }
         },
         error: (error: any) => {

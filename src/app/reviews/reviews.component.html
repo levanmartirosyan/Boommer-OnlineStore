@@ -1,0 +1,52 @@
+<section>
+  <div class="topMenu">
+    <h1>ცნობილი ციტატები</h1>
+    <button class="addQuote">
+      <i class="fi fi-rr-square-plus"></i>ციტატის დამატება
+    </button>
+  </div>
+  <div class="quotes">
+    @for (item of Reviews; track $index) {
+    <div class="quote">
+      <p>"{{ item.quote }}"</p>
+      <div class="author">
+        <div>
+          <span>ტიპი:</span>
+          <h4>{{ item.type }}</h4>
+        </div>
+        <div>
+          <span>ავტორი:</span>
+          <h4>{{ item.author }}</h4>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="pages">
+    <button
+      (click)="prevPage()"
+      [class.active]="pageNumber == 1"
+      [disabled]="pageNumber == 1"
+    >
+      წინა
+    </button>
+    <div>
+      @for (item of pageList; track $index) {
+      <button
+        (click)="showAllReviews($index + 1)"
+        [class.active]="$index + 1 == pageNumber"
+        [disabled]="$index + 1 == pageNumber"
+      >
+        {{ $index + 1 }}
+      </button>
+      }
+    </div>
+    <button
+      (click)="nextPage()"
+      [class.active]="pageNumber == lastPageNumber"
+      [disabled]="pageNumber == lastPageNumber"
+    >
+      შემდეგი
+    </button>
+  </div>
+</section>

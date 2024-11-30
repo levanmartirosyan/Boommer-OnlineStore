@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
-  constructor(public apiService: ApiService, public router: Router) {}
+  constructor(
+    public apiService: ApiService,
+    public router: Router,
+    public tools: ToolsService
+  ) {}
 
   ngOnInit(): void {
     this.getCart();
@@ -28,7 +33,9 @@ export class CartComponent implements OnInit {
   getCart() {
     const checkAccessToken = sessionStorage.getItem('userToken');
     const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-
+    if (!checkAccessToken) {
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
+    }
     if (checkAccessToken && checkRefreshToken) {
       const getToken = sessionStorage.getItem('userToken');
       const userData = new HttpHeaders({
@@ -44,14 +51,10 @@ export class CartComponent implements OnInit {
           this.userCart = data;
           this.totalPrices = this.userCart.total.price.current;
           this.totalProducts = this.userCart.total.quantity;
-
-          console.log(data);
           for (const item of data.products) {
             this.productsOfCart.push(item);
             this.productID.push(item.productId);
           }
-
-          console.log(this.productsOfCart);
           this.getProductWithId();
         },
         error: (error) => {
@@ -80,7 +83,6 @@ export class CartComponent implements OnInit {
               this.combinedCartProducts.push(combinedItem);
             }
           }
-          console.log(this.combinedCartProducts);
         },
         error: (error) => {
           console.log(error);
@@ -104,14 +106,14 @@ export class CartComponent implements OnInit {
       });
       this.apiService.deleteProductFromCart(userData, body).subscribe({
         next: (data: any) => {
-          console.log(data);
           this.getCart();
           setTimeout(() => {
             window.location.reload();
+            this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
           }, 10);
         },
         error: (error: any) => {
-          console.log(error);
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
     }
@@ -128,14 +130,14 @@ export class CartComponent implements OnInit {
       });
       this.apiService.deleteUserCart(userData).subscribe({
         next: (data: any) => {
-          console.log(data);
           this.router.navigate(['/']);
           setTimeout(() => {
             window.location.reload();
+            this.tools.showSuccess('კალათა წაიშალა', 'წარმატება!');
           }, 10);
         },
         error: (error: any) => {
-          console.log(error);
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
     }
@@ -159,7 +161,7 @@ export class CartComponent implements OnInit {
         this.getCart();
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -182,11 +184,10 @@ export class CartComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.getCart();
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -199,13 +200,13 @@ export class CartComponent implements OnInit {
     });
     this.apiService.checkOut(userData).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           window.location.reload();
+          this.tools.showSuccess('პროდუქტი შეძენილია', 'წარმატება!');
         }, 10);
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }

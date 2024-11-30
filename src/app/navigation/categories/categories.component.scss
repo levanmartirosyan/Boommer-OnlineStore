@@ -85,3 +85,23 @@ $seventh: #000000;
     }
   }
 }
+
+@media screen and (max-width: 415px) {
+  .bottomM {
+    .cataloge {
+      height: 600px;
+      overflow-y: scroll;
+      .catalogeMenu {
+        max-width: 120px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 355px) {
+  .bottomM {
+    .cataloge {
+      justify-content: center;
+    }
+  }
+}

@@ -56,13 +56,13 @@ export class EditprofileComponent implements OnInit {
       .changePersonalInfo(userData, this.personalInfo.value)
       .subscribe({
         next: (data: any) => {
-          console.log(data);
           setTimeout(() => {
             window.location.reload();
+            this.tools.showSuccess('პირადი ინფორმაცია შეცვლილია', 'წარმატება!');
           }, 100);
         },
         error: (error) => {
-          console.log(error);
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
   }
@@ -86,14 +86,14 @@ export class EditprofileComponent implements OnInit {
     });
     this.apiService.changePassword(userData, this.newPassword.value).subscribe({
       next: (data: any) => {
-        console.log(data);
         setTimeout(() => {
           this.router.navigate(['/']);
           window.location.reload();
+          this.tools.showSuccess('პაროლი შეცვლილია', 'წარმატება!');
         }, 2000);
       },
       error: (error) => {
-        console.log(error);
+        this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
   }
@@ -122,17 +122,17 @@ export class EditprofileComponent implements OnInit {
       });
       this.apiService.deleteAccount(userData).subscribe({
         next: (data: any) => {
-          console.log(data);
           sessionStorage.removeItem('userToken');
           sessionStorage.removeItem('userRefreshToken');
           sessionStorage.removeItem('userProfileData');
+          this.tools.showWarning('ანგარიში წაშლილია', 'ყურადღება!');
           this.router.navigate(['/']);
           setTimeout(() => {
             window.location.reload();
           }, 2000);
         },
         error: (error) => {
-          console.log(error);
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
     }
@@ -149,12 +149,9 @@ export class EditprofileComponent implements OnInit {
   getBrands() {
     this.apiService.getProductBrand().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.brands = data;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -163,12 +160,9 @@ export class EditprofileComponent implements OnInit {
   getCategories() {
     this.apiService.getCategories().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.categories = data;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -195,10 +189,10 @@ export class EditprofileComponent implements OnInit {
       .addProductsToshop(userData, this.productAdd.value)
       .subscribe({
         next: (data: any) => {
-          console.log(data);
+          this.tools.showSuccess('პროდუქტი წარმატებით დაემატა', 'წარმატება!');
         },
         error: (error) => {
-          console.log(error);
+          this.tools.showError('error.error.error', 'შეცდომა!');
         },
       });
   }
