@@ -40,7 +40,6 @@ export class SalesectionComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -68,7 +67,6 @@ export class SalesectionComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -77,7 +75,10 @@ export class SalesectionComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
+        setTimeout(() => {
+          window.location.reload();
+          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
+        }, 10);
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -86,21 +87,8 @@ export class SalesectionComponent implements OnInit {
   }
 
   getCartForCheck() {
-    const getToken = sessionStorage.getItem('userToken');
-    const userData = new HttpHeaders({
-      accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
-      'Content-Type': 'application/json',
-    });
-    this.apiService.getUser(userData).subscribe({
-      next: (data: any) => {
-        sessionStorage.setItem('userProfileData', JSON.stringify(data));
-        const storedData = sessionStorage.getItem('userProfileData');
-        if (storedData) {
-          this.checkCart = JSON.parse(storedData).cartID;
-        }
-      },
-      error: (error) => {},
+    this.tools.transferData.subscribe((data: any) => {
+      this.checkCart = data.cartID;
     });
   }
 

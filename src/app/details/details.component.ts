@@ -87,7 +87,6 @@ export class DetailsComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -112,7 +111,6 @@ export class DetailsComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -137,7 +135,6 @@ export class DetailsComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     this.apiService.getCartProducts(userData).subscribe({
@@ -163,8 +160,6 @@ export class DetailsComponent implements OnInit {
   });
 
   sendProductRate(id: any) {
-    console.log(this.productRate);
-
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
@@ -173,7 +168,6 @@ export class DetailsComponent implements OnInit {
     const userData = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getToken}`,
     });
     const body = {
       productId: id,

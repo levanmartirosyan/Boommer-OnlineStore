@@ -78,8 +78,9 @@ section {
               border-radius: 15px;
               padding: 5px 10px;
               img {
-                width: 48px;
+                width: 55px;
                 height: 55px;
+                object-fit: contain;
               }
             }
             .info {
@@ -266,6 +267,12 @@ section {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  section {
+    padding: 0 6%;
   }
 }
 

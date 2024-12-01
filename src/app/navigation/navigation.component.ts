@@ -63,11 +63,9 @@ export class NavigationComponent implements OnInit {
   }
 
   getUserInfo() {
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
     const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
     });
     if (getToken) {
       this.apiService.getUser(userData).subscribe({
@@ -92,7 +90,6 @@ export class NavigationComponent implements OnInit {
     const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
 

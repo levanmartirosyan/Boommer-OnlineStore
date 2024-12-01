@@ -61,10 +61,8 @@ export class ProductsComponent implements OnInit {
   }
 
   getCartForCheck() {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     this.apiService.getUser(userData).subscribe({
@@ -85,12 +83,11 @@ export class ProductsComponent implements OnInit {
   createCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -113,12 +110,11 @@ export class ProductsComponent implements OnInit {
   addToCart(id: any) {
     const getToken = sessionStorage.getItem('userToken');
     if (!getToken) {
-      console.log('User not logged in.');
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({

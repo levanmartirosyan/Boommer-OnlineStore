@@ -14,6 +14,7 @@ import {
   provideAnimations,
 } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { tokenInterceptor } from './services/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(),
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptors([loadingInterceptor, tokenInterceptor])),
     importProvidersFrom([BrowserAnimationsModule]),
     provideAnimations(),
     provideToastr(),

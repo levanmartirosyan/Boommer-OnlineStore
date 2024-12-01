@@ -1,7 +1,7 @@
 <section>
   <div class="topMenu">
     <h1>ცნობილი ციტატები</h1>
-    <button class="addQuote">
+    <button class="addQuote" (click)="openQuoteWindow()">
       <i class="fi fi-rr-square-plus"></i>ციტატის დამატება
     </button>
   </div>
@@ -50,3 +50,30 @@
     </button>
   </div>
 </section>
+
+@if (addQuote) {
+<form class="addQuoteForm" [formGroup]="addQuoteForm" (ngSubmit)="postQuote()">
+  <span class="exitBtn" (click)="openQuoteWindow()"
+    ><i class="fa-solid fa-xmark"></i
+  ></span>
+  <h2>ციტატის დამატება</h2>
+  <div>
+    <label for="">ავტორი</label>
+    <input
+      type="text"
+      placeholder="შეიყვანეთ ავტორი"
+      formControlName="author"
+    />
+  </div>
+  <div>
+    <label for="">ციტატა</label>
+    <input type="text" placeholder="შეიყვანეთ ციტატა" formControlName="quote" />
+  </div>
+  <div>
+    <label for="">ტიპი</label>
+    <input type="text" placeholder="შეიყვანეთ ტიპი" formControlName="type" />
+  </div>
+  <button type="submit">დამატება</button>
+</form>
+<div class="overlay"></div>
+}

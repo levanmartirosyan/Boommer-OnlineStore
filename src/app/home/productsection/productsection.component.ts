@@ -45,7 +45,6 @@ export class ProductsectionComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -73,7 +72,6 @@ export class ProductsectionComponent implements OnInit {
     }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const body = JSON.stringify({
@@ -94,21 +92,8 @@ export class ProductsectionComponent implements OnInit {
   }
 
   getCartForCheck() {
-    const getToken = sessionStorage.getItem('userToken');
-    const userData = new HttpHeaders({
-      accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
-      'Content-Type': 'application/json',
-    });
-    this.apiService.getUser(userData).subscribe({
-      next: (data: any) => {
-        sessionStorage.setItem('userProfileData', JSON.stringify(data));
-        const storedData = sessionStorage.getItem('userProfileData');
-        if (storedData) {
-          this.checkCart = JSON.parse(storedData).cartID;
-        }
-      },
-      error: (error) => {},
+    this.tools.transferData.subscribe((data: any) => {
+      this.checkCart = data.cartID;
     });
   }
 

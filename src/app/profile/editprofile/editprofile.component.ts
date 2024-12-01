@@ -47,10 +47,8 @@ export class EditprofileComponent implements OnInit {
   });
 
   changePersonalInfo() {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
     });
     this.apiService
       .changePersonalInfo(userData, this.personalInfo.value)
@@ -79,10 +77,8 @@ export class EditprofileComponent implements OnInit {
   });
 
   changePassword() {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
     });
     this.apiService.changePassword(userData, this.newPassword.value).subscribe({
       next: (data: any) => {
@@ -115,10 +111,8 @@ export class EditprofileComponent implements OnInit {
   deleteUserAcc() {
     this.confirmationWindow = true;
     if (this.confirmation) {
-      const getToken = sessionStorage.getItem('userToken');
       const userData = new HttpHeaders({
         accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
       });
       this.apiService.deleteAccount(userData).subscribe({
         next: (data: any) => {
@@ -179,10 +173,8 @@ export class EditprofileComponent implements OnInit {
   });
 
   addProductToStore() {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     this.apiService

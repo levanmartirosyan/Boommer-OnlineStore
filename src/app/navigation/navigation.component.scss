@@ -70,8 +70,9 @@ nav {
     gap: 20px;
     background-color: #f2f0f0;
     .logo {
+      padding: 10px 0;
       cursor: pointer;
-      height: 40px;
+      height: 100%;
       img {
         width: 100%;
         height: 100%;
@@ -381,7 +382,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   background-color: $secondary;
   border: 1px solid $primary;
   border-radius: 10px;
@@ -391,6 +392,7 @@ nav {
   transform: translate(-50%, -50%);
   padding: 50px 0;
   z-index: 9999;
+  animation: windowAppear 0.7s ease-out;
   .exitBtn {
     position: absolute;
     right: 7px;
@@ -435,6 +437,17 @@ nav {
   }
   .line:nth-child(3) {
     transform: translateY(-6.9px) rotate(-225deg);
+  }
+}
+
+@keyframes windowAppear {
+  from {
+    transform: translate(-50%, -20%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
   }
 }
 

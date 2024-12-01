@@ -26,12 +26,9 @@ export class ProfileComponent implements OnInit {
   public userProfile: any;
 
   getUserProfileData() {
-    const getToken = sessionStorage.getItem('userToken');
-    if (getToken) {
-      this.tools.transferData.subscribe((data: any) => {
-        this.userProfile = data;
-      });
-    }
+    this.tools.transferData.subscribe((data: any) => {
+      this.userProfile = data;
+    });
   }
   signOut() {
     sessionStorage.removeItem('userToken');

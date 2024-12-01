@@ -32,36 +32,31 @@ export class CartComponent implements OnInit {
 
   getCart() {
     const checkAccessToken = sessionStorage.getItem('userToken');
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
     if (!checkAccessToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
     }
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-      });
-      this.productsOfCart = [];
-      this.productID = [];
-      this.combinedCartProducts = [];
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+    });
+    this.productsOfCart = [];
+    this.productID = [];
+    this.combinedCartProducts = [];
 
-      this.apiService.getCartProducts(userData).subscribe({
-        next: (data: any) => {
-          this.userCart = data;
-          this.totalPrices = this.userCart.total.price.current;
-          this.totalProducts = this.userCart.total.quantity;
-          for (const item of data.products) {
-            this.productsOfCart.push(item);
-            this.productID.push(item.productId);
-          }
-          this.getProductWithId();
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-    }
+    this.apiService.getCartProducts(userData).subscribe({
+      next: (data: any) => {
+        this.userCart = data;
+        this.totalPrices = this.userCart.total.price.current;
+        this.totalProducts = this.userCart.total.quantity;
+        for (const item of data.products) {
+          this.productsOfCart.push(item);
+          this.productID.push(item.productId);
+        }
+        this.getProductWithId();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   getProductWithId() {
@@ -92,62 +87,48 @@ export class CartComponent implements OnInit {
   }
 
   deleteProduct(id: any) {
-    const checkAccessToken = sessionStorage.getItem('userToken');
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-        'Content-Type': 'application/json',
-      });
-      const body = JSON.stringify({
-        id: id,
-      });
-      this.apiService.deleteProductFromCart(userData, body).subscribe({
-        next: (data: any) => {
-          this.getCart();
-          setTimeout(() => {
-            window.location.reload();
-            this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
-          }, 10);
-        },
-        error: (error: any) => {
-          this.tools.showError(error.error.error, 'შეცდომა!');
-        },
-      });
-    }
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+    });
+    const body = JSON.stringify({
+      id: id,
+    });
+    this.apiService.deleteProductFromCart(userData, body).subscribe({
+      next: (data: any) => {
+        this.getCart();
+        setTimeout(() => {
+          window.location.reload();
+          this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
+        }, 10);
+      },
+      error: (error: any) => {
+        this.tools.showError(error.error.error, 'შეცდომა!');
+      },
+    });
   }
 
   deleteCart() {
-    const checkAccessToken = sessionStorage.getItem('userToken');
-    const checkRefreshToken = sessionStorage.getItem('userRefreshToken');
-    if (checkAccessToken && checkRefreshToken) {
-      const getToken = sessionStorage.getItem('userToken');
-      const userData = new HttpHeaders({
-        accept: 'application/json',
-        Authorization: `Bearer ${getToken}`,
-      });
-      this.apiService.deleteUserCart(userData).subscribe({
-        next: (data: any) => {
-          this.router.navigate(['/']);
-          setTimeout(() => {
-            window.location.reload();
-            this.tools.showSuccess('კალათა წაიშალა', 'წარმატება!');
-          }, 10);
-        },
-        error: (error: any) => {
-          this.tools.showError(error.error.error, 'შეცდომა!');
-        },
-      });
-    }
+    const userData = new HttpHeaders({
+      accept: 'application/json',
+    });
+    this.apiService.deleteUserCart(userData).subscribe({
+      next: (data: any) => {
+        this.router.navigate(['/']);
+        setTimeout(() => {
+          window.location.reload();
+          this.tools.showSuccess('კალათა წაიშალა', 'წარმატება!');
+        }, 10);
+      },
+      error: (error: any) => {
+        this.tools.showError(error.error.error, 'შეცდომა!');
+      },
+    });
   }
 
   increaseQuantity(id: any, quantity: any) {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const increase = quantity + 1;
@@ -167,14 +148,8 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQuantity(id: any, quantity: any) {
-    const getToken = sessionStorage.getItem('userToken');
-    if (!getToken) {
-      console.log('User not logged in.');
-      return;
-    }
     const userData = new HttpHeaders({
       accept: 'application/json',
-      Authorization: `Bearer ${getToken}`,
       'Content-Type': 'application/json',
     });
     const decrease = quantity - 1;
@@ -193,10 +168,8 @@ export class CartComponent implements OnInit {
   }
 
   goCheckOut() {
-    const getToken = sessionStorage.getItem('userToken');
     const userData = new HttpHeaders({
       accept: '*/*',
-      Authorization: `Bearer ${getToken}`,
     });
     this.apiService.checkOut(userData).subscribe({
       next: (data: any) => {
