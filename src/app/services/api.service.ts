@@ -230,4 +230,10 @@ export class ApiService {
       `https://api.everrest.educata.dev/quote?page_index=${page}&page_size=50`
     );
   }
+
+  postReviews(userData: any, body: any) {
+    return this.http.post(`https://api.everrest.educata.dev/quote`, body, {
+      headers: userData,
+    });
+  }
 }
