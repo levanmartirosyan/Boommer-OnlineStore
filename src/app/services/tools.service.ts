@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToolsService {
-  constructor(public toastr: ToastrService) {}
+  constructor(public toastr: ToastrService, public router: Router) {}
 
   public transferData: BehaviorSubject<any> = new BehaviorSubject('');
   public transferCategories: BehaviorSubject<any> = new BehaviorSubject(null);
   public cartLength: Subject<any> = new Subject();
+  private refreshNavSubject = new Subject<void>();
+  refreshNav$ = this.refreshNavSubject.asObservable();
+
+  triggerNavRefresh() {
+    this.refreshNavSubject.next();
+  }
 
   clearSubject() {
     this.transferCategories.next(null);
@@ -38,6 +45,13 @@ export class ToolsService {
     this.toastr.warning(message, text, {
       positionClass: 'toast-top-center',
       timeOut: 2000,
+    });
+  }
+
+  reloadRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
   }
 }

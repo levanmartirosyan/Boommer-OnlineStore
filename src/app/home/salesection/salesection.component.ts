@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { ToolsService } from '../../services/tools.service';
   styleUrl: './salesection.component.scss',
 })
 export class SalesectionComponent implements OnInit {
+  @ViewChild('productContainer') productContainer!: ElementRef;
   constructor(
     public apiService: ApiService,
     public router: Router,
@@ -48,10 +49,8 @@ export class SalesectionComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          window.location.reload();
-          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
-        }, 100);
+        this.tools.triggerNavRefresh();
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -75,10 +74,8 @@ export class SalesectionComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          window.location.reload();
-          this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
-        }, 10);
+        this.tools.triggerNavRefresh();
+        this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -97,6 +94,22 @@ export class SalesectionComponent implements OnInit {
       queryParams: {
         data: JSON.stringify(card),
       },
+    });
+  }
+
+  scrollLeft() {
+    const container = this.productContainer.nativeElement;
+    container.scrollBy({
+      left: -400,
+      behavior: 'smooth',
+    });
+  }
+
+  scrollRight() {
+    const container = this.productContainer.nativeElement;
+    container.scrollBy({
+      left: 400,
+      behavior: 'smooth',
     });
   }
 }

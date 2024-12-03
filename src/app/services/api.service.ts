@@ -15,7 +15,7 @@ export class ApiService {
 
   getAllProducts() {
     return this.http.get(
-      'https://api.everrest.educata.dev/shop/products/all?page_index=6&page_size=6'
+      'https://api.everrest.educata.dev/shop/products/all?page_index=3&page_size=10'
     );
   }
 
@@ -27,19 +27,19 @@ export class ApiService {
 
   getSaled() {
     return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=11`
+      `https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=18`
     );
   }
 
   getLaptops() {
     return this.http.get(
-      'https://api.everrest.educata.dev/shop/products/category/1?page_index=2&page_size=6'
+      'https://api.everrest.educata.dev/shop/products/category/1?page_index=2&page_size=11'
     );
   }
 
   getPhones() {
     return this.http.get(
-      'https://api.everrest.educata.dev/shop/products/category/2?page_index=1&page_size=6'
+      'https://api.everrest.educata.dev/shop/products/category/2?page_index=1&page_size=10'
     );
   }
 
@@ -235,5 +235,11 @@ export class ApiService {
     return this.http.post(`https://api.everrest.educata.dev/quote`, body, {
       headers: userData,
     });
+  }
+
+  getReviewsRandom(page: any, size: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/quote?page_index=${page}&page_size=${size}`
+    );
   }
 }

@@ -46,9 +46,7 @@ export class AuthorizationComponent implements OnInit {
         sessionStorage.setItem('userToken', data.access_token);
         sessionStorage.setItem('userRefreshToken', data.refresh_token);
         this.sendAnswerFromAuth();
-        setTimeout(() => {
-          window.location.reload();
-        }, 300);
+        this.tools.triggerNavRefresh();
         this.tools.showSuccess('', 'წარმატებული ავტორიზაცია!');
       },
       error: (error) => {

@@ -219,3 +219,15 @@
     <div class="fakeBox"></div>
   </div>
 </section>
+<section class="comments">
+  <div class="content">
+    <h2>კომენტარები</h2>
+    @for (item of randomQoutes; track $index) {
+    <div class="comment">
+      <p><img src="/user.png" alt="" />{{ item.author }}:</p>
+      <p>"{{ item.quote }}"</p>
+    </div>
+    }
+  </div>
+  <div class="fakeBox"></div>
+</section>

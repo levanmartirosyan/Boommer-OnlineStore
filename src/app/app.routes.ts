@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EditprofileComponent } from './profile/editprofile/editprofile.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './details/details.component';
 import { ProductsComponent } from './products/products.component';

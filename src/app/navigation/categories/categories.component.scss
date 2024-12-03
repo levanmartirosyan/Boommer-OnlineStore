@@ -61,6 +61,7 @@ $seventh: #000000;
     flex-wrap: wrap;
     gap: 7px;
     justify-content: flex-start;
+    align-items: flex-start;
     .catalogeMenu {
       max-width: 150px;
       width: 100%;
@@ -86,22 +87,15 @@ $seventh: #000000;
   }
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 419px) {
   .bottomM {
     .cataloge {
       height: 600px;
       overflow-y: scroll;
+      justify-content: center;
       .catalogeMenu {
         max-width: 120px;
       }
-    }
-  }
-}
-
-@media screen and (max-width: 355px) {
-  .bottomM {
-    .cataloge {
-      justify-content: center;
     }
   }
 }

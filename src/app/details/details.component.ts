@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../services/tools.service';
+import e from 'express';
 
 @Component({
   selector: 'app-details',
@@ -27,6 +28,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getCardDetails();
     this.getCartForCheck();
+    this.getqoutes();
   }
 
   public productDetails: any;
@@ -38,7 +40,6 @@ export class DetailsComponent implements OnInit {
   getCardDetails() {
     this.actR.queryParams.subscribe((data: any) => {
       this.productDetails = JSON.parse(data.data);
-      console.log(JSON.parse(data.data));
       this.saledGanvadebaCurrent =
         Math.round((this.productDetails.price.current / 12) * 10) / 10;
       this.saledGanvadebaBefore =
@@ -182,5 +183,27 @@ export class DetailsComponent implements OnInit {
         this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
+  }
+
+  public randomQoutes: any;
+  public randomPage: any;
+  public randomSize: any;
+
+  randomNums() {
+    this.randomPage = Math.floor(Math.random() * 13) + 1;
+    this.randomSize = Math.floor(Math.random() * 6) + 7;
+  }
+  getqoutes() {
+    this.randomNums();
+    this.apiService
+      .getReviewsRandom(this.randomPage, this.randomSize)
+      .subscribe({
+        next: (data: any) => {
+          this.randomQoutes = data.quotes;
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
   }
 }

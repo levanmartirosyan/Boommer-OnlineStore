@@ -63,7 +63,7 @@
           <div>
             <span>მიწოდების ღირებულება</span>
             <span class="price"
-              >{{ totalPrices ? deliveryPrice + "₾" : "..." }}
+              >{{ totalPrices < 500 ? deliveryPrice + "₾" : "0₾" }}
             </span>
           </div>
         </div>
@@ -71,7 +71,13 @@
           <div>
             <span>გადასახდელი თანხა</span>
             <span class="price2"
-              >{{ totalPrices ? totalPrices + deliveryPrice + "₾" : "..." }}
+              >{{
+                totalPrices < 500
+                  ? totalPrices + deliveryPrice + "₾"
+                  : totalPrices > 500
+                  ? totalPrices + "₾"
+                  : "..."
+              }}
             </span>
           </div>
         </div>

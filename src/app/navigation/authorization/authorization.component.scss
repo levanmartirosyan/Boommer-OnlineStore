@@ -21,7 +21,7 @@ $seventh: #000000;
   border-radius: 20px;
   padding: 25px;
   animation: authAppear 0.7s ease-out;
-  z-index: 1000;
+  z-index: 9999;
   background-color: $secondary;
   .exitBtn {
     position: absolute;
@@ -305,7 +305,7 @@ $seventh: #000000;
   background-color: rgba($color: #000000, $alpha: 0.5);
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 @keyframes authAppear {
   from {

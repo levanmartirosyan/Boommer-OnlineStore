@@ -96,9 +96,7 @@ export class ProductsComponent implements OnInit {
     });
     this.apiService.addCreateProductsCart(userData, body).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 10);
+        this.tools.reloadRoute();
         this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
@@ -123,9 +121,7 @@ export class ProductsComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 10);
+        this.tools.reloadRoute();
         this.tools.showSuccess('პროდუქტი კალათაში დაემატა', 'წარმატება!');
       },
       error: (error) => {
@@ -160,10 +156,20 @@ export class ProductsComponent implements OnInit {
     const isPriceValid = this.priceMin !== '' && this.priceMax !== '';
 
     if (isPriceValid && this.priceMin > this.priceMax) {
+      this.priceMin = '';
+      this.priceMax = '';
       this.tools.showWarning(
         'მინიმალური ფასი მეტია მაქსიმალურზე!',
         'ყურადღება!'
       );
+      this.showAllproducts(1);
+      return;
+    }
+    if (this.priceMin < 0 || this.priceMax < 0) {
+      this.priceMin = '';
+      this.priceMax = '';
+      this.tools.showWarning('ფასი ვერ იქნება უარყოფითი რიცხვი!', 'ყურადღება!');
+      this.showAllproducts(1);
       return;
     }
 

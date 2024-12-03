@@ -96,11 +96,8 @@ export class CartComponent implements OnInit {
     });
     this.apiService.deleteProductFromCart(userData, body).subscribe({
       next: (data: any) => {
-        this.getCart();
-        setTimeout(() => {
-          window.location.reload();
-          this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
-        }, 10);
+        this.tools.reloadRoute();
+        this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
       },
       error: (error: any) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -114,11 +111,8 @@ export class CartComponent implements OnInit {
     });
     this.apiService.deleteUserCart(userData).subscribe({
       next: (data: any) => {
-        this.router.navigate(['/']);
-        setTimeout(() => {
-          window.location.reload();
-          this.tools.showSuccess('კალათა წაიშალა', 'წარმატება!');
-        }, 10);
+        this.tools.reloadRoute();
+        this.tools.showSuccess('კალათა წაიშალა', 'წარმატება!');
       },
       error: (error: any) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -139,7 +133,7 @@ export class CartComponent implements OnInit {
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
         console.log(data);
-        this.getCart();
+        this.tools.reloadRoute();
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -159,7 +153,7 @@ export class CartComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        this.getCart();
+        this.tools.reloadRoute();
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -173,10 +167,8 @@ export class CartComponent implements OnInit {
     });
     this.apiService.checkOut(userData).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          window.location.reload();
-          this.tools.showSuccess('პროდუქტი შეძენილია', 'წარმატება!');
-        }, 10);
+        this.tools.reloadRoute();
+        this.tools.showSuccess('პროდუქტი შეძენილია', 'წარმატება!');
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');

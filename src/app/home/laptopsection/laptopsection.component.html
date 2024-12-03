@@ -1,10 +1,18 @@
 <section class="mainContent">
   <h3>ლეპტოპები</h3>
-  <div class="product">
+  <button class="slide prev" (click)="scrollLeft()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <div class="product" #productContainer>
     @for (item of products; track $index) {
     <div class="productCard">
       <div class="head" (click)="goToDetails(item)">
         <img [src]="item.thumbnail" alt="{{ item.title }}" />
+        @if ( item.price.discountPercentage) {
+        <span class="discountPercentage"
+          >-{{ item.price.discountPercentage + "%" }}</span
+        >
+        }
         <div
           [style.background-color]="
             item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
@@ -15,12 +23,16 @@
         </div>
       </div>
       <div class="pInfo" (click)="goToDetails(item)">
-        @if ( item.price.discountPercentage) {
-        <span class="discountPercentage"
-          >-{{ item.price.discountPercentage + "%" }}</span
-        >
-        }
         <span>
+          <div
+            class="ratingBox"
+            [style.background-color]="
+              item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
+            "
+          >
+            <span class="rating"> {{ item.rating }} </span>
+            <i class="fi fi-ss-star"></i>
+          </div>
           @if (item.price.beforeDiscount == item.price.current ) {
           <span>{{ item.price.beforeDiscount + "₾" }}</span>
           } @else {
@@ -47,4 +59,7 @@
     </div>
     }
   </div>
+  <button class="slide next" (click)="scrollRight()">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
 </section>

@@ -54,10 +54,8 @@ export class EditprofileComponent implements OnInit {
       .changePersonalInfo(userData, this.personalInfo.value)
       .subscribe({
         next: (data: any) => {
-          setTimeout(() => {
-            window.location.reload();
-            this.tools.showSuccess('პირადი ინფორმაცია შეცვლილია', 'წარმატება!');
-          }, 100);
+          this.tools.reloadRoute();
+          this.tools.showSuccess('პირადი ინფორმაცია შეცვლილია', 'წარმატება!');
         },
         error: (error) => {
           this.tools.showError(error.error.error, 'შეცდომა!');
@@ -82,11 +80,8 @@ export class EditprofileComponent implements OnInit {
     });
     this.apiService.changePassword(userData, this.newPassword.value).subscribe({
       next: (data: any) => {
-        setTimeout(() => {
-          this.router.navigate(['/']);
-          window.location.reload();
-          this.tools.showSuccess('პაროლი შეცვლილია', 'წარმატება!');
-        }, 2000);
+        this.tools.reloadRoute();
+        this.tools.showSuccess('პაროლი შეცვლილია', 'წარმატება!');
       },
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -181,6 +176,7 @@ export class EditprofileComponent implements OnInit {
       .addProductsToshop(userData, this.productAdd.value)
       .subscribe({
         next: (data: any) => {
+          this.tools.reloadRoute();
           this.tools.showSuccess('პროდუქტი წარმატებით დაემატა', 'წარმატება!');
         },
         error: (error) => {

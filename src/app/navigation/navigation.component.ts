@@ -96,6 +96,7 @@ export class NavigationComponent implements OnInit {
     if (getToken) {
       this.apiService.getCartProducts(userData).subscribe({
         next: (data: any) => {
+          this.cartLength = 0;
           this.cartLength = data.total.quantity;
         },
         error: (error) => {},
