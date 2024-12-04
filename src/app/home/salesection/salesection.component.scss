@@ -55,6 +55,7 @@ section.mainContent {
     scroll-padding-right: 10px;
     scrollbar-width: none;
     min-width: 100%;
+    border-radius: 10px;
     .productCard {
       display: flex;
       flex-direction: column;
@@ -211,6 +212,10 @@ section.mainContent {
 
 @media screen and (max-width: 500px) {
   section.mainContent {
+    button.slide {
+      width: 40px;
+      height: 40px;
+    }
     .product {
       overflow-x: auto;
       scroll-behavior: smooth;
@@ -239,13 +244,12 @@ section.mainContent {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
+            width: 60px;
             height: 25px;
             background-color: $primary;
             border-radius: 5px;
             gap: 3px;
             position: absolute;
-            top: 90;
             right: 15px;
             span.rating {
               color: $secondary;
@@ -268,6 +272,9 @@ section.mainContent {
             justify-content: flex-start;
             padding-left: 10px;
           }
+        }
+        &:hover {
+          box-shadow: none;
         }
       }
     }

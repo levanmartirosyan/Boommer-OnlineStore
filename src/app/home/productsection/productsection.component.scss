@@ -55,6 +55,7 @@ section.mainContent {
     scroll-padding-right: 10px;
     scrollbar-width: none;
     min-width: 100%;
+    border-radius: 10px;
     .productCard {
       display: flex;
       flex-direction: column;
@@ -211,6 +212,10 @@ section.mainContent {
 
 @media screen and (max-width: 500px) {
   section.mainContent {
+    button.slide {
+      width: 40px;
+      height: 40px;
+    }
     .product {
       overflow-x: auto;
       scroll-behavior: smooth;
@@ -267,6 +272,9 @@ section.mainContent {
             justify-content: flex-start;
             padding-left: 10px;
           }
+        }
+        &:hover {
+          box-shadow: none;
         }
       }
     }

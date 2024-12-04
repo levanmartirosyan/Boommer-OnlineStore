@@ -25,7 +25,6 @@ export class ProductsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.showAllproducts(1);
-    this.getCartForCheck();
     this.getBrands();
     this.getTransferedData();
   }
@@ -58,26 +57,6 @@ export class ProductsComponent implements OnInit {
       this.pageNumber--;
       this.showAllproducts(this.pageNumber);
     }
-  }
-
-  getCartForCheck() {
-    const userData = new HttpHeaders({
-      accept: 'application/json',
-      'Content-Type': 'application/json',
-    });
-    this.apiService.getUser(userData).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        sessionStorage.setItem('userProfileData', JSON.stringify(data));
-        const storedData = sessionStorage.getItem('userProfileData');
-        if (storedData) {
-          this.checkCart = JSON.parse(storedData).cartID;
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
   }
 
   createCart(id: any) {
@@ -145,12 +124,13 @@ export class ProductsComponent implements OnInit {
   public sortBy: any = '';
   public sortDirection: any = '';
   public search: any = '';
-  public removePages: any;
+  public hide: boolean = false;
   public noFound: any = '';
 
   filterProducts() {
     this.noFound = '';
     this.products = [];
+    this.hide = true;
 
     const isSortingValid = this.sortBy !== '' && this.sortDirection !== '';
     const isPriceValid = this.priceMin !== '' && this.priceMax !== '';
@@ -185,8 +165,6 @@ export class ProductsComponent implements OnInit {
         )
         .subscribe({
           next: (data: any) => {
-            console.log(data);
-            this.removePages = data;
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
@@ -207,8 +185,6 @@ export class ProductsComponent implements OnInit {
         )
         .subscribe({
           next: (data: any) => {
-            console.log(data);
-            this.removePages = data;
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
@@ -224,8 +200,6 @@ export class ProductsComponent implements OnInit {
         .filterPrice(this.priceMin, this.priceMax, this.categoryId, this.brand)
         .subscribe({
           next: (data: any) => {
-            console.log(data);
-            this.removePages = data;
             this.products = data.products;
             if (data.total === 0) {
               this.noFound = 'პროდუქტი ვერ მოიძებნა';
@@ -239,8 +213,6 @@ export class ProductsComponent implements OnInit {
     } else {
       this.apiService.filterBrand(this.categoryId, this.brand).subscribe({
         next: (data: any) => {
-          console.log(data);
-          this.removePages = data;
           this.products = data.products;
           if (data.total === 0) {
             this.noFound = 'პროდუქტი ვერ მოიძებნა';
@@ -264,20 +236,20 @@ export class ProductsComponent implements OnInit {
     this.search = '';
     this.noFound = '';
     this.products = [];
-    this.removePages = null;
     this.showAllproducts(1);
+    this.hide = false;
   }
 
   searchByKeyword() {
     this.noFound = '';
     this.products = [];
+    this.hide = true;
     this.apiService.search(this.search).subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.removePages = data;
         this.products = data.products;
         if (data.total == 0) {
           this.noFound = 'პროდუქტი ვერ მოიძებნა';
+          this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
         }
       },
       error: (error: any) => {
@@ -290,8 +262,6 @@ export class ProductsComponent implements OnInit {
   getBrands() {
     this.apiService.getProductBrand().subscribe({
       next: (data: any) => {
-        console.log(data);
-
         this.brands = data;
       },
       error: (error: any) => {
@@ -301,7 +271,7 @@ export class ProductsComponent implements OnInit {
   }
   getTransferedData() {
     this.tools.transferCategories.subscribe((data: any) => {
-      if (data) {
+      if (data !== '') {
         this.brand = data.brand;
         this.categoryId = data.categoryId;
       }
