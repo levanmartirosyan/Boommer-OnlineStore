@@ -239,13 +239,12 @@ section.mainContent {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
+            width: 60px;
             height: 25px;
             background-color: $primary;
             border-radius: 5px;
             gap: 3px;
             position: absolute;
-            top: 90;
             right: 15px;
             span.rating {
               color: $secondary;
