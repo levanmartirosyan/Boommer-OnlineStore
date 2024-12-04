@@ -105,7 +105,7 @@ export class ProductsectionComponent implements OnInit {
   scrollLeft() {
     const container = this.productContainer.nativeElement;
     container.scrollBy({
-      left: -300,
+      left: -450,
       behavior: 'smooth',
     });
   }
@@ -113,7 +113,7 @@ export class ProductsectionComponent implements OnInit {
   scrollRight() {
     const container = this.productContainer.nativeElement;
     container.scrollBy({
-      left: 300,
+      left: 450,
       behavior: 'smooth',
     });
   }
