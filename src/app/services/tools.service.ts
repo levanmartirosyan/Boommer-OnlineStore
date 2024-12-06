@@ -10,7 +10,7 @@ export class ToolsService {
   constructor(public toastr: ToastrService, public router: Router) {}
 
   public transferData: BehaviorSubject<any> = new BehaviorSubject('');
-  public transferCategories: BehaviorSubject<any> = new BehaviorSubject(null);
+  public transferCategories: BehaviorSubject<any> = new BehaviorSubject('');
   public cartLength: Subject<any> = new Subject();
   private refreshNavSubject = new Subject<void>();
   refreshNav$ = this.refreshNavSubject.asObservable();

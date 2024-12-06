@@ -6,7 +6,7 @@
           <input
             type="search"
             [(ngModel)]="search"
-            (keydown.enter)="searchByKeyword()"
+            (keyup.enter)="searchByKeyword()"
             placeholder="ძიება..."
           />
           <button (click)="searchByKeyword()">
