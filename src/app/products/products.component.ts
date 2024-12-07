@@ -9,11 +9,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { ToolsService } from '../services/tools.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
