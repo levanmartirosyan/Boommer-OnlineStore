@@ -18,7 +18,7 @@
             item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
           "
         >
-          <span class="rating"> {{ item.rating }} </span>
+          <span class="rating"> {{ item.rating | number : "1.0-1" }} </span>
           <i class="fi fi-ss-star"></i>
         </div>
       </div>
@@ -30,7 +30,7 @@
               item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
             "
           >
-            <span class="rating"> {{ item.rating }} </span>
+            <span class="rating"> {{ item.rating | number : "1.0-1" }} </span>
             <i class="fi fi-ss-star"></i>
           </div>
           @if (item.price.beforeDiscount == item.price.current ) {

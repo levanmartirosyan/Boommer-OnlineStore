@@ -3,11 +3,12 @@ import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-salesection',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './salesection.component.html',
   styleUrl: './salesection.component.scss',
 })

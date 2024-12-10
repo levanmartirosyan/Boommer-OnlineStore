@@ -3,10 +3,11 @@ import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-productsection',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './productsection.component.html',
   styleUrl: './productsection.component.scss',
 })

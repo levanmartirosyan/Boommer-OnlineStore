@@ -3,11 +3,12 @@ import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-mobilesection',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './mobilesection.component.html',
   styleUrl: './mobilesection.component.scss',
 })
