@@ -104,6 +104,7 @@ export class DetailsComponent implements OnInit {
           this.saledGanvadebaBefore =
             Math.round((this.productDetails.price.beforeDiscount / 12) * 10) /
             10;
+          this.productDetailsImages = [];
           this.productDetails.images.forEach((images: any) => {
             this.productDetailsImages.push(images);
           });
