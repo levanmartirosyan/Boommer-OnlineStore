@@ -248,4 +248,11 @@ export class ApiService {
       `https://api.everrest.educata.dev/quote?page_index=${page}&page_size=${size}`
     );
   }
+
+  refreshToken(body: any) {
+    return this.http.post(
+      'https://api.everrest.educata.dev/auth/refresh',
+      body
+    );
+  }
 }

@@ -79,6 +79,19 @@ export class NavigationComponent implements OnInit {
         },
         error: (error) => {
           this.tools.showError(error.error.error, 'შეცდომა!');
+          const tokens = {
+            access_token: sessionStorage.getItem('userToken'),
+            refresh_token: sessionStorage.getItem('userRefreshToken'),
+          };
+          this.apiService.refreshToken(tokens).subscribe({
+            next: (data: any) => {
+              sessionStorage.setItem('userToken', data.access_token);
+              this.tools.showSuccess('ტოკენი განახლდა', 'წარმატება!');
+            },
+            error: (error: any) => {
+              this.tools.showError(error.error.error, 'შეცდომა!');
+            },
+          });
         },
       });
     }
