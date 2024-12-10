@@ -1,6 +1,12 @@
 import { HttpHeaders } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import {
   FormControl,
@@ -9,12 +15,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToolsService } from '../services/tools.service';
-import e from 'express';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
@@ -22,7 +27,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     public actR: ActivatedRoute,
     public apiService: ApiService,
-    public tools: ToolsService
+    public tools: ToolsService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,26 +36,95 @@ export class DetailsComponent implements OnInit {
     this.getCartForCheck();
     this.getqoutes();
   }
-
-  public productDetails: any;
+  @ViewChild('productContainer') productContainer!: ElementRef;
+  public productDetails: any = {
+    brand: '',
+    category: {
+      id: '',
+      image: '',
+      name: '',
+    },
+    description: '',
+    images: [],
+    issueDate: '',
+    price: {
+      beforeDiscount: 0,
+      currency: '',
+      current: 0,
+      discountPercentage: 0,
+    },
+    rating: 0,
+    ratings: [],
+    stock: 0,
+    thumbnail: '',
+    title: '',
+    warranty: 0,
+    _id: '',
+  };
   public productDetailsImages: any[] = [];
   public saledGanvadebaCurrent: any;
   public saledGanvadebaBefore: any;
   public dateOfProducts: any;
+  public productId: any;
+  public products: any;
+  public getCategory: any;
+
+  goToDetails(id: any) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`products/details/${id}`], {
+        queryParams: { data: JSON.stringify(id) },
+      });
+    });
+  }
+
+  scrollLeft() {
+    const container = this.productContainer.nativeElement;
+    container.scrollBy({
+      left: -400,
+      behavior: 'smooth',
+    });
+  }
+
+  scrollRight() {
+    const container = this.productContainer.nativeElement;
+    container.scrollBy({
+      left: 400,
+      behavior: 'smooth',
+    });
+  }
 
   getCardDetails() {
     this.actR.queryParams.subscribe((data: any) => {
-      this.productDetails = JSON.parse(data.data);
-      this.saledGanvadebaCurrent =
-        Math.round((this.productDetails.price.current / 12) * 10) / 10;
-      this.saledGanvadebaBefore =
-        Math.round((this.productDetails.price.beforeDiscount / 12) * 10) / 10;
-      this.productDetails.images.forEach((images: any) => {
-        this.productDetailsImages.push(images);
+      this.productId = JSON.parse(data.data);
+      this.apiService.getProductsById(this.productId).subscribe({
+        next: (data: any) => {
+          this.productDetails = data;
+          this.saledGanvadebaCurrent =
+            Math.round((this.productDetails.price.current / 12) * 10) / 10;
+          this.saledGanvadebaBefore =
+            Math.round((this.productDetails.price.beforeDiscount / 12) * 10) /
+            10;
+          this.productDetails.images.forEach((images: any) => {
+            this.productDetailsImages.push(images);
+          });
+          this.dateOfProducts = this.productDetails.issueDate.slice(0, 10);
+          this.getCategory = this.productDetails.category.id;
+          this.apiService.getProductForDetails(this.getCategory).subscribe({
+            next: (data: any) => {
+              this.products = data.products;
+            },
+            error: (error: any) => {
+              this.tools.showError(error.error.error, 'შეცდომა!');
+            },
+          });
+        },
+        error: (error) => {
+          this.tools.showError(error.error.error, 'შეცდომა!');
+        },
       });
-      this.dateOfProducts = this.productDetails.issueDate.slice(0, 10);
     });
   }
+
   copyLink() {
     const currentUrl = window.location.href; // Get current URL
     navigator.clipboard

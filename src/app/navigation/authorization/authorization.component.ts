@@ -40,7 +40,6 @@ export class AuthorizationComponent implements OnInit {
   public refreshToken: any;
 
   authorize() {
-    console.log(this.authorization);
     this.apiService.authorization(this.authorization.value).subscribe({
       next: (data: any) => {
         sessionStorage.setItem('userToken', data.access_token);

@@ -6,7 +6,7 @@
   <div class="product" #productContainer>
     @for (item of products; track $index) {
     <div class="productCard">
-      <div class="head" (click)="goToDetails(item)">
+      <div class="head" (click)="goToDetails(item._id)">
         <img [src]="item.thumbnail" alt="{{ item.title }}" />
         @if ( item.price.discountPercentage) {
         <span class="discountPercentage"
@@ -22,7 +22,7 @@
           <i class="fi fi-ss-star"></i>
         </div>
       </div>
-      <div class="pInfo" (click)="goToDetails(item)">
+      <div class="pInfo" (click)="goToDetails(item._id)">
         <span>
           <div
             class="ratingBox"

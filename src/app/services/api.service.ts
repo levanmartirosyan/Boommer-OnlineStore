@@ -43,6 +43,12 @@ export class ApiService {
     );
   }
 
+  getProductForDetails(categoryId: any) {
+    return this.http.get(
+      `https://api.everrest.educata.dev/shop/products/category/${categoryId}?page_index=1&page_size=10`
+    );
+  }
+
   registration(body: any) {
     return this.http.post(
       'https://api.everrest.educata.dev/auth/sign_up',

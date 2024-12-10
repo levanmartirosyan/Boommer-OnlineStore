@@ -13,8 +13,12 @@
           <i class="fa-solid fa-chevron-left"></i>
         </button>
         <img
-          [src]="productDetailsImages[currentIndex]"
-          alt="Image slider"
+          [src]="
+            productDetailsImages[currentIndex]
+              ? productDetailsImages[currentIndex]
+              : productDetails.thumbnail
+          "
+          alt=""
           class="slider-image"
         />
         <button (click)="next()" class="nextImg">
@@ -44,28 +48,39 @@
       @if (productDetails.price.beforeDiscount == productDetails.price.current)
       {
       <span class="beforePriceNoLine">{{
-        productDetails.price.beforeDiscount + " ₾"
+        productDetails.price.beforeDiscount !== 0
+          ? productDetails.price.beforeDiscount + " ₾"
+          : null
       }}</span>
       } @else {
       <div>
         <span class="beforeSale">{{
-          productDetails.price.beforeDiscount
+          productDetails.price.beforeDiscount !== 0
+            ? productDetails.price.beforeDiscount
+            : null
         }}</span>
         <span class="currentPrice">{{
-          productDetails.price.current + " ₾"
+          productDetails.price.current !== 0
+            ? productDetails.price.current + " ₾"
+            : null
         }}</span>
       </div>
-      } @if (productDetails.price.beforeDiscount ==
-      productDetails.price.current) {
+      } @if (productDetails.price.beforeDiscount == productDetails.price.current
+      && productDetails.price.beforeDiscount !== undefined ||
+      productDetails.price.current !== undefined) {
       <span class="ganvadebaParent"
         >თვეში:
-        <span class="ganvadeba">{{ saledGanvadebaBefore + " ₾" }}</span>
+        <span class="ganvadeba">{{
+          saledGanvadebaBefore ? saledGanvadebaBefore + " ₾" : null
+        }}</span>
         -დან</span
       >
       } @else {
       <span class="ganvadebaParent"
         >თვეში
-        <span class="ganvadeba">{{ saledGanvadebaCurrent + " ₾" }}</span>
+        <span class="ganvadeba">{{
+          saledGanvadebaCurrent ? saledGanvadebaCurrent + " ₾" : null
+        }}</span>
         -დან</span
       >
       }
@@ -103,15 +118,21 @@
       @if (productDetails.price.beforeDiscount == productDetails.price.current)
       {
       <span class="beforePriceNoLine">{{
-        productDetails.price.beforeDiscount + " ₾"
+        productDetails.price.beforeDiscount !== 0
+          ? productDetails.price.beforeDiscount + " ₾"
+          : null
       }}</span>
       } @else {
       <div>
         <span class="beforeSale">{{
-          productDetails.price.beforeDiscount + " ₾"
+          productDetails.price.beforeDiscount !== 0
+            ? productDetails.price.beforeDiscount + " ₾"
+            : null
         }}</span>
         <span class="currentPrice">{{
-          productDetails.price.current + " ₾"
+          productDetails.price.current !== 0
+            ? productDetails.price.current + " ₾"
+            : null
         }}</span>
       </div>
       }
@@ -201,7 +222,7 @@
       </div>
       <div>
         <span>გამოშვების თარიღი:</span>
-        <span>{{ dateOfProducts }}</span>
+        <span>{{ dateOfProducts | date : "d MMM y" }}</span>
       </div>
       <div>
         <span>გარანტია:</span>
@@ -219,6 +240,72 @@
     <div class="fakeBox"></div>
   </div>
 </section>
+<section class="mainContent">
+  <h3>მსგავსი პროდუქტი</h3>
+  <button class="slide prev" (click)="scrollLeft()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <div class="product" #productContainer>
+    @for (item of products; track $index) {
+    <div class="productCard">
+      <div class="head" (click)="goToDetails(item._id)">
+        <img [src]="item.thumbnail" alt="{{ item.title }}" />
+        @if ( item.price.discountPercentage) {
+        <span class="discountPercentage"
+          >-{{ item.price.discountPercentage + "%" }}</span
+        >
+        }
+        <div
+          [style.background-color]="
+            item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
+          "
+        >
+          <span class="rating"> {{ item.rating }} </span>
+          <i class="fi fi-ss-star"></i>
+        </div>
+      </div>
+      <div class="pInfo" (click)="goToDetails(item._id)">
+        <span>
+          <div
+            class="ratingBox"
+            [style.background-color]="
+              item.rating <= 2 ? 'red' : item.rating < 4 ? '#32b100' : '#ec5e2a'
+            "
+          >
+            <span class="rating"> {{ item.rating }} </span>
+            <i class="fi fi-ss-star"></i>
+          </div>
+          @if (item.price.beforeDiscount == item.price.current ) {
+          <span>{{ item.price.beforeDiscount + "₾" }}</span>
+          } @else {
+          <span class="beforeSale">{{ item.price.beforeDiscount }} </span>
+          <span class="currentPrice">{{ item.price.current + "₾" }}</span>
+          }
+        </span>
+        <span>{{ item.title }}</span>
+      </div>
+      <div class="cardBtn">
+        <div>
+          <i class="fi fi-rr-exchange"></i>
+        </div>
+        @if (checkCart !== "") {
+        <button (click)="addToCart(item._id)">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        } @else {
+        <button (click)="createCart(item._id)">
+          <i class="fi fi-rr-shopping-cart"></i> დამატება
+        </button>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  <button class="slide next" (click)="scrollRight()">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+</section>
+
 <section class="comments">
   <div class="content">
     <h2>კომენტარები</h2>

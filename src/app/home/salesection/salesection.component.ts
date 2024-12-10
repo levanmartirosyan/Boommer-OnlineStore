@@ -89,10 +89,10 @@ export class SalesectionComponent implements OnInit {
     });
   }
 
-  goToDetails(card: any) {
-    this.router.navigate([`products/details/${card.title}`], {
+  goToDetails(id: any) {
+    this.router.navigate([`products/details/${id}`], {
       queryParams: {
-        data: JSON.stringify(card),
+        data: JSON.stringify(id),
       },
     });
   }
