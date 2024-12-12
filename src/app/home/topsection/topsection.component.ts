@@ -33,7 +33,6 @@ export class TopsectionComponent implements OnInit {
   getBanner() {
     this.apiService.getZoommerBanner().subscribe({
       next: (data: any) => {
-        console.log(data.section);
         this.bannerImages = data.section;
         for (const item of this.bannerImages[0].banners) {
           this.images.push(item.webImageUrl);
