@@ -135,6 +135,9 @@ section.mainContent {
           padding-left: 10px;
           font-size: 20px;
         }
+        span.beforePrice {
+          font-size: 18px;
+        }
         span.beforeSale {
           position: relative;
           &::after {

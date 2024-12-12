@@ -15,3 +15,21 @@
     </button>
   </div>
 </section>
+
+<section class="headerM">
+  <div class="slider">
+    <button (click)="prev()" class="prevImg">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div>
+      <img
+        [src]="imagesM[currentIndex]"
+        alt="Image slider"
+        class="slider-image"
+      />
+    </div>
+    <button (click)="next()" class="nextImg">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
