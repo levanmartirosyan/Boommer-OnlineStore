@@ -6,11 +6,17 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailsComponent } from './details/details.component';
 import { ProductsComponent } from './products/products.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { routeGuard } from './services/route.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Boommer - Home' },
   { path: 'cart', component: CartComponent, title: 'Boommer - Cart' },
-  { path: 'profile', component: ProfileComponent, title: 'Boommer - Profile' },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    title: 'Boommer - Profile',
+    canActivate: [routeGuard],
+  },
   {
     path: 'products/details/:id',
     component: DetailsComponent,

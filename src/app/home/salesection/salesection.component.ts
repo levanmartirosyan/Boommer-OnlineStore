@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
 import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-salesection',
@@ -17,7 +18,8 @@ export class SalesectionComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     public router: Router,
-    public tools: ToolsService
+    public tools: ToolsService,
+    private cookies: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class SalesectionComponent implements OnInit {
   }
 
   createCart(id: any) {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
@@ -60,7 +62,7 @@ export class SalesectionComponent implements OnInit {
   }
 
   addToCart(id: any) {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;

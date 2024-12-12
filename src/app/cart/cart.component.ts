@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToolsService } from '../services/tools.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     public router: Router,
-    public tools: ToolsService
+    public tools: ToolsService,
+    private cookies: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class CartComponent implements OnInit {
   public combinedCartProducts: any[] = [];
 
   getCart() {
-    const checkAccessToken = sessionStorage.getItem('userToken');
+    const checkAccessToken = this.cookies.get('userToken');
     if (!checkAccessToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
     }

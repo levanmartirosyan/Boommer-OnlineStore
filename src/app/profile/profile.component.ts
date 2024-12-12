@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ToolsService } from '../services/tools.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     public router: Router,
-    public tools: ToolsService
+    public tools: ToolsService,
+    private cookies: CookieService
   ) {
     document.title = 'dasd';
   }
@@ -31,9 +33,9 @@ export class ProfileComponent implements OnInit {
     });
   }
   signOut() {
-    sessionStorage.removeItem('userToken');
-    sessionStorage.removeItem('userRefreshToken');
     sessionStorage.removeItem('userProfileData');
+    this.cookies.delete('userToken');
+    this.cookies.delete('userRefreshToken');
     this.router.navigate(['/']);
     setTimeout(() => {
       window.location.reload();

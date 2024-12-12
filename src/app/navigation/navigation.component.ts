@@ -13,6 +13,7 @@ import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToolsService } from '../services/tools.service';
 import { CategoriesComponent } from './categories/categories.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navigation',
@@ -32,7 +33,8 @@ export class NavigationComponent implements OnInit {
     private renderer: Renderer2,
     public apiService: ApiService,
     public tools: ToolsService,
-    public router: Router
+    public router: Router,
+    private cookies: CookieService
   ) {}
   ngOnInit(): void {
     this.showCategories();
@@ -63,7 +65,7 @@ export class NavigationComponent implements OnInit {
   }
 
   getUserInfo() {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
     });
@@ -80,12 +82,16 @@ export class NavigationComponent implements OnInit {
         error: (error) => {
           this.tools.showError(error.error.error, 'შეცდომა!');
           const tokens = {
-            access_token: sessionStorage.getItem('userToken'),
-            refresh_token: sessionStorage.getItem('userRefreshToken'),
+            access_token: this.cookies.get('userToken'),
+            refresh_token: this.cookies.get('userRefreshToken'),
           };
           this.apiService.refreshToken(tokens).subscribe({
             next: (data: any) => {
-              sessionStorage.setItem('userToken', data.access_token);
+              this.cookies.set('userToken', data.access_token, {
+                expires: new Date(Date.now() + 15 * 60 * 1000),
+                secure: true,
+                sameSite: 'Strict',
+              });
               this.tools.showSuccess('ტოკენი განახლდა', 'წარმატება!');
             },
             error: (error: any) => {
@@ -100,7 +106,7 @@ export class NavigationComponent implements OnInit {
   public cartLength: any;
 
   getCartForQuantity() {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     const userData = new HttpHeaders({
       accept: 'application/json',
       'Content-Type': 'application/json',

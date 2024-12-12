@@ -2,12 +2,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToolsService } from '../../services/tools.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-authorization',
@@ -18,7 +20,11 @@ import { ToolsService } from '../../services/tools.service';
 })
 export class AuthorizationComponent implements OnInit {
   switchAuth: any = 'auth';
-  constructor(public apiService: ApiService, public tools: ToolsService) {}
+  constructor(
+    public apiService: ApiService,
+    public tools: ToolsService,
+    private cookies: CookieService
+  ) {}
   ngOnInit(): void {}
 
   public singInUp: boolean = false;
@@ -38,12 +44,34 @@ export class AuthorizationComponent implements OnInit {
 
   public accessToken: any;
   public refreshToken: any;
+  public rememberMe: boolean = false;
 
   authorize() {
     this.apiService.authorization(this.authorization.value).subscribe({
       next: (data: any) => {
-        sessionStorage.setItem('userToken', data.access_token);
-        sessionStorage.setItem('userRefreshToken', data.refresh_token);
+        if (this.rememberMe == true) {
+          this.cookies.set('userToken', data.access_token, {
+            expires: new Date(Date.now() + 30 * 60 * 1000),
+            secure: true,
+            sameSite: 'Strict',
+          });
+          this.cookies.set('userRefreshToken', data.refresh_token, {
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            secure: true,
+            sameSite: 'Strict',
+          });
+        } else if (this.rememberMe == false) {
+          this.cookies.set('userToken', data.access_token, {
+            expires: new Date(Date.now() + 30 * 60 * 1000),
+            secure: true,
+            sameSite: 'Strict',
+          });
+          this.cookies.set('userRefreshToken', data.refresh_token, {
+            expires: new Date(Date.now() + 60 * 60 * 1000),
+            secure: true,
+            sameSite: 'Strict',
+          });
+        }
         this.sendAnswerFromAuth();
         this.tools.triggerNavRefresh();
         this.tools.showSuccess('', 'წარმატებული ავტორიზაცია!');
@@ -52,6 +80,10 @@ export class AuthorizationComponent implements OnInit {
         this.tools.showError(error.error.error, 'შეცდომა!');
       },
     });
+  }
+
+  rememberCheckBox() {
+    this.rememberMe = !this.rememberMe;
   }
 
   public registration: FormGroup = new FormGroup({

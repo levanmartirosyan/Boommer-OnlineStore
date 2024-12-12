@@ -10,6 +10,7 @@ import {
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-editprofile',
@@ -22,7 +23,8 @@ export class EditprofileComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     public router: Router,
-    public tools: ToolsService
+    public tools: ToolsService,
+    private cookies: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -111,9 +113,9 @@ export class EditprofileComponent implements OnInit {
       });
       this.apiService.deleteAccount(userData).subscribe({
         next: (data: any) => {
-          sessionStorage.removeItem('userToken');
-          sessionStorage.removeItem('userRefreshToken');
           sessionStorage.removeItem('userProfileData');
+          this.cookies.delete('userToken');
+          this.cookies.delete('userRefreshToken');
           this.tools.showWarning('ანგარიში წაშლილია', 'ყურადღება!');
           this.router.navigate(['/']);
           setTimeout(() => {
@@ -180,7 +182,7 @@ export class EditprofileComponent implements OnInit {
           this.tools.showSuccess('პროდუქტი წარმატებით დაემატა', 'წარმატება!');
         },
         error: (error) => {
-          this.tools.showError('error.error.error', 'შეცდომა!');
+          this.tools.showError(error.error.error, 'შეცდომა!');
         },
       });
   }

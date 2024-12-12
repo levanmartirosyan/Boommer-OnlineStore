@@ -16,6 +16,7 @@ import {
 } from '@angular/forms';
 import { ToolsService } from '../services/tools.service';
 import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-details',
   standalone: true,
@@ -28,7 +29,8 @@ export class DetailsComponent implements OnInit {
     public actR: ActivatedRoute,
     public apiService: ApiService,
     public tools: ToolsService,
-    public router: Router
+    public router: Router,
+    private cookies: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -157,7 +159,7 @@ export class DetailsComponent implements OnInit {
   public checkCart: any;
 
   createCart(id: any) {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
@@ -181,7 +183,7 @@ export class DetailsComponent implements OnInit {
   }
 
   addToCart(id: any) {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;
@@ -205,7 +207,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getCartForCheck() {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       console.log('User not logged in.');
       return;
@@ -237,7 +239,7 @@ export class DetailsComponent implements OnInit {
   });
 
   sendProductRate(id: any) {
-    const getToken = sessionStorage.getItem('userToken');
+    const getToken = this.cookies.get('userToken');
     if (!getToken) {
       this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
       return;

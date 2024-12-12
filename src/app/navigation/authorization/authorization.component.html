@@ -34,7 +34,16 @@
           formControlName="password"
         />
       </div>
-      <span (click)="recoveryToggle()">დაგავიწყდა პაროლი?</span>
+      <div class="remember">
+        <div class="custom-checkbox">
+          <input id="remember" type="checkbox" (click)="rememberCheckBox()" />
+          <label for="remember" class="custom-checkbox-label">
+            <span class="custom-checkbox-box"></span>
+            დამახსოვრება
+          </label>
+        </div>
+        <span (click)="recoveryToggle()">დაგავიწყდა პაროლი?</span>
+      </div>
       <button type="submit">ავტორიზაცია</button>
     </form>
     } @case ('register') {
