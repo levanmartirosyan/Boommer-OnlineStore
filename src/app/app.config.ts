@@ -15,7 +15,6 @@ import {
 } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { tokenInterceptor } from './services/token.interceptor';
-import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,6 +26,5 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([BrowserAnimationsModule]),
     provideAnimations(),
     provideToastr(),
-    CookieService,
   ],
 };
