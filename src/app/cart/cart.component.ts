@@ -33,10 +33,6 @@ export class CartComponent implements OnInit {
   public combinedCartProducts: any[] = [];
 
   getCart() {
-    const checkAccessToken = this.cookies.get('userToken');
-    if (!checkAccessToken) {
-      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
-    }
     const userData = new HttpHeaders({
       accept: 'application/json',
     });

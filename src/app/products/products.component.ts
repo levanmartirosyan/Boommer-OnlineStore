@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
     this.showAllproducts(1);
     this.getBrands();
     this.getTransferedData();
+    this.getCartForCheck();
   }
 
   public products: any;
@@ -109,6 +110,12 @@ export class ProductsComponent implements OnInit {
       error: (error) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
       },
+    });
+  }
+
+  getCartForCheck() {
+    this.tools.transferData.subscribe((data: any) => {
+      this.checkCart = data.cartID;
     });
   }
 

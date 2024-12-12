@@ -10,7 +10,12 @@ import { routeGuard } from './services/route.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Boommer - Home' },
-  { path: 'cart', component: CartComponent, title: 'Boommer - Cart' },
+  {
+    path: 'cart',
+    component: CartComponent,
+    title: 'Boommer - Cart',
+    canActivate: [routeGuard],
+  },
   {
     path: 'profile',
     component: ProfileComponent,

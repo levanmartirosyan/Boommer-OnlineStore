@@ -54,22 +54,26 @@ export class AuthorizationComponent implements OnInit {
             expires: new Date(Date.now() + 30 * 60 * 1000),
             secure: true,
             sameSite: 'Strict',
+            path: '/',
           });
           this.cookies.set('userRefreshToken', data.refresh_token, {
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             secure: true,
             sameSite: 'Strict',
+            path: '/',
           });
         } else if (this.rememberMe == false) {
           this.cookies.set('userToken', data.access_token, {
             expires: new Date(Date.now() + 30 * 60 * 1000),
             secure: true,
             sameSite: 'Strict',
+            path: '/',
           });
           this.cookies.set('userRefreshToken', data.refresh_token, {
             expires: new Date(Date.now() + 60 * 60 * 1000),
             secure: true,
             sameSite: 'Strict',
+            path: '/',
           });
         }
         this.sendAnswerFromAuth();

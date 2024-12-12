@@ -22,7 +22,7 @@
           <i class="fa-solid fa-magnifying-glass" routerLink="/search"></i>
         </div>
       </div>
-      <span routerLink="/cart"
+      <span routerLink="/cart" (click)="showErrorIfNoToken()"
         ><i class="fi fi-rr-shopping-cart"></i> კალათა
         <span class="cartQuantity">{{
           cartLength ? cartLength : 0
@@ -75,7 +75,12 @@
         <i class="fi fi-rr-category"></i>
         <span>კატეგორიები</span>
       </div>
-      <div class="navItem" routerLink="/cart" routerLinkActive="activeMitem">
+      <div
+        class="navItem"
+        routerLink="/cart"
+        routerLinkActive="activeMitem"
+        (click)="showErrorIfNoToken()"
+      >
         <i class="fi fi-rr-shopping-cart"></i>
         <span>კალათა</span>
         <div class="cartLengthM">

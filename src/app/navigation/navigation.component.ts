@@ -123,11 +123,16 @@ export class NavigationComponent implements OnInit {
     }
   }
 
+  showErrorIfNoToken() {
+    const getToken = this.cookies.get('userToken');
+    if (!getToken) {
+      this.tools.showWarning('ჯერ გაიარეთ ავტორიზაცია', 'ყურადღება!');
+      return;
+    }
+  }
+
   syncCartLength() {
     return this.cartLength;
-  }
-  reloadPage() {
-    window.location.reload();
   }
 
   @HostListener('window:scroll', [])
