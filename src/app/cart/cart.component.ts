@@ -76,6 +76,14 @@ export class CartComponent implements OnInit {
               this.combinedCartProducts.push(combinedItem);
             }
           }
+          this.combinedCartProducts.sort((a, b) => {
+            const titleA = a.productDetails.title.toLowerCase();
+            const titleB = b.productDetails.title.toLowerCase();
+
+            if (titleA < titleB) return -1;
+            if (titleA > titleB) return 1;
+            return 0;
+          });
         },
         error: (error) => {
           console.log(error);
@@ -95,7 +103,7 @@ export class CartComponent implements OnInit {
     this.apiService.deleteProductFromCart(userData, body).subscribe({
       next: (data: any) => {
         this.tools.reloadRoute();
-        this.tools.showSuccess('პროდუქტი კალათიდან წაიშალა', 'წარმატება!');
+        this.tools.showSuccess('პროდუქტი წაიშალა', 'წარმატება!');
       },
       error: (error: any) => {
         this.tools.showError(error.error.error, 'შეცდომა!');
@@ -130,7 +138,6 @@ export class CartComponent implements OnInit {
     });
     this.apiService.addProductsToCart(userData, body).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.tools.reloadRoute();
       },
       error: (error) => {
@@ -149,14 +156,18 @@ export class CartComponent implements OnInit {
       id: id,
       quantity: decrease,
     });
-    this.apiService.addProductsToCart(userData, body).subscribe({
-      next: (data: any) => {
-        this.tools.reloadRoute();
-      },
-      error: (error) => {
-        this.tools.showError(error.error.error, 'შეცდომა!');
-      },
-    });
+    if (decrease <= 0) {
+      this.deleteProduct(id);
+    } else {
+      this.apiService.addProductsToCart(userData, body).subscribe({
+        next: (data: any) => {
+          this.tools.reloadRoute();
+        },
+        error: (error) => {
+          this.tools.showError(error.error.error, 'შეცდომა!');
+        },
+      });
+    }
   }
 
   goCheckOut() {

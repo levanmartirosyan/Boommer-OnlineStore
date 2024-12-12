@@ -80,7 +80,9 @@
           }
           <span>
             @if (item.price.beforeDiscount == item.price.current ) {
-            <span>{{ item.price.beforeDiscount + "₾" }}</span>
+            <span class="beforePrice">{{
+              item.price.beforeDiscount + "₾"
+            }}</span>
             } @else {
             <span class="beforeSale">{{ item.price.beforeDiscount }} </span>
             <span class="currentPrice">{{ item.price.current + "₾" }}</span>

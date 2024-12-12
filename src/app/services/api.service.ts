@@ -194,12 +194,6 @@ export class ApiService {
     );
   }
 
-  filterProduct(sortBy: any, sortDir: any, category: any, brand: any) {
-    return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?sort_by=${sortBy}&sort_direction=${sortDir}&category_id=${category}&brand=${brand}&page_size=50`
-    );
-  }
-
   filterAll(
     category: any,
     brand: any,
@@ -208,21 +202,16 @@ export class ApiService {
     sortBy: any,
     sortDir: any
   ) {
-    return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?category_id=${category}&brand=${brand}&price_min=${priceMin}&price_max=${priceMax}&sort_by=${sortBy}&sort_direction=${sortDir}&page_size=50`
-    );
-  }
+    let apiUrl = `https://api.everrest.educata.dev/shop/products/search?page_size=50`;
 
-  filterBrand(category: any, brand: any) {
-    return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?category_id=${category}&brand=${brand}&page_size=50`
-    );
-  }
+    if (category) apiUrl += `&category_id=${category}`;
+    if (brand) apiUrl += `&brand=${brand}`;
+    if (priceMin) apiUrl += `&price_min=${priceMin}`;
+    if (priceMax) apiUrl += `&price_max=${priceMax}`;
+    if (sortBy) apiUrl += `&sort_by=${sortBy}`;
+    if (sortDir) apiUrl += `&sort_direction=${sortDir}`;
 
-  filterPrice(priceMin: any, priceMax: any, category: any, brand: any) {
-    return this.http.get(
-      `https://api.everrest.educata.dev/shop/products/search?price_min=${priceMin}&price_max=${priceMax}&category_id=${category}&brand=${brand}&page_size=50`
-    );
+    return this.http.get(apiUrl);
   }
 
   search(keyword: any) {
@@ -254,5 +243,9 @@ export class ApiService {
       'https://api.everrest.educata.dev/auth/refresh',
       body
     );
+  }
+
+  getZoommerBanner() {
+    return this.http.get('https://api.zoommer.ge/v1/Content/get-content-v2');
   }
 }

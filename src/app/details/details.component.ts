@@ -284,4 +284,14 @@ export class DetailsComponent implements OnInit {
         },
       });
   }
+
+  buyBtn() {
+    if (this.checkCart) {
+      this.router.navigate(['/cart']);
+      this.addToCart(this.productDetails._id);
+    } else {
+      this.router.navigate(['/cart']);
+      this.createCart(this.productDetails._id);
+    }
+  }
 }

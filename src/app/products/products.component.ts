@@ -143,9 +143,11 @@ export class ProductsComponent implements OnInit {
     this.hide = true;
 
     const isSortingValid = this.sortBy !== '' && this.sortDirection !== '';
-    const isPriceValid = this.priceMin !== '' && this.priceMax !== '';
+    const isPriceMinValid = this.priceMin !== '';
+    const isPriceMaxValid = this.priceMax !== '';
+    const isPriceRangeValid = isPriceMinValid && isPriceMaxValid;
 
-    if (isPriceValid && this.priceMin > this.priceMax) {
+    if (isPriceRangeValid && this.priceMin > this.priceMax) {
       this.priceMin = '';
       this.priceMax = '';
       this.tools.showWarning(
@@ -155,7 +157,11 @@ export class ProductsComponent implements OnInit {
       this.showAllproducts(1);
       return;
     }
-    if (this.priceMin < 0 || this.priceMax < 0) {
+
+    if (
+      (isPriceMinValid && this.priceMin < 0) ||
+      (isPriceMaxValid && this.priceMax < 0)
+    ) {
       this.priceMin = '';
       this.priceMax = '';
       this.tools.showWarning('ფასი ვერ იქნება უარყოფითი რიცხვი!', 'ყურადღება!');
@@ -163,65 +169,16 @@ export class ProductsComponent implements OnInit {
       return;
     }
 
-    if (isSortingValid && isPriceValid) {
-      this.apiService
-        .filterAll(
-          this.categoryId,
-          this.brand,
-          this.priceMin,
-          this.priceMax,
-          this.sortBy,
-          this.sortDirection
-        )
-        .subscribe({
-          next: (data: any) => {
-            this.products = data.products;
-            if (data.total === 0) {
-              this.noFound = 'პროდუქტი ვერ მოიძებნა';
-              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
-            }
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-        });
-    } else if (isSortingValid) {
-      this.apiService
-        .filterProduct(
-          this.sortBy,
-          this.sortDirection,
-          this.categoryId,
-          this.brand
-        )
-        .subscribe({
-          next: (data: any) => {
-            this.products = data.products;
-            if (data.total === 0) {
-              this.noFound = 'პროდუქტი ვერ მოიძებნა';
-              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
-            }
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-        });
-    } else if (isPriceValid) {
-      this.apiService
-        .filterPrice(this.priceMin, this.priceMax, this.categoryId, this.brand)
-        .subscribe({
-          next: (data: any) => {
-            this.products = data.products;
-            if (data.total === 0) {
-              this.noFound = 'პროდუქტი ვერ მოიძებნა';
-              this.tools.showWarning('პროდუქტი ვერ მოიძებნა', 'ყურადღება!');
-            }
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-        });
-    } else {
-      this.apiService.filterBrand(this.categoryId, this.brand).subscribe({
+    this.apiService
+      .filterAll(
+        this.categoryId || null,
+        this.brand || null,
+        isPriceMinValid ? this.priceMin : null,
+        isPriceMaxValid ? this.priceMax : null,
+        isSortingValid ? this.sortBy : null,
+        isSortingValid ? this.sortDirection : null
+      )
+      .subscribe({
         next: (data: any) => {
           this.products = data.products;
           if (data.total === 0) {
@@ -231,9 +188,9 @@ export class ProductsComponent implements OnInit {
         },
         error: (error: any) => {
           console.log(error);
+          this.tools.showError('დაფიქსირდა შეცდომა!', 'შეცდომა!');
         },
       });
-    }
   }
 
   resetFilters() {
