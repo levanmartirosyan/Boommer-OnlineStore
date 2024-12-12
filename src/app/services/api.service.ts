@@ -244,8 +244,4 @@ export class ApiService {
       body
     );
   }
-
-  getZoommerBanner() {
-    return this.http.get('https://api.zoommer.ge/v1/Content/get-content-v2');
-  }
 }
