@@ -88,7 +88,7 @@ export class NavigationComponent implements OnInit {
           this.apiService.refreshToken(tokens).subscribe({
             next: (data: any) => {
               this.cookies.set('userToken', data.access_token, {
-                expires: new Date(Date.now() + 15 * 60 * 1000),
+                expires: new Date(Date.now() + 65 * 60 * 1000),
                 secure: true,
                 sameSite: 'Strict',
               });
