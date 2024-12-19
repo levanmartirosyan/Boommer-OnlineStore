@@ -1,4 +1,6 @@
-<ngx-spinner [type]="'ball-scale-ripple'"></ngx-spinner>
 <app-navigation></app-navigation>
+@if (busyService.showCustomLoader) {
+<app-loader></app-loader>
+}
 <router-outlet></router-outlet>
 <app-footer></app-footer>

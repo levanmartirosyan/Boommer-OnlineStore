@@ -1,0 +1,59 @@
+.loader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .kaleidoscope {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    animation: rotate 2s linear infinite;
+    .circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 8px solid transparent;
+      border-top-color: #ec5e2a;
+      animation: spin 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .circle:nth-child(2) {
+      border-top-color: #ffbb33;
+      animation-duration: 1s;
+      transform: scale(0.7);
+    }
+
+    .circle:nth-child(3) {
+      border-top-color: #00ffbb;
+      animation-duration: 2.5s;
+      transform: scale(0.4);
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}

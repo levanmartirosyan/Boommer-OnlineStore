@@ -9,6 +9,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToolsService } from './services/tools.service';
+import { LoaderComponent } from './loader/loader.component';
+import { BusyService } from './core/busy.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,7 @@ import { ToolsService } from './services/tools.service';
     NavigationComponent,
     RouterModule,
     FooterComponent,
+    LoaderComponent,
     NgxSpinnerModule,
   ],
   templateUrl: './app.component.html',
@@ -28,7 +31,11 @@ export class AppComponent implements OnInit {
     | NavigationComponent
     | undefined;
 
-  constructor(private router: Router, public tools: ToolsService) {}
+  constructor(
+    private router: Router,
+    public tools: ToolsService,
+    public busyService: BusyService
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
