@@ -47,37 +47,41 @@ export class AuthorizationComponent implements OnInit {
   public rememberMe: boolean = false;
 
   authorize() {
-    this.apiService.authorization(this.authorization.value).subscribe({
-      next: (data: any) => {
-        if (this.rememberMe == true) {
-          this.cookies.set('userToken', data.access_token, {
-            expires: new Date(Date.now() + 65 * 60 * 1000),
-            secure: true,
-            sameSite: 'Strict',
-            path: '/',
-          });
-          this.cookies.set('userRefreshToken', data.refresh_token, {
-            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            secure: true,
-            sameSite: 'Strict',
-            path: '/',
-          });
-        } else if (this.rememberMe == false) {
-          this.cookies.set('userToken', data.access_token, {
-            expires: new Date(Date.now() + 60 * 60 * 1000),
-            secure: true,
-            sameSite: 'Strict',
-            path: '/',
-          });
-        }
-        this.sendAnswerFromAuth();
-        this.tools.triggerNavRefresh();
-        this.tools.showSuccess('', 'წარმატებული ავტორიზაცია!');
-      },
-      error: (error) => {
-        this.tools.showError(error.error.error, 'შეცდომა!');
-      },
-    });
+    if (this.authorization.valid) {
+      this.apiService.authorization(this.authorization.value).subscribe({
+        next: (data: any) => {
+          if (this.rememberMe == true) {
+            this.cookies.set('userToken', data.access_token, {
+              expires: new Date(Date.now() + 65 * 60 * 1000),
+              secure: true,
+              sameSite: 'Strict',
+              path: '/',
+            });
+            this.cookies.set('userRefreshToken', data.refresh_token, {
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+              secure: true,
+              sameSite: 'Strict',
+              path: '/',
+            });
+          } else if (this.rememberMe == false) {
+            this.cookies.set('userToken', data.access_token, {
+              expires: new Date(Date.now() + 60 * 60 * 1000),
+              secure: true,
+              sameSite: 'Strict',
+              path: '/',
+            });
+          }
+          this.sendAnswerFromAuth();
+          this.tools.triggerNavRefresh();
+          this.tools.showSuccess('', 'წარმატებული ავტორიზაცია!');
+        },
+        error: (error) => {
+          this.tools.showError(error.error.error, 'შეცდომა!');
+        },
+      });
+    } else {
+      this.tools.showWarning('შეავსეთ ყველა ველი', 'ყურადღება!');
+    }
   }
 
   rememberCheckBox() {
@@ -107,16 +111,26 @@ export class AuthorizationComponent implements OnInit {
   public userId: any;
 
   register() {
-    this.apiService.registration(this.registration.value).subscribe({
-      next: (data: any) => {
-        this.userId = data._id;
-        this.sendAnswerFromAuth();
-        this.tools.showSuccess('', 'წარმატებული რეგისტრაცია!');
-      },
-      error: (error) => {
-        this.tools.showError(error.error.error, 'შეცდომა!');
-      },
-    });
+    if (this.registration.valid) {
+      this.apiService.registration(this.registration.value).subscribe({
+        next: (data: any) => {
+          this.userId = data._id;
+          this.sendAnswerFromAuth();
+          this.tools.showSuccess('', 'წარმატებული რეგისტრაცია!');
+          setTimeout(() => {
+            this.tools.showSuccess(
+              'შეტყობინება გაიგზავნა მაილზე!',
+              'წარმატება!'
+            );
+          }, 1500);
+        },
+        error: (error) => {
+          this.tools.showError(error.error.error, 'შეცდომა!');
+        },
+      });
+    } else {
+      this.tools.showWarning('შეავსეთ ყველა ველი', 'ყურადღება!');
+    }
   }
 
   public toggleRecovery: boolean = false;
@@ -130,15 +144,19 @@ export class AuthorizationComponent implements OnInit {
   });
 
   passRecovery() {
-    this.apiService.recovery(this.recovery.value).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.sendAnswerFromAuth();
-        this.tools.showSuccess('შეტყობინება გაიგზავნა მაილზე!', 'წარმატება!');
-      },
-      error: (error) => {
-        this.tools.showError(error.error.error, 'შეცდომა!');
-      },
-    });
+    if (this.recovery.valid) {
+      this.apiService.recovery(this.recovery.value).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.sendAnswerFromAuth();
+          this.tools.showSuccess('შეტყობინება გაიგზავნა მაილზე!', 'წარმატება!');
+        },
+        error: (error) => {
+          this.tools.showError(error.error.error, 'შეცდომა!');
+        },
+      });
+    } else {
+      this.tools.showWarning('შეავსეთ ყველა ველი', 'ყურადღება!');
+    }
   }
 }

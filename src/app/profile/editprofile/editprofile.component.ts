@@ -49,20 +49,30 @@ export class EditprofileComponent implements OnInit {
   });
 
   changePersonalInfo() {
+    const filteredInfo = Object.fromEntries(
+      Object.entries(this.personalInfo.value).filter(
+        ([_, value]) => value !== null && value !== ''
+      )
+    );
+
+    if (Object.keys(filteredInfo).length === 0) {
+      this.tools.showWarning('შეავსეთ ველი', 'ყურადღება!');
+      return;
+    }
+
     const userData = new HttpHeaders({
       accept: 'application/json',
     });
-    this.apiService
-      .changePersonalInfo(userData, this.personalInfo.value)
-      .subscribe({
-        next: (data: any) => {
-          this.tools.reloadRoute();
-          this.tools.showSuccess('პირადი ინფორმაცია შეცვლილია', 'წარმატება!');
-        },
-        error: (error) => {
-          this.tools.showError(error.error.error, 'შეცდომა!');
-        },
-      });
+
+    this.apiService.changePersonalInfo(userData, filteredInfo).subscribe({
+      next: (data: any) => {
+        this.tools.reloadRoute();
+        this.tools.showSuccess('პირადი ინფორმაცია შეცვლილია', 'წარმატება!');
+      },
+      error: (error) => {
+        this.tools.showError(error.error.error, 'შეცდომა!');
+      },
+    });
   }
 
   public newPassword: FormGroup = new FormGroup({
@@ -120,7 +130,7 @@ export class EditprofileComponent implements OnInit {
           this.router.navigate(['/']);
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1000);
         },
         error: (error) => {
           this.tools.showError(error.error.error, 'შეცდომა!');

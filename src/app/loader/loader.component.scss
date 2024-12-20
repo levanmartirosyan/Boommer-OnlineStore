@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(3px);
   .kaleidoscope {
     position: relative;
     width: 120px;
