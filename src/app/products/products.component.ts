@@ -31,6 +31,15 @@ export class ProductsComponent implements OnInit {
     this.getBrands();
     this.getTransferedData();
     this.getCartForCheck();
+    this.hide = false;
+    this.priceMin = '';
+    this.priceMax = '';
+    this.brand = '';
+    this.categoryId = '';
+    this.sortBy = '';
+    this.sortDirection = '';
+    this.search = '';
+    this.noFound = '';
   }
 
   public products: any;
@@ -155,6 +164,7 @@ export class ProductsComponent implements OnInit {
         'ყურადღება!'
       );
       this.showAllproducts(1);
+      this.hide = false;
       return;
     }
 
