@@ -26,12 +26,12 @@ export class ProductsComponent implements OnInit {
     public tools: ToolsService,
     private cookies: CookieService
   ) {}
+
   ngOnInit(): void {
     this.showAllproducts(1);
     this.getBrands();
     this.getTransferedData();
     this.getCartForCheck();
-    this.hide = false;
     this.priceMin = '';
     this.priceMax = '';
     this.brand = '';
@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
     this.search = '';
     this.noFound = '';
   }
-
+  public hide!: boolean;
   public products: any;
   public checkCart: any;
   public pageList: any[] = [];
@@ -143,13 +143,12 @@ export class ProductsComponent implements OnInit {
   public sortBy: any = '';
   public sortDirection: any = '';
   public search: any = '';
-  public hide: boolean = false;
   public noFound: any = '';
 
   filterProducts() {
     this.noFound = '';
     this.products = [];
-    this.hide = true;
+    this.hide = false;
 
     const isSortingValid = this.sortBy !== '' && this.sortDirection !== '';
     const isPriceMinValid = this.priceMin !== '';
@@ -177,6 +176,16 @@ export class ProductsComponent implements OnInit {
       this.tools.showWarning('ფასი ვერ იქნება უარყოფითი რიცხვი!', 'ყურადღება!');
       this.showAllproducts(1);
       return;
+    }
+    if (
+      this.priceMin == '' &&
+      this.priceMax == '' &&
+      this.brand == '' &&
+      this.categoryId == '' &&
+      this.sortBy == '' &&
+      this.sortDirection == ''
+    ) {
+      this.hide = true;
     }
 
     this.apiService
@@ -214,13 +223,13 @@ export class ProductsComponent implements OnInit {
     this.noFound = '';
     this.products = [];
     this.showAllproducts(1);
-    this.hide = false;
+    this.hide = true;
   }
 
   searchByKeyword() {
     this.noFound = '';
     this.products = [];
-    this.hide = true;
+    this.hide = false;
     this.apiService.search(this.search).subscribe({
       next: (data: any) => {
         this.products = data.products;
@@ -252,6 +261,7 @@ export class ProductsComponent implements OnInit {
         this.brand = data.brand;
         this.categoryId = data.categoryId;
       }
+
       this.filterProducts();
     });
   }
