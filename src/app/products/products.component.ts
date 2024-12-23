@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   constructor(
     public apiService: ApiService,
     public router: Router,
@@ -32,15 +32,12 @@ export class ProductsComponent implements OnInit {
     this.getBrands();
     this.getTransferedData();
     this.getCartForCheck();
-    this.priceMin = '';
-    this.priceMax = '';
-    this.brand = '';
-    this.categoryId = '';
-    this.sortBy = '';
-    this.sortDirection = '';
-    this.search = '';
-    this.noFound = '';
   }
+
+  ngOnDestroy(): void {
+    this.tools.clearTransferCategories();
+  }
+
   public hide!: boolean;
   public products: any;
   public checkCart: any;
@@ -49,6 +46,7 @@ export class ProductsComponent implements OnInit {
   public lastPageNumber: any;
 
   showAllproducts(page: any) {
+    this.hide = true;
     this.apiService.getProducts(page).subscribe((data: any) => {
       this.products = data.products;
       this.lastPageNumber = Math.round(data.total / data.limit);
@@ -185,7 +183,7 @@ export class ProductsComponent implements OnInit {
       this.sortBy == '' &&
       this.sortDirection == ''
     ) {
-      this.hide = true;
+      this.hide = false;
     }
 
     this.apiService
@@ -227,9 +225,13 @@ export class ProductsComponent implements OnInit {
   }
 
   searchByKeyword() {
+    if (this.search == '') {
+      this.hide = true;
+    } else {
+      this.hide = false;
+    }
     this.noFound = '';
     this.products = [];
-    this.hide = false;
     this.apiService.search(this.search).subscribe({
       next: (data: any) => {
         this.products = data.products;
@@ -257,12 +259,14 @@ export class ProductsComponent implements OnInit {
   }
   getTransferedData() {
     this.tools.transferCategories.subscribe((data: any) => {
-      if (data !== '') {
+      if (data && data.brand && data.categoryId) {
         this.brand = data.brand;
         this.categoryId = data.categoryId;
+        this.filterProducts();
+      } else {
+        this.brand = '';
+        this.categoryId = '';
       }
-
-      this.filterProducts();
     });
   }
 }

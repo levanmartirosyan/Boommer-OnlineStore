@@ -15,6 +15,10 @@ export class ToolsService {
   private refreshNavSubject = new Subject<void>();
   refreshNav$ = this.refreshNavSubject.asObservable();
 
+  clearTransferCategories() {
+    this.transferCategories.next(null); // Reset data in the subject
+  }
+
   triggerNavRefresh() {
     this.refreshNavSubject.next();
   }
