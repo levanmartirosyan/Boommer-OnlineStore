@@ -11,11 +11,17 @@ import {
 import { ToolsService } from '../services/tools.service';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { ScrolltotopComponent } from '../home/scrolltotop/scrolltotop.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    ScrolltotopComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })

@@ -1,0 +1,35 @@
+$primary: #ec5e2a;
+$secondary: #ffffff;
+$third: #f28f6a;
+$fourth: #828282;
+$fifth: #333333;
+$sixth: #f7bba5;
+$seventh: #000000;
+
+.go-to-top {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 23px;
+  background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s;
+  transition: background-color 0.3s;
+}
+
+.go-to-top:hover {
+  background-color: $third;
+}
+
+@media screen and (max-width: 1024px) {
+  .go-to-top {
+    display: none;
+  }
+}

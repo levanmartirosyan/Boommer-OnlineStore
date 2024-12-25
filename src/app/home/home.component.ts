@@ -4,6 +4,7 @@ import { ProductsectionComponent } from './productsection/productsection.compone
 import { SalesectionComponent } from './salesection/salesection.component';
 import { LaptopsectionComponent } from './laptopsection/laptopsection.component';
 import { MobilesectionComponent } from './mobilesection/mobilesection.component';
+import { ScrolltotopComponent } from './scrolltotop/scrolltotop.component';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { MobilesectionComponent } from './mobilesection/mobilesection.component'
     SalesectionComponent,
     LaptopsectionComponent,
     MobilesectionComponent,
+    ScrolltotopComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
