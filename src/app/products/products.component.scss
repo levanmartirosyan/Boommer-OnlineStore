@@ -98,8 +98,9 @@ section.allProducts {
             height: 50px;
             border: 1px solid $primary;
             border-radius: 12px;
-            padding: 8px;
+            padding: 8px 0;
             padding-left: 20px;
+            padding-right: 55px;
             outline: none;
           }
           input[type="search"]::-webkit-search-cancel-button {

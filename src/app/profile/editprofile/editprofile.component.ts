@@ -90,15 +90,21 @@ export class EditprofileComponent implements OnInit {
     const userData = new HttpHeaders({
       accept: 'application/json',
     });
-    this.apiService.changePassword(userData, this.newPassword.value).subscribe({
-      next: (data: any) => {
-        this.tools.reloadRoute();
-        this.tools.showSuccess('პაროლი შეცვლილია', 'წარმატება!');
-      },
-      error: (error) => {
-        this.tools.showError(error.error.error, 'შეცდომა!');
-      },
-    });
+    if (this.newPassword.valid) {
+      this.apiService
+        .changePassword(userData, this.newPassword.value)
+        .subscribe({
+          next: (data: any) => {
+            this.tools.reloadRoute();
+            this.tools.showSuccess('პაროლი შეცვლილია', 'წარმატება!');
+          },
+          error: (error) => {
+            this.tools.showError(error.error.error, 'შეცდომა!');
+          },
+        });
+    } else {
+      this.tools.showWarning('შეავსეთ ყველა ველი', 'ყურადღება!');
+    }
   }
 
   public confirmationWindow: boolean = false;

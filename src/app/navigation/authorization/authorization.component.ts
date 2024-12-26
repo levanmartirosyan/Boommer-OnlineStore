@@ -52,7 +52,7 @@ export class AuthorizationComponent implements OnInit {
         next: (data: any) => {
           if (this.rememberMe == true) {
             this.cookies.set('userToken', data.access_token, {
-              expires: new Date(Date.now() + 65 * 60 * 1000),
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
               secure: true,
               sameSite: 'Strict',
               path: '/',
@@ -149,7 +149,7 @@ export class AuthorizationComponent implements OnInit {
         next: (data: any) => {
           console.log(data);
           this.sendAnswerFromAuth();
-          this.tools.showSuccess('შეტყობინება გაიგზავნა მაილზე!', 'წარმატება!');
+          this.tools.showSuccess('შეტყობინება გაიგზავნა მეილზე!', 'წარმატება!');
         },
         error: (error) => {
           this.tools.showError(error.error.error, 'შეცდომა!');

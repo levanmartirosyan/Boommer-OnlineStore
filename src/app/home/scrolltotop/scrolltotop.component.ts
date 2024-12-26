@@ -17,13 +17,13 @@ export class ScrolltotopComponent {
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0;
-    this.isButtonVisible = scrollPosition > 400; // Show button after scrolling 200px
+    this.isButtonVisible = scrollPosition > 400;
   }
 
   scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // Smooth scrolling effect
+      behavior: 'smooth',
     });
   }
 }

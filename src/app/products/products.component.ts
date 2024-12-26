@@ -157,9 +157,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const isSortingValid = this.sortBy !== '' && this.sortDirection !== '';
     const isPriceMinValid = this.priceMin !== '';
     const isPriceMaxValid = this.priceMax !== '';
-    const isPriceRangeValid = isPriceMinValid && isPriceMaxValid;
 
-    if (isPriceRangeValid && this.priceMin > this.priceMax) {
+    const numericPriceMin = isPriceMinValid ? Number(this.priceMin) : null;
+    const numericPriceMax =
+      isPriceMaxValid && Number(this.priceMax) !== 0
+        ? Number(this.priceMax)
+        : null;
+
+    if (
+      numericPriceMin !== null &&
+      numericPriceMax !== null &&
+      numericPriceMin > numericPriceMax
+    ) {
       this.priceMin = '';
       this.priceMax = '';
       this.tools.showWarning(
@@ -167,37 +176,34 @@ export class ProductsComponent implements OnInit, OnDestroy {
         'ყურადღება!'
       );
       this.showAllproducts(1);
-      this.hide = false;
-      return;
-    }
-
-    if (
-      (isPriceMinValid && this.priceMin < 0) ||
-      (isPriceMaxValid && this.priceMax < 0)
-    ) {
-      this.priceMin = '';
-      this.priceMax = '';
-      this.tools.showWarning('ფასი ვერ იქნება უარყოფითი რიცხვი!', 'ყურადღება!');
-      this.showAllproducts(1);
+      this.hide = true;
       return;
     }
     if (
-      this.priceMin == '' &&
-      this.priceMax == '' &&
-      this.brand == '' &&
-      this.categoryId == '' &&
-      this.sortBy == '' &&
+      this.priceMin == '' ||
+      this.priceMax == '' ||
+      this.brand == '' ||
+      this.categoryId == '' ||
+      this.sortBy == '' ||
       this.sortDirection == ''
     ) {
       this.hide = false;
+    }
+    if (
+      (numericPriceMin !== null && numericPriceMin < 0) ||
+      (numericPriceMax !== null && numericPriceMax < 0)
+    ) {
+      this.resetFilters();
+      this.tools.showWarning('ფასი ვერ იქნება უარყოფითი რიცხვი!', 'ყურადღება!');
+      return;
     }
 
     this.apiService
       .filterAll(
         this.categoryId || null,
         this.brand || null,
-        isPriceMinValid ? this.priceMin : null,
-        isPriceMaxValid ? this.priceMax : null,
+        numericPriceMin,
+        numericPriceMax,
         isSortingValid ? this.sortBy : null,
         isSortingValid ? this.sortDirection : null
       )
@@ -210,7 +216,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
           }
         },
         error: (error: any) => {
-          console.log(error);
           this.tools.showError('დაფიქსირდა შეცდომა!', 'შეცდომა!');
         },
       });
@@ -265,7 +270,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   getTransferedData() {
     this.tools.transferCategories.subscribe((data: any) => {
-      if (data && data.brand && data.categoryId) {
+      if (data) {
         this.brand = data.brand;
         this.categoryId = data.categoryId;
         this.filterProducts();
