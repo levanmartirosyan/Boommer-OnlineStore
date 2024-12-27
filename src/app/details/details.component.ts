@@ -294,4 +294,9 @@ export class DetailsComponent implements OnInit {
       this.createCart(this.productDetails._id);
     }
   }
+
+  public zoom: boolean = false;
+  zoomImg() {
+    this.zoom = !this.zoom;
+  }
 }
